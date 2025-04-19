@@ -1,21 +1,42 @@
 import { Nunito } from 'next/font/google'
-import '@/app/global.css'
+import '@/css/global.css'
+import '@/css/global.scss'
+import '@/css/reset.css'
+import '@/css/ckeditor.scss'
+import GuestHeader from '../components/Header'
+import Footer from '@/components/Footer'
+import NextTopLoader from 'nextjs-toploader'
+
+
 
 const nunitoFont = Nunito({
     subsets: ['latin'],
     display: 'swap',
 })
 
-const RootLayout = ({ children }) => {
+const RootLayout = ({ children }) => { 
+
     return (
-        <html lang="en" className={nunitoFont.className}>
-            <body className="antialiased">{children}</body>
+        <html lang="jp" className={nunitoFont.className}>
+             <head />
+            <body className="antialiased">
+                <NextTopLoader />
+                    <GuestHeader />
+                    <main className='main'>
+                    {children}
+                    </main>
+                    <Footer />
+
+            </body>
         </html>
     )
 }
 
 export const metadata = {
-    title: 'Laravel',
+    title: 'junsan14｜ホテル業からIT、そしてルワンダ協力隊へ',
+    icons: {
+        icon: '/favicon.png',
+      },
 }
 
 export default RootLayout

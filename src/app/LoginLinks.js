@@ -1,38 +1,45 @@
 'use client'
 
 import Link from 'next/link'
-import { useAuth } from '@/hooks/auth'
+import { useAuth } from '../hooks/auth'
 
 const LoginLinks = () => {
     const { user } = useAuth({ middleware: 'guest' })
-
+    const { logout } = useAuth()
     return (
-        <div className="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+        <>
             {user ? (
+                <>
+                <li className="nav_ul_li js-nav-ul-li">  
                 <Link
-                    href="/dashboard"
-                    className="ml-4 text-sm text-gray-700 underline"
+                    href="/admin"
                 >
-                    Dashboard
+                    ADMIN
                 </Link>
+                </li> 
+                <li className="nav_ul_li js-nav-ul-li" onClick={logout}>
+                    logout  
+                </li>  
+                </>
             ) : (
                 <>
+                    <li className="nav_ul_li js-nav-ul-li">  
                     <Link
                         href="/login"
-                        className="text-sm text-gray-700 underline"
                     >
                         Login
                     </Link>
-
+                    </li>
+                    <li className="nav_ul_li js-nav-ul-li">  
                     <Link
                         href="/register"
-                        className="ml-4 text-sm text-gray-700 underline"
                     >
                         Register
                     </Link>
+                    </li>
                 </>
             )}
-        </div>
+        </>
     )
 }
 

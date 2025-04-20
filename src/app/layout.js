@@ -1,4 +1,6 @@
-import { Nunito } from 'next/font/google'
+import { Murecho } from 'next/font/google'
+import { Roboto } from 'next/font/google'
+
 import '@/css/global.css'
 import '@/css/global.scss'
 import '@/css/reset.css'
@@ -9,15 +11,16 @@ import NextTopLoader from 'nextjs-toploader'
 
 
 
-const nunitoFont = Nunito({
+const murecho = Murecho({
+    weight: '400',
     subsets: ['latin'],
     display: 'swap',
-})
+  })
 
 const RootLayout = ({ children }) => { 
-
+console.log(murecho)
     return (
-        <html lang="jp" className={nunitoFont.className}>
+        <html lang="jp" className={murecho.className}>
              <head />
             <body className="antialiased">
                 <NextTopLoader />

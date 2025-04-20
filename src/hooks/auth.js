@@ -6,18 +6,30 @@ import { useParams, useRouter } from 'next/navigation'
 export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     const router = useRouter()
     const params = useParams()
-
-    const { data: user, error, mutate } = useSWR('/api/user', () =>
+    const fetcher = url =>
         axios
-            .get('/api/user')
+            .get(url, {
+                withCredentials: true,
+            })
+            .then(res => res.data)
+    
+
+    
+    const { data: user, error, mutate } = useSWR(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user`,() =>
+        axios
+            .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user`,{
+                withCredentials: true,
+            })
             .then(res => res.data)
             .catch(error => {
                 if (error.response.status !== 409) throw error
                 router.push('/verify-email')
             }),
     )
-
-    const csrf = () => axios.get('/sanctum/csrf-cookie')
+    
+    const csrf = () => axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/sanctum/csrf-cookie`,{
+        withCredentials: true,
+    })
 
     const register = async ({ setErrors, ...props }) => {
         await csrf()
@@ -43,7 +55,9 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         setStatus(null)
 
         axios
-            .post('/login', props)
+            .post('/login', props,{
+                withCredentials: true,
+            })
             .then(() => mutate())
             .catch(error => {
                 if (error.response.status !== 422) throw error

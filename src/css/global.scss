@@ -1,8 +1,5 @@
 
 
-@import url('https://fonts.googleapis.com/css2?family=Murecho:wght@300&display=swap');
-
-
 $breakpoint: (
   sp: 'screen and (max-width: 767px)',
   tab: 'screen and (max-width: 1025px)',
@@ -28,19 +25,23 @@ $line-height-sp:20px ;
 
 body{
     font-size: 100%;
-    font-family: 'Murecho', sans-serif;
+    //font-family: 'Murecho', sans-serif;
     color:#505050;;
     background: white;
    &.noscroll{
       overflow: hidden;
     }  
 }
-.spinner {
-    top: auto !important;
-    bottom: 10px !important; /* 下から10px */
-    left: auto !important;
-    right: 10px !important;  /* 右から10px */
-  }
+
+    .spinner {
+        top: auto !important;
+        bottom: 10px !important; /* 下から10px */
+        left: auto !important;
+        right: 10px !important;  /* 右から10px */
+      }
+
+
+
 .single_btn{
     margin-right: 0;
     margin-bottom: 20px;
@@ -161,7 +162,6 @@ body{
             transition: .5s ease;
         }
         &.show{
-            background: rgba(#fff, 1);
             :nth-child(1){
                 transform: rotate(-45deg) translateY(15px);
                 transition: .5s ease;

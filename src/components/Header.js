@@ -40,7 +40,7 @@ export default function GuestHeader(){
 
     return () => clearTimeout(timeout)
   }, [user]) // userが変更された時に再バインド
-  
+  console.log(user)
     return(
         <header className='header'>
             <div className="toggle js-toggle" id="js-toggle">

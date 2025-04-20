@@ -6,12 +6,7 @@ import { useParams, useRouter } from 'next/navigation'
 export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     const router = useRouter()
     const params = useParams()
-    const fetcher = url =>
-        axios
-            .get(url, {
-                withCredentials: true,
-            })
-            .then(res => res.data)
+
     
 
     

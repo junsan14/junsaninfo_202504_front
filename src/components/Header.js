@@ -6,7 +6,8 @@ import {useEffect } from 'react'
 import { useAuth } from '../hooks/auth'
 
 export default function GuestHeader(){
-  const { user } = useAuth({ middleware: 'guest' })
+  //const { user } = useAuth({ middleware: 'guest' })
+  const { user } = useAuth();
   const { logout } = useAuth()
   useEffect(() => {
     const $nav = $('.js-nav')

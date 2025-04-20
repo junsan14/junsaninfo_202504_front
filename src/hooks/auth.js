@@ -22,6 +22,12 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             })
             .then(res => res.data)
             .catch(error => {
+                if (error.response?.status === 401) {
+                    console.log('未ログイン状態です');
+                    // ログインページにリダイレクトなど
+                  } else {
+                    console.error('別のエラー:', error);
+                  }
                 if (error.response.status !== 409) throw error
                 router.push('/verify-email')
             }),
@@ -35,7 +41,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         await csrf()
 
         setErrors([])
-
+        
         axios
             .post('/register', props,{
                 withCredentials: true,
@@ -58,7 +64,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             .post('/login', props,{
                 withCredentials: true,
             })
-            .then(() => mutate())
+            .then(() => console.log(mutate()))
             .catch(error => {
                 if (error.response.status !== 422) throw error
 

@@ -1,6 +1,4 @@
 import { Murecho } from 'next/font/google'
-import { Roboto } from 'next/font/google'
-
 import '@/css/global.css'
 import '@/css/global.scss'
 import '@/css/reset.css'

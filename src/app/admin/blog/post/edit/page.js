@@ -1,8 +1,13 @@
 'use client'
 import useSWR from 'swr'
 import { useSearchParams } from 'next/navigation'
-//import BlogEditor from '@/components/BlogEditor'
+import dynamic from 'next/dynamic'
 
+//import BlogEditor from '@/components/BlogEditor'
+const BlogEditor = dynamic(
+    () => import('@/components/BlogEditor').then(mod => mod.CKEditor),
+    { ssr: false }
+  )
 const fetcher = (url) => fetch(url).then((res) => res.json())
 export default function EditBlog(){
     const searchParams = useSearchParams()
@@ -18,7 +23,7 @@ export default function EditBlog(){
             <h1 className="section_title">
                 <p className="section_title_jp">EDIT</p>
             </h1>
-            {/* <BlogEditor postData={data}/> */}
+            <BlogEditor postData={data}/> 
         </section>
     )
 }

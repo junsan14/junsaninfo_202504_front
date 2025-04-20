@@ -1,7 +1,7 @@
 import useSWRMutation from 'swr/mutation'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
-import { ClassicEditor } from 'ckeditor5'
+//import { ClassicEditor } from 'ckeditor5'
 import { editorConfiguration,editorConfigurationThumbnail } from '@/components/CustomEditor'
 import CKFinderLoader from '@/components/CKFinderLoader'
 import { formatinputDate } from '@/components/Script'
@@ -9,6 +9,12 @@ import { blogCategories } from '@/constants/blogCategories'
 import { useRouter } from 'next/navigation'
 import Script from 'next/script'
 
+import dynamic from 'next/dynamic'
+
+const ClassicEditor = dynamic(
+    () => import('@ckeditor/ckeditor5-react').then(mod => mod.CKEditor),
+    { ssr: false }
+  )
 
 const sendData = async (url, { arg }) => {
   
@@ -27,7 +33,6 @@ const sendData = async (url, { arg }) => {
 }
 
 export default function BlogEditor({postData}){
-    /*
     useEffect(() => {
         // すでに読み込まれていたらスキップ
         if (window.CKFinder) return
@@ -37,17 +42,16 @@ export default function BlogEditor({postData}){
         script.async = true
     
         script.onload = () => {
-          //console.log('CKFinder loaded')
-          // CKFinder 初期化などここで安全に行える
+            console.log('CKFinder script loaded')
+            // CKFinder 初期化などここで安全に行える
         }
     
         document.body.appendChild(script)
     
         return () => {
-          document.body.removeChild(script)
+            document.body.removeChild(script)
         }
-      }, [])
-    */
+    }, [])
     const { trigger, data } = useSWRMutation(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/blog/post/store`,
             sendData

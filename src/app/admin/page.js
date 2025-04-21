@@ -12,7 +12,7 @@ export default function AdminTop(){
                     NEW
                 </Link>
             </button>
-            <ArticleList postLimit={20} pagination={true} edit={true} />
+            <ArticleList postLimit={20} pagination={true} edit={true} all={true} />
         </section>
     )
 }

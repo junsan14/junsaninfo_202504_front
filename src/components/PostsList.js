@@ -13,7 +13,7 @@ import { ja } from 'date-fns/locale'
 import { formatDate } from "./Script"
 import { MdAccessTime,MdUpdate } from "react-icons/md"
 
-const fetcher = (url) => fetch(url, { credentials: 'include' }).then(res => res.json())
+const fetcher = (url) => fetch(url).then(res => res.json())
 
 
 const toggleVisibility = async (url, { arg:{id,is_show} }) => {
@@ -35,11 +35,10 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
     const [currentPage, setCurrentPage] = useState(1)
     const router = useRouter()
     const pathname = usePathname()
-    //const searchParams = new URLSearchParams(window.location.search)
 
     const isAdmin = pathname.startsWith('/admin')
     const { data, error, isLoading } = useSWR(
-        () => currentPage ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&all=${isAdmin}` : null,
+        () => currentPage? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/posts?page=${currentPage}&limit=${postLimit}&all=${isAdmin}` : null,
         fetcher
       )
     const { trigger:triggerVisibility,isMutating } = useSWRMutation(
@@ -56,7 +55,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
       
         try {
             await triggerVisibility({id:id, is_show:is_show})
-            mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&all=${isAdmin}`)
+            mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/posts?page=${currentPage}&limit=${postLimit}&all=${isAdmin}`)
         } catch (err) {
             console.error(err)
         }   
@@ -64,7 +63,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
     const handleClickDelete = async(e,id)=>{
         const res = confirm('本当に削除してよろしいですか?')
         if(res) await triggerDelete(id)
-        mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&all=${isAdmin}`)
+        mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/posts?page=${currentPage}&limit=${postLimit}&all=${isAdmin}`)
     }   
     const changePage = (page) => {
         setCurrentPage(page)
@@ -81,6 +80,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
     }, [])
 
     if (error) return 'An error has occurred.'
+    
     if (isLoading || ! data){
         return (
             <div className="posts">
@@ -119,7 +119,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
             </div>  
         )
     }
-    //console.log(relevantPosts)
+
     const posts = relevantPosts?relevantPosts:data.data
     const totalPages = data.last_page
     const paginationRange = getPaginationRange(currentPage, totalPages)

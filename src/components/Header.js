@@ -9,9 +9,9 @@ export default function GuestHeader(){
   const { user } = useAuth()
   const { logout } = useAuth()
   
-  const [isShowMenu, setIsShowMenu] = useState(false);
+  const [isShowMenu, setIsShowMenu] = useState(false)
   const toggle = ()=>{
-    setIsShowMenu((prev)=>!prev);
+    setIsShowMenu((prev)=>!prev)
   }
   useEffect(() => {
     if (isShowMenu) {

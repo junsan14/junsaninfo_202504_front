@@ -43,6 +43,7 @@ export default function BlogEditor({postData}){
         category:isNew?5:post.category,
         tag:isNew?"":post.tag,
         keywords:isNew?keywords.keywords:post.keywords,
+        slug: isNew? "":post.slug,
         thumbnail:isNew?"":post.thumbnail,
         is_show:isNew?1:post.is_show,
         is_top:isNew?1:post.is_top,
@@ -130,14 +131,16 @@ export default function BlogEditor({postData}){
                         <datalist id="tags">
                             {tags.map((tag, key)=>(<option value={tag.tag} key={key} />))}
                         </datalist>
-
                     </div>
-                    
                     <div  className="form_control_item">
                         <label htmlFor="keywords" >Keywords</label>
                         <textarea id="keywords" name='keywords' className="form_control_item_input"  
                         rows="5" value={form.keywords} onChange={(e)=>handleChangeData(e)}  />
-
+                    </div>
+                    <div  className="form_control_item">
+                        <label htmlFor="slug" >Slug</label>
+                        <textarea id="slug" name='slug' className="form_control_item_input"  
+                        rows="5" value={form.slug} onChange={(e)=>handleChangeData(e)}  />
                     </div>
                     <div  className="form_control_item">
                         <label htmlFor="thumbnail" style={{marginBottom:'20px'}} >Thumbnail</label>

@@ -15,7 +15,7 @@ export function formatinputDate(date){
             +new Date(date).getMinutes().toString().padStart(2, '0')
     return formatDate
 }
-
+/*
 
 function addClassPage() {
         document.addEventListener('DOMContentLoaded', () => {
@@ -145,4 +145,4 @@ function addClassPage() {
         });
       }
       
-  
+  */

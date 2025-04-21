@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import useSWR from 'swr'
 import Image from 'next/image'
@@ -22,7 +22,7 @@ const fetcher = (url) => fetch(url).then(res => res.json())
 
 export function Instagram(){  
  
-  const { data, error, isLoading } = useSWR('/api/instagram', fetcher);
+  const { data, error, isLoading } = useSWR('/api/instagram', fetcher)
 
   if (error) return 'An error has occurred.'
   if (isLoading || ! data){
@@ -110,7 +110,7 @@ return(
 
 
 export function Threads(){
-    const { data, error, isLoading } = useSWR('/api/threads', fetcher);
+    const { data, error, isLoading } = useSWR('/api/threads', fetcher)
     if (error) return 'An error has occurred.'
     if (isLoading || !data){
         return (

@@ -4,7 +4,8 @@ import { formatDate } from '@/components/Script'
 import { blogCategories } from "@/constants/blogCategories"
 import ConvertCKEditorImageToNextImage from '@/components/ConvertCKEditorImageToNextImage'
 import ArticleList from '@/components/PostsList'
-
+import Toc from '@/components/stylePost/TableOfContetsForPost'
+import CodeEnhancer from '@/components/stylePost/CodeEnhancer';
 
 export function PostDetail({ params }) {
   const { category,postId } = params
@@ -33,6 +34,7 @@ export function PostDetail({ params }) {
     </section>
   )
   const post = data.post
+
   //console.log(data);
   return (
     data.message ? (
@@ -51,6 +53,8 @@ export function PostDetail({ params }) {
             <Date post={post}/>
           </div>
           <div className="post_content ck ck-content">
+              <Toc />
+              <CodeEnhancer />
               {post.content && <ConvertCKEditorImageToNextImage imagePath={post.content} />}
           </div>
         </div>

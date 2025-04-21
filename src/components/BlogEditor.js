@@ -55,15 +55,13 @@ export default function BlogEditor({postData}){
         const key = e.target.id
         const value =e.target.value
         setForm({...form,[key]: value})
-        console.log(form)
     }
 
-    const handleSubmit  = async(e)=>{
+    const handleSubmit  = async(e,showValue)=>{
         e.preventDefault()
-       
-        setForm({...form, is_show:e.target.value})
+        setForm((prev) => ({ ...prev, is_show: showValue }))
         try {
-            await trigger(form)
+            await trigger({ ...form, is_show: showValue })
             console.log('投稿成功:', data)
             router.push('/admin')
         } catch (err) {
@@ -153,11 +151,11 @@ export default function BlogEditor({postData}){
 
                 </div>
                 </form>
-                <button className='form_control_item_submit' id="is_show" value="0" onClick={handleSubmit}>
+                <button type="button" className='form_control_item_submit' id="is_show" value="0"   onClick={(e) => handleSubmit(e, 0)} >
                     Draft
                 </button> 
-                <button className='form_control_item_submit' id="is_show" value="1" onClick={handleSubmit}>
-                    Store
+                <button type="button" className='form_control_item_submit' id="is_show" value="1"   onClick={(e) => handleSubmit(e, 1)} >
+                    Publish
                 </button>  
         </>
     )

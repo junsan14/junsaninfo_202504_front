@@ -178,7 +178,7 @@ export const editorConfiguration = {
     },
     
     ckfinder: {
-        uploadUrl:'http://localhost:8000/ckfinder/connector?command=QuickUpload&type=Images&responseType=json',
+        uploadUrl:`${process.env.NEXT_PUBLIC_BACKEND_URL}/ckfinder/connector?command=QuickUpload&type=Images&responseType=json`,
         options: {
             resourceType: 'Images'
         },

@@ -12,7 +12,7 @@ import AuthSessionStatus from '@/app/(auth)/AuthSessionStatus'
 
 const Login = () => {
     const router = useRouter()
-
+    const [isLoading, setIsLoading] = useState(false)
     const { login } = useAuth({
         middleware: 'guest',
         redirectIfAuthenticated: '/admin',
@@ -34,6 +34,7 @@ const Login = () => {
 
     const submitForm = async event => {
         event.preventDefault()
+        setIsLoading(true)
 
         login({
             email,
@@ -42,6 +43,8 @@ const Login = () => {
             setErrors,
             setStatus,
         })
+        setIsLoading(false)
+
     }
 
     return (
@@ -113,7 +116,9 @@ const Login = () => {
                         Forgot your password?
                     </Link>
 
-                    <Button className="ml-3">Login</Button>
+                    <Button className="ml-3">
+                        {isLoading ? 'Logging in...' : 'Login'}
+                    </Button>
                 </div>
             </form>
         </>

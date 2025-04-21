@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-      domains: ['172.20.10.6','localhost','scontent.cdninstagram.com','api.junsan.info'], // ← ここにIPやドメインを追加
+      domains: ['172.20.10.6','localhost','scontent.cdninstagram.com','api.junsan.info','assets.st-note.com'], // ← ここにIPやドメインを追加
     },
     /*
     async rewrites() {

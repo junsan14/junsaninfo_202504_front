@@ -1,8 +1,6 @@
 'use client'
-import React from 'react'
-
+import React, { useEffect, useState } from 'react'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
-
 import useSWR from 'swr'
 import Image from 'next/image'
 
@@ -23,15 +21,9 @@ import { LuSend } from "react-icons/lu"
 const fetcher = (url) => fetch(url).then(res => res.json())
 
 export function Instagram(){  
-  //const user_name = "junsan_junsan14" //ビジネスorクリエイターアカウントの必要あり
-  const ACCESS_TOKEN = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN
-  //const USER_ID = process.env.NEXT_PUBLIC_INSTAGRAM_USER_ID
-  //const INSTAGRAM_ID = process.env.NEXT_PUBLIC_INSTAGRAM_APP_ID
-  const get_count = 9 //取得したい投稿数
-  const apiRL = `https://graph.instagram.com/v22.0/me/media?fields=id,media_type,media_url,username,timestamp,caption&limit=${get_count}&access_token=${ACCESS_TOKEN}`
  
+  const { data, error, isLoading } = useSWR('/api/instagram', fetcher);
 
-  const { data, error, isLoading } = useSWR(() =>  apiRL,fetcher)
   if (error) return 'An error has occurred.'
   if (isLoading || ! data){
     return (
@@ -40,7 +32,7 @@ export function Instagram(){
             {
                 (function(){
                     const list=[]
-                    for(let i=0; i<get_count;i++){
+                    for(let i=0; i<9;i++){
                         list.push(
                             <div
                                 className="aspect-square bg-gray-300 rounded-sm flex items-center justify-center instagram_posts_item"
@@ -74,9 +66,9 @@ export function Instagram(){
     )
   }
    
-   
 return(
     <div className="instagram js-instagram">
+        
             <div className="instagram_posts js-instagram-wrapper">
                 {data.data.map((post,i) => {
                 const MediaType = ()=>{
@@ -118,11 +110,7 @@ return(
 
 
 export function Threads(){
-    const ACCESS_TOKEN = process.env.NEXT_PUBLIC_THREADS_ACCESS_TOKEN
-    //const THREADS_USER_ID = process.env.NEXT_PUBLIC_THREADS_USER_ID
-    const get_count = 6 //取得したい投稿数
-    const apiURL = `https://graph.threads.net/v1.0/me/threads?fields=id,media_type,media_url,permalink,username,text,timestamp&limit=${get_count}&access_token=${ACCESS_TOKEN}`
-    const { data, error, isLoading } = useSWR(() =>  apiURL, fetcher)
+    const { data, error, isLoading } = useSWR('/api/threads', fetcher);
     if (error) return 'An error has occurred.'
     if (isLoading || !data){
         return (
@@ -175,70 +163,69 @@ export function Threads(){
             </div>  
         )
     }  
-return(
-    <div className="threads js-threads">
-        <div className="threads_posts js-threads-wrapper">
-            <Swiper
-                slidesPerView={1.2}
-                spaceBetween={20}
-                pagination={{
-                    clickable: true,
-                }}
-                loop={true}
-                centeredSlides={true}
-                breakpoints={{
-                    640: {
-                    slidesPerView: 2,
-                    spaceBetween: 20,
-                    },
-                    768: {
-                    slidesPerView: 1.5,
-                    spaceBetween: 50,
-                    },
-                    960: {
-                    slidesPerView: 3.8,
-                    spaceBetween: 40,
-                    },
-                }}
-                autoplay={{
-                    delay: 7000,
-                    disableOnInteraction: false,
-                }}
-                modules={[Pagination,Autoplay]}
-                className="mySwiper"
-            >
-            {data.data.map((post,i)=>(
-                <SwiperSlide key={i}>       
-                <a href={post.permalink} target="_blank" rel="noreferrer">
-                    <div className='threads_posts_item'>
-                        <div className="threads_posts_item_header">
-                        <Image src='/profile.png' alt="" width={200} height={200}/>
-                        <h2 className="title">{post.username}</h2>
-                        <p className="date">{formatDistanceToNow(post.timestamp,{locale: ja})}前 </p>
+    return(
+        <div className="threads js-threads">
+            <div className="threads_posts js-threads-wrapper">
+                <Swiper
+                    slidesPerView={1.2}
+                    spaceBetween={20}
+                    pagination={{
+                        clickable: true,
+                    }}
+                    loop={true}
+                    centeredSlides={true}
+                    breakpoints={{
+                        640: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                        },
+                        768: {
+                        slidesPerView: 1.5,
+                        spaceBetween: 50,
+                        },
+                        960: {
+                        slidesPerView: 3.8,
+                        spaceBetween: 40,
+                        },
+                    }}
+                    autoplay={{
+                        delay: 7000,
+                        disableOnInteraction: false,
+                    }}
+                    modules={[Pagination,Autoplay]}
+                    className="mySwiper"
+                >
+                {data.data.map((post,i)=>(
+                    <SwiperSlide key={i}>       
+                    <a href={post.permalink} target="_blank" rel="noreferrer">
+                        <div className='threads_posts_item'>
+                            <div className="threads_posts_item_header">
+                            <Image src='/profile.png' alt="" width={200} height={200}/>
+                            <h2 className="title">{post.username}</h2>
+                            <p className="date">{formatDistanceToNow(post.timestamp,{locale: ja})}前 </p>
+                            </div>
+                            <div className='threads_posts_item_content'>
+                                <p className='threads_posts_item_content_text'>{post.text}</p>
+                            </div>
+                            <div className='icon'>
+                                <FaRegHeart />
+                                <FaRegComment />
+                                <FaRetweet />
+                                <LuSend />
+                            </div>
                         </div>
-                        <div className='threads_posts_item_content'>
-                            <p className='threads_posts_item_content_text'>{post.text}</p>
-                        </div>
-                        <div className='icon'>
-                            <FaRegHeart />
-                            <FaRegComment />
-                            <FaRetweet />
-                            <LuSend />
-                        </div>
-                    </div>
-                </a>
-                </SwiperSlide>
-                ))}
-            </Swiper>
-            <div className="section_btn">
-                <a href='https://www.instagram.com/junsan_junsan14/' target='_blank' rel="noreferrer">
-                    <FaThreads />
-                </a>
+                    </a>
+                    </SwiperSlide>
+                    ))}
+                </Swiper>
+                <div className="section_btn">
+                    <a href='https://www.instagram.com/junsan_junsan14/' target='_blank' rel="noreferrer">
+                        <FaThreads />
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-)
-
+    )
 }
 
 

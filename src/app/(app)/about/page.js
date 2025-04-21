@@ -2,10 +2,13 @@
 import React from 'react'
 import { Radar,RadarChart, PolarGrid,Tooltip, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts'
 import Image from 'next/image'
-//import $ from 'jquery'
+import { useState } from 'react'
 
 export default function About() {
-  //graphShow()
+  const [isVisible, setIsVisible] = useState("front")
+  const toggle = (e) => {
+   setIsVisible(e.target.id)
+  }
 
   return (
       <>
@@ -65,12 +68,12 @@ export default function About() {
                 </h2>
                 <div className="skill">
                   <ul className="skill_tab tab">
-                    <li className="skill_tab_li js-skill-tab-li on" tabIndex="-1" name="front">FrontEnd</li>
-                    <li className="skill_tab_li js-skill-tab-li" tabIndex="-1" name="back">BackEnd</li>
-                    <li className="skill_tab_li js-skill-tab-li" tabIndex="-1" name="other">Adobe/Tools</li>
+                    <li className={`skill_tab_li ${isVisible === "front" ? "on" : ""}`} tabIndex="-1" id="front" onClick={toggle}>FrontEnd</li>
+                    <li className={`skill_tab_li ${isVisible === "back" ? "on" : ""}`} tabIndex="-1" id="back" onClick={toggle}>BackEnd</li>
+                    <li className={`skill_tab_li ${isVisible === "other" ? "on" : ""}`} tabIndex="-1" id="other" onClick={toggle}>Adobe/Tools</li>
                   </ul>
                   <div className="skill_content">
-                      <div className="skill_content_item js-content-front show">
+                      <div className={`skill_content_item ${isVisible === "front" ? "show" : ""}`}>
                         <div className="skill_content_item_graph skill_graph">
                           <FrontSKillGraph />
                         </div>
@@ -82,7 +85,7 @@ export default function About() {
                            <p>1: 少し触れたレベルで､スキル向上の余地多くあり</p>
                         </div>
                       </div>
-                      <div className="skill_content_item js-content-back">
+                      <div className={`skill_content_item ${isVisible === "back" ? "show" : ""}`}>
                         <div className="skill_content_item_graph skill_graph">
                           <BackSKillGraph />
                         </div>
@@ -94,7 +97,7 @@ export default function About() {
                            <p>1: 少し触れたレベルで､スキル向上の余地多くあり</p>
                         </div>
                       </div>
-                      <div className="skill_content_item js-content-other">
+                      <div className={`skill_content_item ${isVisible === "other" ? "show" : ""}`}>
                         <div className="skill_content_item_graph skill_graph">
                           <OtherSkillGraph />
                         </div>
@@ -105,11 +108,10 @@ export default function About() {
                            <p>2: 基本的な機能は使用しているが、それまで</p>
                            <p>1: 少し触れたレベルで､機能理解の余地多くあり</p>
                         </div>
-                    </div>
+                      </div>
                   </div>
 
                 </div>
-               
               </div>
             </section>
       </>
@@ -117,20 +119,6 @@ export default function About() {
 }
 
 
-/*
-function graphShow(){
-    $(function(){
-      $('.js-skill-tab-li').on('click', function(){
-       
-        $(this).addClass("show on")
-        $(this).siblings().removeClass("on")
-        let $content = $(".js-content-"+$(this).attr('name'))
-        $content.addClass('show')
-        $content.siblings().removeClass('show')
-      })     
-    })
-}
-*/
 /*
 const enginerSkill = [
     {

@@ -151,13 +151,13 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
                                     <Link href={`/admin/blog/post/edit?postid=${post.id}`} data={{ id: post.id }}>
                                         <FaEdit className='posts_item_manage_icons_item'/>
                                     </Link>
-                                    <button className={"btn-"+post.id} disabled={isMutating && true}>
+                                    <button className={"btn-"+post.id} disabled={isMutating}>
                                         {post.is_show
                                             ?<AiOutlineEyeInvisible className='posts_item_manage_icons_item' id={post.id} alt='表示する' onClick={(e)=>handleClickVisible(e,1)}/>
                                             :<AiOutlineEye className='posts_item_manage_icons_item' id={post.id} alt='表示する' onClick={(e)=>handleClickVisible(e,0)}/>
                                             }
                                     </button>
-                                    <button className={"btn-"+post.id}>
+                                    <button className={"btn-"+post.id} disabled={isMutating}>
                                         <FaTrash className='posts_item_manage_icons_item' id={post.id} 
                                             onClick={(e)=>handleClickDelete(e,post.id)}/>
                                     </button>

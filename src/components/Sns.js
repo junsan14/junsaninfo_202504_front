@@ -20,33 +20,9 @@ import { FaRegHeart } from "react-icons/fa"
 import { FaRegComment } from "react-icons/fa"
 import { FaRetweet } from "react-icons/fa6"
 import { LuSend } from "react-icons/lu"
-
 const fetcher = (url) => fetch(url).then(res => res.json())
 
 export function Instagram(){  
-
-    /*
-  const [posted, setPosted] = useState("");
-  useEffect(()=>{
-    const user_name = "junsan_junsan14" //ビジネスorクリエイターアカウントの必要あり
-    const ACCESS_TOKEN = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN;
-    const USER_ID = process.env.NEXT_PUBLIC_INSTAGRAM_USER_ID;
-    const INSTAGRAM_ID = process.env.NEXT_PUBLIC_INSTAGRAM_APP_ID;
-    const get_count = 9 //取得したい投稿数
-    const url = `https://graph.facebook.com/v22.0/1117396250003165`;
-   
-
-      .get(
-        
-        `https://graph.instagram.com/v22.0/me/media?fields=id,media_type,media_url,username,timestamp,caption&limit=${get_count}&access_token=${ACCESS_TOKEN}`
-
-      )
-      .then((res) => {
-        setPosted(res.data);   
-      });
-
-  }, [])
-*/
   //const user_name = "junsan_junsan14" //ビジネスorクリエイターアカウントの必要あり
   const ACCESS_TOKEN = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN
   //const USER_ID = process.env.NEXT_PUBLIC_INSTAGRAM_USER_ID
@@ -113,7 +89,7 @@ return(
                     )
                     }else{
                     return (
-                        <img src={post.media_url} alt="" width={250} height={250} className="instagram_posts_item_image js-modal-img" data-url={post.media_url} data-index={i}/>            
+                        <Image src={post.media_url} alt="" width={250} height={250} className="instagram_posts_item_image js-modal-img" data-url={post.media_url} data-index={i}/>            
                         )
                     }
                 }

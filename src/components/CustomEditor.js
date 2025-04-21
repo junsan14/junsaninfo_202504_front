@@ -1,6 +1,7 @@
 'use client' // only in App Router
 
-
+import { ClassicEditor } from 'ckeditor5'
+import { CKEditor } from '@ckeditor/ckeditor5-react'
 import {  
     Autoformat,
     Autosave,
@@ -37,7 +38,6 @@ import {
     TableToolbar,
     TextTransformation,
 } from 'ckeditor5'
-
 
 import 'ckeditor5/ckeditor5.css'
 
@@ -216,9 +216,32 @@ export const editorConfigurationThumbnail = {
      ],
 
      ckfinder:{
-        uploadUrl:'http://localhost:8000/ckfinder/connector?command=QuickUpload&type=Images&responseType=json',
+        uploadUrl:`${process.env.NEXT_PUBLIC_BACKEND_URL}/ckfinder/connector?command=QuickUpload&type=Images&responseType=json`,
     },
 
     
 }
 
+
+export default function CustomEditor ({form,setForm,thumbnail}){
+    const setEfitorData = (e,editor,key)=>{
+        setForm({...form,[key]:editor.getData()})
+    }
+    return(
+        <>
+        <CKEditor
+            editor={ClassicEditor}
+            config={thumbnail?editorConfigurationThumbnail:editorConfiguration}
+            id={thumbnail? "thumbnail" : "content"}
+            data={thumbnail?form.thumbnail:form.content}
+            onChange={ ( e, editor,key=thumbnail?"thumbnail":"content" ) => {
+                setEfitorData(e , editor, key)
+            } }
+            onBlur={ ( e, editor,key=thumbnail?"thumbnail":"content" ) => {
+                setEfitorData(e , editor, key)
+            }}
+                
+        />
+        </>
+    )
+}

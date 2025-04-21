@@ -1,12 +1,8 @@
 'use client'
 import useSWR from 'swr'
 //import BlogEditor from '@/components/BlogEditor'
-import dynamic from 'next/dynamic'
+import BlogEditor from '@/components/BlogEditor'
 
-const BlogEditor = dynamic(
-    () => import('@/components/BlogEditor').then(mod => mod.CKEditor),
-    { ssr: false }
-  )
 const fetcher = (url) =>
     fetch(url, {
       credentials: 'include',
@@ -26,7 +22,8 @@ export default function Create(){
                 <h1 className="section_title">
                     <div className="section_title_jp">NEW POST</div>
                 </h1>
-                <BlogEditor postData={data}/> 
+                {/* <BlogEditor postData={data}/>  */}
+                 <BlogEditor postData={data}/>
             </section>
         </>                
     )

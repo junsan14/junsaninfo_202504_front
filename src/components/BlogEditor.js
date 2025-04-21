@@ -1,27 +1,22 @@
+'use client'
 import useSWRMutation from 'swr/mutation'
-import { useState,useEffect } from 'react'
-import { CKEditor } from '@ckeditor/ckeditor5-react'
-//import { ClassicEditor } from 'ckeditor5'
-import { editorConfiguration,editorConfigurationThumbnail } from '@/components/CustomEditor'
+import { useState} from 'react'
 import CKFinderLoader from '@/components/CKFinderLoader'
 import { formatinputDate } from '@/components/Script'
 import { blogCategories } from '@/constants/blogCategories'
 import { useRouter } from 'next/navigation'
 import Script from 'next/script'
-
 import dynamic from 'next/dynamic'
 
-const ClassicEditor = dynamic(
-    () => import('@ckeditor/ckeditor5-react').then(mod => mod.CKEditor),
-    { ssr: false }
-  )
+const  ClientSideCustomEditor = dynamic( () => import( '@/components/CustomEditor' ), { ssr: false } )
+
 
 const sendData = async (url, { arg }) => {
   
     const res = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(arg),
+        body: JSON.stringify(arg)
         //credentials: 'include',
     })
     
@@ -33,25 +28,7 @@ const sendData = async (url, { arg }) => {
 }
 
 export default function BlogEditor({postData}){
-    useEffect(() => {
-        // すでに読み込まれていたらスキップ
-        if (window.CKFinder) return
-    
-        const script = document.createElement('script')
-        script.src = '/ckfinder/ckfinder.js'
-        script.async = true
-    
-        script.onload = () => {
-            console.log('CKFinder script loaded')
-            // CKFinder 初期化などここで安全に行える
-        }
-    
-        document.body.appendChild(script)
-    
-        return () => {
-            document.body.removeChild(script)
-        }
-    }, [])
+
     const { trigger, data } = useSWRMutation(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/blog/post/store`,
             sendData
@@ -78,7 +55,7 @@ export default function BlogEditor({postData}){
         const key = e.target.id
         const value =e.target.value
         setForm({...form,[key]: value})
-        
+        console.log(form)
     }
 
     const handleSubmit  = async(e)=>{
@@ -104,6 +81,7 @@ export default function BlogEditor({postData}){
                 console.log('CKFinder script loaded')
                 }}
             />
+            <CKFinderLoader />
             <form onSubmit={handleSubmit} method='post' id='form' className='form_control blogEditor_form encType="multipart/form-data"' >
                 <div className='blogEditor_form_main'>
                     <div  className="form_control_item">
@@ -114,19 +92,7 @@ export default function BlogEditor({postData}){
                     <div className="form_control_item post_content">
                         <label htmlFor="content"  style={{marginBottom:'20px'}} >Content</label>
                         <div className='article_content' id="content">
-                            <CKFinderLoader />
-                            <CKEditor
-                                editor={ClassicEditor}
-                                config={editorConfiguration}
-                                id="content"
-                                data={form.content}
-                                onChange={ ( event, editor ) => {
-                                    setForm({...form,"content":editor.getData()})
-                                } }
-                                onBlur={ ( event, editor ) => {
-                                    setForm({...form,'content':editor.getData()})
-                                }}
-                            />
+                            <ClientSideCustomEditor form={form} setForm={setForm}/>
                         </div>                     
                     </div>
                 </div>
@@ -143,7 +109,7 @@ export default function BlogEditor({postData}){
                         <label htmlFor="published_at">Publish Date</label>
                         <input type='datetime-local' className="form_control_item_select" 
                             value={formatinputDate(form.published_at)}
-                            name='published_at' id='published_at' onChange={handleChangeData}/>
+                            name='published_at' id='published_at' onChange={handleChangeData} />
                     </div>
                     <div  className="form_control_item">
                         <label htmlFor="category">Category</label>
@@ -177,14 +143,7 @@ export default function BlogEditor({postData}){
                     </div>
                     <div  className="form_control_item">
                         <label htmlFor="thumbnail" style={{marginBottom:'20px'}} >Thumbnail</label>
-                        <CKEditor
-                            editor={ ClassicEditor }
-                            config={ editorConfigurationThumbnail }
-                            data={form.thumbnail}
-                            onChange={ ( event, editor ) => {  
-                                setForm({...form,'thumbnail':editor.getData()})
-                            } }
-                        />
+                        <ClientSideCustomEditor form={form} setForm={setForm} thumbnail={true}/>
                     </div>
                     <div  className="form_control_item"  style={{marginTop:'20px'}}>
                         <label htmlFor="excerpt" >Excerpt</label>
@@ -204,3 +163,5 @@ export default function BlogEditor({postData}){
     )
 
 }
+
+//export  default ClientSideCustomEditor;

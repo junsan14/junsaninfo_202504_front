@@ -7,7 +7,7 @@ import { useAuth } from '../hooks/auth'
 
 export default function GuestHeader(){
   //const { user } = useAuth({ middleware: 'guest' })
-  const { user } = useAuth();
+  const { user } = useAuth()
   const { logout } = useAuth()
   useEffect(() => {
     const $nav = $('.js-nav')
@@ -41,7 +41,7 @@ export default function GuestHeader(){
 
     return () => clearTimeout(timeout)
   }, [user]) // userが変更された時に再バインド
-  console.log(user)
+  //console.log(user)
     return(
         <header className='header'>
             <div className="toggle js-toggle" id="js-toggle">

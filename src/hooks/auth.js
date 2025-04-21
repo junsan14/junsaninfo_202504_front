@@ -17,15 +17,9 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             })
             .then(res => res.data)
             .catch(error => {
-                if (error.response?.status === 401) {
-                    console.log('未ログイン状態です');
-                    // ログインページにリダイレクトなど
-                  } else {
-                    console.error('別のエラー:', error);
-                  }
                 if (error.response.status !== 409) throw error
                 router.push('/verify-email')
-            }),
+            })
     )
     
     const csrf = () => axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/sanctum/csrf-cookie`,{

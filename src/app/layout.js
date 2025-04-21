@@ -8,7 +8,6 @@ import Footer from '@/components/Footer'
 import NextTopLoader from 'nextjs-toploader'
 
 
-
 const murecho = Murecho({
     weight: '400',
     subsets: ['latin'],
@@ -16,7 +15,6 @@ const murecho = Murecho({
   })
 
 const RootLayout = ({ children }) => { 
-console.log(murecho)
     return (
         <html lang="jp" className={murecho.className}>
              <head />
@@ -27,7 +25,6 @@ console.log(murecho)
                     {children}
                     </main>
                     <Footer />
-
             </body>
         </html>
     )

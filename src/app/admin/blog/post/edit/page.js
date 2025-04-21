@@ -18,7 +18,7 @@ export default function EditBlog(){
             <h1 className="section_title">
                 <p className="section_title_jp">EDIT</p>
             </h1>
-            <BlogEditor postData={data}/> 
+            <BlogEditor postData={data}/> *
         </section>
     )
 }

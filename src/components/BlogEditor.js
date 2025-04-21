@@ -1,5 +1,6 @@
 'use client'
 import useSWRMutation from 'swr/mutation'
+import { mutate } from 'swr'
 import { useState} from 'react'
 import CKFinderLoader from '@/components/CKFinderLoader'
 import { formatinputDate } from '@/components/Script'
@@ -64,7 +65,10 @@ export default function BlogEditor({postData}){
         try {
             await trigger({ ...form, is_show: showValue })
             console.log('投稿成功:', data)
+            await mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/posts`)
+            //await mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/blog/post/edit?postid=${postId}`)
             router.push('/admin')
+            
         } catch (err) {
             console.error(err)
         }

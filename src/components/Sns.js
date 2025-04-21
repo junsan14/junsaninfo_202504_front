@@ -81,7 +81,7 @@ return(
                     )
                     }else{
                     return (
-                        <Image src={post.media_url} alt="" width={250} height={250} className="instagram_posts_item_image js-modal-img" data-url={post.media_url} data-index={i}/>            
+                        <img src={post.media_url} alt="" width={250} height={250} className="instagram_posts_item_image js-modal-img" data-url={post.media_url} data-index={i}/>            
                         )
                     }
                 }

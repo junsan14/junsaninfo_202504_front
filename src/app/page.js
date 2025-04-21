@@ -16,7 +16,7 @@ const Home = ()=>{
         const imageList = [
             "/kvs/9.jpeg", "/kvs/10.jpeg", "/kvs/11.jpeg", "/kvs/12.jpeg",
             "/kvs/13.jpeg", "/kvs/14.jpeg", "/kvs/15.jpeg", "/kvs/16.jpeg",
-            "/kvs/17.jpeg", "/kvs/18.jpeg"
+            "/kvs/17.jpeg", "/kvs/18.jpeg", "/kvs/19.jpeg", "/kvs/20.jpeg"
         ]
     
         // 最初のランダムインデックスを設定

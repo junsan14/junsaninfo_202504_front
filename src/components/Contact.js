@@ -35,7 +35,6 @@ export default function Contact() {
         e.preventDefault()
         try {
           await trigger(form)
-          alert('送信成功！')
         } catch (err) {
           console.error(err)
         }
@@ -94,8 +93,8 @@ export default function Contact() {
                 <button className="form_control_item_submit" >
                 {isMutating ? 'SENDING...' : 'SEND'}
                 </button>
-                {error && <p className="text-red-500 mt-2">送信に失敗しました。</p>}
-                {data && <p className="text-green-500 mt-2">送信が成功しました！</p>}
+                {error && <p className="text-red-500 mt-2">Failed to send</p>}
+                {data && <p className="text-green-500 mt-2">Successfully sent!Check your email.</p>}
                 
             </form>
         </div>

@@ -1,18 +1,22 @@
 'use client'
 import Link from "next/link"
-import { blogCategories } from "@/constants/blogCategories"
 import useSWR,{ mutate }from 'swr'
 import useSWRMutation from 'swr/mutation'
 import { useState,useEffect } from "react"
 import { FaTrash, FaEdit } from "react-icons/fa"
 import { AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai"
-import { useRouter, usePathname } from "next/navigation"
+import { useRouter, usePathname,useSearchParams } from "next/navigation"
 import ConvertCKEditorImageToNextImage from "./ConvertCKEditorImageToNextImage"
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { ja } from 'date-fns/locale'
 import { formatDate } from "./Script"
+import { Suspense } from 'react';
+
 import { MdAccessTime,MdUpdate } from "react-icons/md"
 import NProgress from 'nprogress'
+import { AiOutlineClear } from "react-icons/ai"
+import { BsSearch } from "react-icons/bs"
+import { useDebouncedCallback } from 'use-debounce'
 
 const fetcher = (url) => fetch(url).then(res => res.json())
 
@@ -44,13 +48,21 @@ const deletePost = async (url, { arg: id }) => {
 }
 
 export default function PostsList({postLimit,pagination, edit, relevantPosts}){
-    const [currentPage, setCurrentPage] = useState(1)
-    const router = useRouter()
-    const pathname = usePathname()
+    
 
+    //const pathname = usePathname()
+    //const newParams = new URLSearchParams(window.location.search)
+
+    const searchParams = useSearchParams()
+    const pathname = usePathname()
+    const { replace } = useRouter()
+    
+    const [currentPage, setCurrentPage] = useState(1)
+    const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category')?searchParams.get('category'):"")
+    const [inputKeywords, setInputKeywords] = useState(searchParams.get('keywords')?searchParams.get('keywords').toString():"")
     const isAdmin = pathname.startsWith('/admin')
     const { data, error, isLoading } = useSWR(
-        () => currentPage? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/posts?page=${currentPage}&limit=${postLimit}&all=${isAdmin}` : null,
+        () => currentPage? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}` : null,
         fetcher
       )
     const { trigger:triggerVisibility,isMutating } = useSWRMutation(
@@ -67,7 +79,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
       
         try {
             await triggerVisibility({id:id, is_show:is_show})
-            mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/posts?page=${currentPage}&limit=${postLimit}&all=${isAdmin}`)
+            mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}`)
         } catch (err) {
             console.error(err)
         }   
@@ -75,25 +87,49 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
     const handleClickDelete = async(e,id)=>{
         const res = confirm('本当に削除してよろしいですか?')
         if(res) await triggerDelete(id)
-        mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/posts?page=${currentPage}&limit=${postLimit}&all=${isAdmin}`)
+        mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}`)
     }   
     const changePage = (page) => {
+        const params = new URLSearchParams(searchParams)
         setCurrentPage(page)
-        const newParams = new URLSearchParams(window.location.search)
-        newParams.set("page", page)
-        router.push(`${pathname}?${newParams.toString()}`, { scroll: true })
-      }
+        params.set("page", page)
+        replace(`${pathname}?${params.toString()}`)
 
+       // router.push(`${pathname}?${newParams.toString()}`, { scroll: true })
+      }
+    const handleClickCategory = (e)=>{
+        const params = new URLSearchParams(searchParams)
+        setSelectedCategory(e.target.id)
+        setCurrentPage(1)
+        params.set("category", e.target.id)
+        replace(`${pathname}?${params.toString()}`, {scroll:true})
+        //router.push(`${pathname}?${params.toString()}`, { scroll: true })
+    }
+   
+    const handleSearchKeywords = useDebouncedCallback((term)=>{
+        const params = new URLSearchParams(searchParams)
+        if (term) {
+            params.set('keywords', term)
+            setInputKeywords(term)
+          } else {
+            params.delete('keywords')
+          }
+          replace(`${pathname}?${params.toString()}`)
+
+    },500)
+    
     useEffect(() => {
-        const pageFromQuery = Number(new URLSearchParams(window.location.search).get("page"))
-        if (pageFromQuery && pageFromQuery > 0) {
-        setCurrentPage(pageFromQuery)
+        if (typeof window !== 'undefined') {
+          const pageFromQuery = Number(new URLSearchParams(window.location.search).get("page"))
+          if (pageFromQuery && pageFromQuery > 0) {
+            setCurrentPage(pageFromQuery)
+          }
         }
-    }, [])
+      }, []) // 初回マウント時にのみ実行
 
     if (error) return 'An error has occurred.'
     
-    if (isLoading || ! data){
+    if (isLoading || ! data.posts.data){
         return (
             <div className="posts">
                 {
@@ -131,97 +167,157 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
             </div>  
         )
     }
-
-    const posts = relevantPosts?relevantPosts:data.data
+    console.log(data.blogCategories)
+    const posts = relevantPosts?relevantPosts:data.posts.data
+    const blogCategories = data.blogCategories
     const totalPages = data.last_page
     const paginationRange = getPaginationRange(currentPage, totalPages)
-    
 
+    const SearchKeyword = ()=>{
+        return(
+            <div className="search_area js-search_area">
+                <button type="button" className="search_area_reset js-search_area_reset" value="RESET" 
+                        onClick={()=>{
+                            const params = new URLSearchParams(searchParams)
+                            setSelectedCategory("")
+                            setInputKeywords("")
+                            params.delete('keywords')
+                            params.delete('category')
+                            replace(`${pathname}`,{ scroll: true })
+                            
+                        }}>
+                    <AiOutlineClear />
+                </button>
+                <BsSearch className="search_area_icon js-search_area_icon"/>
+                
+                <input list="tag-list"  className="search_area_input js-search_area_input" id="tag-choice" 
+                    name="tag-choice" placeholder=""  
+                    defaultValue={searchParams.get('keywords')?searchParams.get('keywords'):""}
+                    onChange={(e)=>handleSearchKeywords(e.target.value)}
+                   
+                />
+            </div>
+        )
+    }
+
+    const Category = ()=>{
+        return(
+            <ul className="category_tab tab">  
+                {blogCategories.map((item,i)=>{
+                        return(
+                            <li className={selectedCategory === item['name']?"category_tab_li on":"category_tab_li"} 
+                                tabIndex="-1" value={item['name']}  onClick={handleClickCategory} key={i} id={item['name']} >
+                                    {item['name']}
+                            </li>
+                            )
+                    
+                    })}
+                
+            </ul>
+        )
+    }
     return(
-        <div className="posts">
-            {
-            posts.map((post)=>(
-                    <div className={post.is_show?"posts_item fade":"posts_item fade grey"} id={"postid_" + post.id} key={"postid_"+post.id}>
-                        <Link href={`/blog/${blogCategories[post.category]}/${post.id}`} className='posts_item_link'>
-                            <div className="posts_item_link_image">
-                                <ConvertCKEditorImageToNextImage imagePath={post.thumbnail} />
-                            </div>
-                            <div className="posts_item_link_remarks">
-                                <h3 className="posts_item_link_remarks_title">{post.title}</h3>
-                                <div className="posts_item_link_remarks_text">
-                                    {post.excerpt}
-                                </div> 
-                                <div className="posts_item_link_remarks_dates_area">
-                                    <PostDate post={post} />前
-                                </div>   
-                            </div>
-                        </Link>
-                        {edit && (
-                            <div className='posts_item_manage'>
-                                <span className="posts_item_manage_id"> {post.id} </span>          
-                                <div className='posts_item_manage_icons'>
-                                    <Link href={`/admin/blog/post/edit?postid=${post.id}`} data={{ id: post.id }}>
-                                        <FaEdit className='posts_item_manage_icons_item'/>
-                                    </Link>
-                                    <button className={"btn-"+post.id} disabled={isMutating}>
-                                        {post.is_show
-                                            ?<AiOutlineEyeInvisible className='posts_item_manage_icons_item' id={post.id} alt='表示する' onClick={(e)=>handleClickVisible(e,1)}/>
-                                            :<AiOutlineEye className='posts_item_manage_icons_item' id={post.id} alt='表示する' onClick={(e)=>handleClickVisible(e,0)}/>
-                                            }
-                                    </button>
-                                    <button className={"btn-"+post.id} disabled={isMutating}>
-                                        <FaTrash className='posts_item_manage_icons_item' id={post.id} 
-                                            onClick={(e)=>handleClickDelete(e,post.id)}/>
-                                    </button>
+        <>
+            <SearchKeyword />
+            <Category />
+            {posts.length !==0? (
+            <>    
+                <div className="posts">
+                {posts.map((post)=>{
+                    const blogCategory = blogCategories.find((category)=>category.id== post.category)['name']
+                    console.log(blogCategory)
+                    return(
+                        <div className={post.is_show?"posts_item fade":"posts_item fade grey"} id={"postid_" + post.id} key={"postid_"+post.id}>
+                            <Link href={`/blog/${blogCategory}/${post.id}`} className='posts_item_link'>
+                                <div className="posts_item_link_image">
+                                    <ConvertCKEditorImageToNextImage imagePath={post.thumbnail} />
                                 </div>
-                            </div>
-                        )
-                        }
-                    </div>
-            ))
-            }
-             {/* ページネーション */}
-             {pagination && (
-                <div className="mt-6 flex justify-center items-center space-x-1 posts_pagination">
-                    <button
-                     onClick={() => changePage(Math.max(currentPage - 1, 1))}
-                    disabled={currentPage === 1}
-                    className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
-                    >
-                    前へ
-                    </button>
-            
-                    {paginationRange.map((item, index) =>
-                    typeof item === 'string' ? (
-                        <span key={"paginationkey_" + index} className="px-3 py-1 text-gray-400">
-                        {item}
-                        </span>
-                    ) : (
-                        <button
-                        key={item}
-                        onClick={() => changePage(item)}
-                        className={`px-3 py-1 rounded ${
-                            item === currentPage
-                            ? 'bg-gray-800 text-white'
-                            : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
-                        }`}
-                        >
-                        {item}
-                        </button>
+                                <div className="posts_item_link_remarks">
+                                    <h3 className="posts_item_link_remarks_title">{post.title}</h3>
+                                    <div className="posts_item_link_remarks_text">
+                                        {post.excerpt}
+                                    </div> 
+                                    <div className="posts_item_link_remarks_dates_area">
+                                        <PostDate post={post} />前
+                                    </div>   
+                                </div>
+                            </Link>
+                            {edit && (
+                                <div className='posts_item_manage'>
+                                    <span className="posts_item_manage_id"> {post.id} </span>          
+                                    <div className='posts_item_manage_icons'>
+                                        <Link href={`/admin/blog/post/edit?postid=${post.id}`} data={{ id: post.id }}>
+                                            <FaEdit className='posts_item_manage_icons_item'/>
+                                        </Link>
+                                        <button className={"btn-"+post.id} disabled={isMutating}>
+                                            {post.is_show
+                                                ?<AiOutlineEyeInvisible className='posts_item_manage_icons_item' id={post.id} alt='表示する' onClick={(e)=>handleClickVisible(e,1)}/>
+                                                :<AiOutlineEye className='posts_item_manage_icons_item' id={post.id} alt='表示する' onClick={(e)=>handleClickVisible(e,0)}/>
+                                                }
+                                        </button>
+                                        <button className={"btn-"+post.id} disabled={isMutating}>
+                                            <FaTrash className='posts_item_manage_icons_item' id={post.id} 
+                                                onClick={(e)=>handleClickDelete(e,post.id)}/>
+                                        </button>
+                                    </div>
+                                </div>
+                            )
+                            }
+                        </div>
                     )
-                    )}
-            
-                    <button
-                    onClick={() => changePage(Math.min(currentPage + 1, totalPages))}
-                    disabled={currentPage === totalPages}
-                    className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
-                    >
-                    次へ
-                    </button>
+                })
+                }
+                {/* ページネーション */}
+                {pagination && (
+                    <div className="mt-6 flex justify-center items-center space-x-1 posts_pagination">
+                        <button
+                        onClick={() => changePage(Math.max(currentPage - 1, 1))}
+                        disabled={currentPage === 1}
+                        className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
+                        >
+                        前へ
+                        </button>
+                
+                        {paginationRange.map((item, index) =>
+                        typeof item === 'string' ? (
+                            <span key={"paginationkey_" + index} className="px-3 py-1 text-gray-400">
+                            {item}
+                            </span>
+                        ) : (
+                            <button
+                            key={item}
+                            onClick={() => changePage(item)}
+                            className={`px-3 py-1 rounded ${
+                                item === currentPage
+                                ? 'bg-gray-800 text-white'
+                                : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                            }`}
+                            >
+                            {item}
+                            </button>
+                        )
+                        )}
+                
+                        <button
+                        onClick={() => changePage(Math.min(currentPage + 1, totalPages))}
+                        disabled={currentPage === totalPages}
+                        className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
+                        >
+                        次へ
+                        </button>
+                    </div>
+                )}
+                
                 </div>
-             )}
-             
-        </div>
+            </>
+        ):(
+            <>
+                該当の記事はありません
+            </>
+        )}
+        </>
+        
+        
 
     )
 

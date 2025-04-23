@@ -1,19 +1,18 @@
 'use client'
 import useSWR from 'swr'
 import { formatDate } from '@/components/Script'
-import { blogCategories } from "@/constants/blogCategories"
 import ConvertCKEditorImageToNextImage from '@/components/ConvertCKEditorImageToNextImage'
 import ArticleList from '@/components/PostsList'
 import Toc from '@/components/stylePost/TableOfContetsForPost'
-import CodeEnhancer from '@/components/stylePost/CodeEnhancer';
+import CodeEnhancer from '@/components/stylePost/CodeEnhancer'
 
 export function PostDetail({ params }) {
   const { category,postId } = params
-  const categoryId = blogCategories.indexOf(category)
+  
   const fetcher = (url) => fetch(url).then((res) => res.json())
 //console.log(`http://localhost:8000/api/blog/${category}/${postId}`)
   const { data, error,isLoading } = useSWR(
-    category && postId ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/${categoryId}/${postId}` : null,
+    category && postId ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/${category}/${postId}` : null,
     fetcher
   )
 

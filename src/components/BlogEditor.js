@@ -8,6 +8,7 @@ import { blogCategories } from '@/constants/blogCategories'
 import { useRouter } from 'next/navigation'
 import Script from 'next/script'
 import dynamic from 'next/dynamic'
+import NProgress from 'nprogress'
 
 const  ClientSideCustomEditor = dynamic( () => import( '@/components/CustomEditor' ), { ssr: false } )
 
@@ -60,6 +61,7 @@ export default function BlogEditor({postData}){
     }
 
     const handleSubmit  = async(e,showValue)=>{
+        NProgress.start()
         e.preventDefault()
         setForm((prev) => ({ ...prev, is_show: showValue }))
         try {
@@ -71,6 +73,8 @@ export default function BlogEditor({postData}){
             
         } catch (err) {
             console.error(err)
+        }finally{
+            NProgress.done()
         }
     }
 

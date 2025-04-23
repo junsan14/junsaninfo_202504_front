@@ -12,23 +12,35 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { ja } from 'date-fns/locale'
 import { formatDate } from "./Script"
 import { MdAccessTime,MdUpdate } from "react-icons/md"
+import NProgress from 'nprogress'
 
 const fetcher = (url) => fetch(url).then(res => res.json())
 
 
 const toggleVisibility = async (url, { arg:{id,is_show} }) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/blog/post/visible?postid=${id}&is_show=${is_show}`, {
-        method: 'PUT',
-    })
-    if (!res.ok) {throw new Error('送信に失敗しました')} 
-    return res.json()
+    NProgress.start()
+    try{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/blog/post/visible?postid=${id}&is_show=${is_show}`, {
+            method: 'PUT',
+        })
+        if (!res.ok) {throw new Error('送信に失敗しました')} 
+        return res.json()
+    }finally{
+        NProgress.done()
+    }
 }
 const deletePost = async (url, { arg: id }) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/blog/post/delete?postid=${id}`, {
-      method: 'DELETE',
-    })
-    if (!res.ok) throw new Error('削除に失敗しました')
-    return res.json()
+    NProgress.start()
+    try{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/blog/post/delete?postid=${id}`, {
+          method: 'DELETE',
+        })
+        if (!res.ok) throw new Error('削除に失敗しました')
+        return res.json()
+    }finally{
+        NProgress.done()
+    }
+    
 }
 
 export default function PostsList({postLimit,pagination, edit, relevantPosts}){

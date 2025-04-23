@@ -2,15 +2,14 @@ import useSWR from 'swr'
 import axios from '../lib/axios'
 import { useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
+import NProgress from 'nprogress'
 
 export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     const router = useRouter()
     const params = useParams()
 
-    
-
-    
     const { data: user, error, mutate } = useSWR(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user`,() =>
+    
         axios
             .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user`,{
                 withCredentials: true,
@@ -28,14 +27,16 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     const register = async ({ setErrors, ...props }) => {
         await csrf()
-
         setErrors([])
-        
+        NProgress.start()
         axios
             .post('/register', props,{
                 withCredentials: true,
             })
             .then(() => mutate())
+            .finally(() => {
+                NProgress.done()
+            })
             .catch(error => {
                 if (error.response.status !== 422) throw error
 
@@ -45,31 +46,39 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     const login = async ({ setErrors, setStatus, ...props }) => {
         await csrf()
-
+        NProgress.start()
         setErrors([])
         setStatus(null)
 
+
         axios
-            .post('/login', props,{
+            .post('/login', props, {
                 withCredentials: true,
             })
-            .then(() => console.log(mutate()))
+            .then(() => {
+                mutate()
+            })
+            .finally(() => {
+                NProgress.done()
+            })
             .catch(error => {
                 if (error.response.status !== 422) throw error
-
                 setErrors(error.response.data.errors)
             })
-    }
+        }
 
     const forgotPassword = async ({ setErrors, setStatus, email }) => {
         await csrf()
-
+        NProgress.start()
         setErrors([])
         setStatus(null)
 
         axios
             .post('/forgot-password', { email })
             .then(response => setStatus(response.data.status))
+            .finally(() => {
+                NProgress.done()
+            })
             .catch(error => {
                 if (error.response.status !== 422) throw error
 
@@ -79,7 +88,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     const resetPassword = async ({ setErrors, setStatus, ...props }) => {
         await csrf()
-
+        NProgress.start()
         setErrors([])
         setStatus(null)
 
@@ -88,6 +97,9 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             .then(response =>
                 router.push('/login?reset=' + btoa(response.data.status)),
             )
+            .finally(() => {
+                NProgress.done()
+            })
             .catch(error => {
                 if (error.response.status !== 422) throw error
 
@@ -96,14 +108,22 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     }
 
     const resendEmailVerification = ({ setStatus }) => {
+        NProgress.start()
         axios
             .post('/email/verification-notification')
             .then(response => setStatus(response.data.status))
+            .finally(() => {
+                NProgress.done()
+            })
     }
 
     const logout = async () => {
+        NProgress.start()
         if (!error) {
-            await axios.post('/logout').then(() => mutate())
+            await axios.post('/logout').then(() => mutate())            
+            .finally(() => {
+                NProgress.done()
+            })
         }
 
         window.location.pathname = '/login'

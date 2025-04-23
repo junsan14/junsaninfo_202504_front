@@ -30,8 +30,25 @@ const RootLayout = ({ children }) => {
     )
 }
 
+
 export const metadata = {
     title: 'junsan14｜ホテル業からIT、そしてルワンダ協力隊へ',
+    description: '元ホテルマン・Webエンジニアが、ルワンダで挑戦する社会貢献活動とスキルの記録を発信。キャリアと学びを一体化したサイト"',
+    openGraph: {
+        title: 'junsan14｜ホテル業からIT、そしてルワンダ協力隊へ',
+        description: '元ホテルマン・Webエンジニアが、ルワンダで挑戦する社会貢献活動とスキルの記録を発信。キャリアと学びを一体化したサイト',
+        url: 'https://junsan.info',
+        siteName: 'junsan14｜ホテル業からIT、そしてルワンダ協力隊へ',
+        images: [
+          {
+            url: 'https://example.com/og.png',
+            width: 1200,
+            height: 630,
+          },
+        ],
+        locale: 'ja_JP',
+        type: 'website',
+      },
     icons: {
         icon: '/favicon.png',
       },

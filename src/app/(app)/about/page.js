@@ -14,7 +14,7 @@ export default function About() {
       <>
             <section className="section about wrap">
               <h1 className="section_title">
-                <div className="section_title_jp">ABOUTs</div>
+                <div className="section_title_jp">ABOUT</div>
               </h1>
                      
               <div className="section_content about_content">

@@ -5,7 +5,7 @@ import {HiOutlineNewspaper} from 'react-icons/hi2'
 import Contact from '../components/Contact'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import clsx from 'clsx'
 
 
@@ -107,7 +107,9 @@ const Home = ()=>{
                 <h2 className="section_title">
                     <div className="section_title_jp">BLOG</div>
                 </h2>
-                <PostsList postLimit={6}/>
+                <Suspense>
+                    <PostsList postLimit={6}/>
+                </Suspense>
                 <div className="section_btn">
                     <Link href='/blog'>
                         <HiOutlineNewspaper />

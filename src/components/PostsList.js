@@ -2,7 +2,7 @@
 import Link from "next/link"
 import useSWR,{ mutate }from 'swr'
 import useSWRMutation from 'swr/mutation'
-import { useState,useEffect } from "react"
+import { useState } from "react"
 import { FaTrash, FaEdit } from "react-icons/fa"
 import { AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai"
 import { useRouter, usePathname,useSearchParams } from "next/navigation"
@@ -10,7 +10,6 @@ import ConvertCKEditorImageToNextImage from "./ConvertCKEditorImageToNextImage"
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { ja } from 'date-fns/locale'
 import { formatDate } from "./Script"
-import { Suspense } from 'react';
 
 import { MdAccessTime,MdUpdate } from "react-icons/md"
 import NProgress from 'nprogress'
@@ -48,19 +47,18 @@ const deletePost = async (url, { arg: id }) => {
 }
 
 export default function PostsList({postLimit,pagination, edit, relevantPosts}){
-    
 
-    //const pathname = usePathname()
-    //const newParams = new URLSearchParams(window.location.search)
-
-    const searchParams = useSearchParams()
+    const searchParams = useSearchParams();
     const pathname = usePathname()
     const { replace } = useRouter()
-    
+   
     const [currentPage, setCurrentPage] = useState(1)
-    const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category')?searchParams.get('category'):"")
+   
+    const [selectedCategory, setSelectedCategory] = useState(() => searchParams.get('category') || "")
     const [inputKeywords, setInputKeywords] = useState(searchParams.get('keywords')?searchParams.get('keywords').toString():"")
+   
     const isAdmin = pathname.startsWith('/admin')
+
     const { data, error, isLoading } = useSWR(
         () => currentPage? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}` : null,
         fetcher
@@ -76,7 +74,6 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
 
     const handleClickVisible = async(e,is_show)=>{
         const id = Number(e.currentTarget.id)
-      
         try {
             await triggerVisibility({id:id, is_show:is_show})
             mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}`)
@@ -89,35 +86,10 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
         if(res) await triggerDelete(id)
         mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}`)
     }   
-    const changePage = (page) => {
-        const params = new URLSearchParams(searchParams)
-        setCurrentPage(page)
-        params.set("page", page)
-        replace(`${pathname}?${params.toString()}`)
 
-       // router.push(`${pathname}?${newParams.toString()}`, { scroll: true })
-      }
-    const handleClickCategory = (e)=>{
-        const params = new URLSearchParams(searchParams)
-        setSelectedCategory(e.target.id)
-        setCurrentPage(1)
-        params.set("category", e.target.id)
-        replace(`${pathname}?${params.toString()}`, {scroll:true})
-        //router.push(`${pathname}?${params.toString()}`, { scroll: true })
-    }
    
-    const handleSearchKeywords = useDebouncedCallback((term)=>{
-        const params = new URLSearchParams(searchParams)
-        if (term) {
-            params.set('keywords', term)
-            setInputKeywords(term)
-          } else {
-            params.delete('keywords')
-          }
-          replace(`${pathname}?${params.toString()}`)
 
-    },500)
-    
+    /*
     useEffect(() => {
         if (typeof window !== 'undefined') {
           const pageFromQuery = Number(new URLSearchParams(window.location.search).get("page"))
@@ -126,10 +98,10 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
           }
         }
       }, []) // 初回マウント時にのみ実行
-
+*/
     if (error) return 'An error has occurred.'
     
-    if (isLoading || ! data.posts.data){
+    if (isLoading ||! data.posts.data){
         return (
             <div className="posts">
                 {
@@ -174,6 +146,17 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
     const paginationRange = getPaginationRange(currentPage, totalPages)
 
     const SearchKeyword = ()=>{
+        const handleSearchKeywords = useDebouncedCallback((term)=>{
+            const params = new URLSearchParams(searchParams)
+            if (term) {
+                params.set('keywords', term)
+                setInputKeywords(term)
+              } else {
+                params.delete('keywords')
+              }
+              replace(`${pathname}?${params.toString()}`)
+    
+        },500)
         return(
             <div className="search_area js-search_area">
                 <button type="button" className="search_area_reset js-search_area_reset" value="RESET" 
@@ -192,15 +175,22 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
                 
                 <input list="tag-list"  className="search_area_input js-search_area_input" id="tag-choice" 
                     name="tag-choice" placeholder=""  
-                    defaultValue={searchParams.get('keywords')?searchParams.get('keywords'):""}
+                    defaultValue={searchParams.get('keywords')?.toString()}
                     onChange={(e)=>handleSearchKeywords(e.target.value)}
                    
                 />
             </div>
         )
     }
-
     const Category = ()=>{
+        const handleClickCategory = (e)=>{
+            const params = new URLSearchParams(searchParams)
+            setSelectedCategory(e.target.id)
+            setCurrentPage(1)
+            params.set("category", e.target.id)
+            replace(`${pathname}?${params.toString()}`, {scroll:true})
+            //router.push(`${pathname}?${params.toString()}`, { scroll: true })
+        }
         return(
             <ul className="category_tab tab">  
                 {blogCategories.map((item,i)=>{
@@ -212,16 +202,65 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
                             )
                     
                     })}
-                
             </ul>
+        )
+    }
+    const Pagination = ()=>{
+        const changePage = (page) => {
+            const params = new URLSearchParams(searchParams)
+            setCurrentPage(page)
+            params.set("page", page)
+            replace(`${pathname}?${params.toString()}`)
+    
+           // router.push(`${pathname}?${newParams.toString()}`, { scroll: true })
+          }
+        return(
+            pagination && (
+                <div className="mt-6 flex justify-center items-center space-x-1 posts_pagination">
+                        <button
+                        onClick={() => changePage(Math.max(currentPage - 1, 1))}
+                        disabled={currentPage === 1}
+                        className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
+                        >
+                        前へ
+                        </button>
+                
+                        {paginationRange.map((item, index) =>
+                        typeof item === 'string' ? (
+                            <span key={"paginationkey_" + index} className="px-3 py-1 text-gray-400">
+                            {item}
+                            </span>
+                        ) : (
+                            <button
+                            key={item}
+                            onClick={() => changePage(item)}
+                            className={`px-3 py-1 rounded ${
+                                item === currentPage
+                                ? 'bg-gray-800 text-white'
+                                : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                            }`}
+                            >
+                            {item}
+                            </button>
+                        )
+                        )}
+                
+                        <button
+                        onClick={() => changePage(Math.min(currentPage + 1, totalPages))}
+                        disabled={currentPage === totalPages}
+                        className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
+                        >
+                        次へ
+                        </button>
+                </div>
+            )
         )
     }
     return(
         <>
             <SearchKeyword />
             <Category />
-            {posts.length !==0? (
-            <Suspense fallback={<>Loading..</>}>    
+            {posts.length !==0? (   
                 <div className="posts">
                 {posts.map((post)=>{
                     const blogCategory = blogCategories.find((category)=>category.id== post.category)['name']
@@ -267,48 +306,9 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
                 })
                 }
                 {/* ページネーション */}
-                {pagination && (
-                    <div className="mt-6 flex justify-center items-center space-x-1 posts_pagination">
-                        <button
-                        onClick={() => changePage(Math.max(currentPage - 1, 1))}
-                        disabled={currentPage === 1}
-                        className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
-                        >
-                        前へ
-                        </button>
-                
-                        {paginationRange.map((item, index) =>
-                        typeof item === 'string' ? (
-                            <span key={"paginationkey_" + index} className="px-3 py-1 text-gray-400">
-                            {item}
-                            </span>
-                        ) : (
-                            <button
-                            key={item}
-                            onClick={() => changePage(item)}
-                            className={`px-3 py-1 rounded ${
-                                item === currentPage
-                                ? 'bg-gray-800 text-white'
-                                : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
-                            }`}
-                            >
-                            {item}
-                            </button>
-                        )
-                        )}
-                
-                        <button
-                        onClick={() => changePage(Math.min(currentPage + 1, totalPages))}
-                        disabled={currentPage === totalPages}
-                        className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
-                        >
-                        次へ
-                        </button>
-                    </div>
-                )}
+                <Pagination />
                 
                 </div>
-            </Suspense>
         ):(
             <>
                 該当の記事はありません

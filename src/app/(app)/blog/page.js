@@ -10,7 +10,7 @@ export default function Posts (){
                 <p className="section_title_jp">Blog</p>
             </h1>
             <Suspense>
-                <ArticleList postLimit={10} pagination={true}/>
+                <ArticleList postLimit={10} pagination={true} searchBar={true} />
             </Suspense>
         </section>
     </>

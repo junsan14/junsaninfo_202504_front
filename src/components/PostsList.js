@@ -46,7 +46,7 @@ const deletePost = async (url, { arg: id }) => {
     
 }
 
-export default function PostsList({postLimit,pagination, edit, relevantPosts}){
+export default function PostsList({postLimit,pagination, edit, relevantPosts, searchBar}){
 
     const searchParams = useSearchParams();
     const pathname = usePathname()
@@ -246,7 +246,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
     }
     return(
         <>
-            {pathname !== '/' && (
+            {searchBar && (
                 <>
                     <SearchKeyword />
                     <Category />

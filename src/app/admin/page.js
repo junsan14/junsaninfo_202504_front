@@ -14,7 +14,7 @@ export default function AdminTop(){
                 </Link>
             </button>
             <Suspense>
-                <ArticleList postLimit={20} pagination={true} edit={true} all={true} />
+                <ArticleList postLimit={20} pagination={true} edit={true} all={true} searchBar={true}/>
             </Suspense>
         </section>
     )

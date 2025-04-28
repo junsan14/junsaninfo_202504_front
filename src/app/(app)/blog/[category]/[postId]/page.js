@@ -60,7 +60,7 @@ export function PostDetail({ params }) {
         <div className='relevant_posts'>
           <h3 className="relevant_posts_title">関連記事</h3>
           <div className="relevant_posts_item">
-            <ArticleList postLimit={2} pagination={false} relevantPosts={data.relevantPosts}/>
+            <ArticleList postLimit={2} pagination={false} relevantPosts={data.relevantPosts} searchBar={false}/>
           </div>
         </div>
        

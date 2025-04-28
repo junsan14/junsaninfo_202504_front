@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 import Script from 'next/script'
 import dynamic from 'next/dynamic'
 import NProgress from 'nprogress'
+import { useAuth } from '@/hooks/auth'
 
 const  ClientSideCustomEditor = dynamic( () => import( '@/components/CustomEditor' ), { ssr: false } )
 
@@ -30,7 +31,7 @@ const sendData = async (url, { arg }) => {
 }
 
 export default function BlogEditor({postData}){
-
+    const { user } = useAuth()
     const { trigger, data } = useSWRMutation(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/blog/post/store`,
             sendData
@@ -39,6 +40,7 @@ export default function BlogEditor({postData}){
     const { post,tags,isNew,keywords } = postData
     const [form, setForm] = useState({
         id:isNew?"":post.id,
+        author_id:user.user.id,
         title:isNew?"":post.title,
         content:isNew?"":post.content,
         excerpt:isNew?"":post.excerpt,

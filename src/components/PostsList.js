@@ -221,7 +221,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
             <SearchKeyword />
             <Category />
             {posts.length !==0? (
-            <>    
+            <Suspense fallback={<>Loading..</>}>    
                 <div className="posts">
                 {posts.map((post)=>{
                     const blogCategory = blogCategories.find((category)=>category.id== post.category)['name']
@@ -308,7 +308,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
                 )}
                 
                 </div>
-            </>
+            </Suspense>
         ):(
             <>
                 該当の記事はありません

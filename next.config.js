@@ -8,7 +8,7 @@ const nextConfig = {
       },
       {
         protocol: 'http',
-        hostname: '0.0.0.0',
+        hostname: 'jun.local',
       },
       {
         protocol: 'http',

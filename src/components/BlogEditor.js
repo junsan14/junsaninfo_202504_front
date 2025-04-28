@@ -4,13 +4,12 @@ import { mutate } from 'swr'
 import { useState} from 'react'
 import CKFinderLoader from '@/components/CKFinderLoader'
 import { formatinputDate } from '@/components/Script'
-import { blogCategories } from '@/constants/blogCategories'
 import { useRouter } from 'next/navigation'
 import Script from 'next/script'
 import dynamic from 'next/dynamic'
 import NProgress from 'nprogress'
 import { useAuth } from '@/hooks/auth'
-
+import { useBlogCategories } from '@/hooks/useBlogCategories'
 const  ClientSideCustomEditor = dynamic( () => import( '@/components/CustomEditor' ), { ssr: false } )
 
 
@@ -32,6 +31,7 @@ const sendData = async (url, { arg }) => {
 
 export default function BlogEditor({postData}){
     const { user } = useAuth()
+    const {blogCategories} = useBlogCategories();
     const { trigger, data } = useSWRMutation(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/blog/post/store`,
             sendData
@@ -79,7 +79,7 @@ export default function BlogEditor({postData}){
             NProgress.done()
         }
     }
-
+    if(!blogCategories) return <>Loading</>
     return(
         <>
             {/* CKFinder Script */}
@@ -127,11 +127,13 @@ export default function BlogEditor({postData}){
                                 (e)=>{
                                     handleChangeData(e)
                                 }}>
+                          
                             {blogCategories.map((category,i)=>{
                                 if(category !==""){
-                                    return category && <option value={i} key={i}>{category}</option>
+                                    return category && <option value={i} key={i}>{category.name}</option>
                                 }
                             })}
+                        
                         </select>
                     </div>
                     <div  className="form_control_item">

@@ -16,7 +16,7 @@ import NProgress from 'nprogress'
 import { AiOutlineClear } from "react-icons/ai"
 import { BsSearch } from "react-icons/bs"
 import { useDebouncedCallback } from 'use-debounce'
-
+import { useBlogCategories } from "@/hooks/useBlogCategories"
 const fetcher = (url) => fetch(url).then(res => res.json())
 
 
@@ -55,6 +55,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
     const [selectedCategory, setSelectedCategory] = useState(() => searchParams.get('category') || "")
     const [inputKeywords, setInputKeywords] = useState(searchParams.get('keywords')?searchParams.get('keywords').toString():"")
     const isAdmin = pathname.startsWith('/admin')
+    const {blogCategories} = useBlogCategories()
     const { data, error, isLoading } = useSWR(
         () => currentPage? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}` : null,
         fetcher
@@ -86,7 +87,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
    
     if (error) return 'An error has occurred.'
     
-    if (isLoading ||! data.posts.data){
+    if (isLoading ||! data.data || !blogCategories){
         return (
             <div className="posts">
                 {
@@ -125,9 +126,8 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
         )
     }
     
-    const posts = relevantPosts?relevantPosts:data.posts.data
-    const blogCategories = data.blogCategories
-    const totalPages = data.posts.last_page
+    const posts = relevantPosts?relevantPosts:data.data
+    const totalPages = data.last_page
     const paginationRange = getPaginationRange(currentPage, totalPages)
 
     const SearchKeyword = ()=>{

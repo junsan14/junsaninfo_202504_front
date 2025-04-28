@@ -167,10 +167,10 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
             </div>  
         )
     }
-    console.log(data.blogCategories)
+    
     const posts = relevantPosts?relevantPosts:data.posts.data
     const blogCategories = data.blogCategories
-    const totalPages = data.last_page
+    const totalPages = data.posts.last_page
     const paginationRange = getPaginationRange(currentPage, totalPages)
 
     const SearchKeyword = ()=>{
@@ -225,7 +225,6 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
                 <div className="posts">
                 {posts.map((post)=>{
                     const blogCategory = blogCategories.find((category)=>category.id== post.category)['name']
-                    console.log(blogCategory)
                     return(
                         <div className={post.is_show?"posts_item fade":"posts_item fade grey"} id={"postid_" + post.id} key={"postid_"+post.id}>
                             <Link href={`/blog/${blogCategory}/${post.id}`} className='posts_item_link'>
@@ -338,14 +337,14 @@ function PostDate({post}){
         return(
             <div className="posts_item_link_remarks_dates_area_date">
                 <MdAccessTime className='posts_item_link_remarks_dates_area_date_icon' />
-                <span className='posts_item_link_remarks_dates_area_date_value'>{formatDistanceToNow(post.published_at,{locale: ja})}前</span>
+                <span className='posts_item_link_remarks_dates_area_date_value'>{formatDistanceToNow(post.published_at,{locale: ja})}</span>
             </div>  
         )
     }else{
         return(
             <div className="posts_item_link_remarks_dates_area_date">
                 <MdUpdate className="posts_item_link_remarks_dates_area_date_icon"/>
-                <span className='posts_item_link_remarks_dates_area_date_value'>{formatDistanceToNow(post.updated_at,{locale: ja})}前</span>
+                <span className='posts_item_link_remarks_dates_area_date_value'>{formatDistanceToNow(post.updated_at,{locale: ja})}</span>
             </div>
         )
     }

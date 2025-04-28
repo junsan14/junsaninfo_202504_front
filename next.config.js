@@ -1,7 +1,32 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-      domains: ['172.20.10.6','localhost','scontent.cdninstagram.com','api.junsan.info','assets.st-note.com','scontent-iad3-1.cdninstagram.com'], // ← ここにIPやドメインを追加
+       remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: '172.20.10.6',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+      },
+      {
+        protocol: 'https',
+        hostname: 'scontent.cdninstagram.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.junsan.info',
+      },
+      {
+        protocol: 'https',
+        hostname: 'assets.st-note.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'scontent-iad3-1.cdninstagram.com',
+      },
+    ],
     },
     /*
     async rewrites() {

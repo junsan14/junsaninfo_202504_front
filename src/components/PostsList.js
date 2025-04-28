@@ -58,7 +58,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
     const [inputKeywords, setInputKeywords] = useState(searchParams.get('keywords')?searchParams.get('keywords').toString():"")
    
     const isAdmin = pathname.startsWith('/admin')
-
+    console.log(pathname === '/')
     const { data, error, isLoading } = useSWR(
         () => currentPage? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}` : null,
         fetcher
@@ -258,8 +258,13 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
     }
     return(
         <>
-            <SearchKeyword />
-            <Category />
+            {pathname !== '/' && (
+                <>
+                    <SearchKeyword />
+                    <Category />
+                </>
+        )}
+    
             {posts.length !==0? (   
                 <div className="posts">
                 {posts.map((post)=>{
@@ -276,7 +281,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
                                         {post.excerpt}
                                     </div> 
                                     <div className="posts_item_link_remarks_dates_area">
-                                        <PostDate post={post} />前
+                                        <PostDate post={post} />
                                     </div>   
                                 </div>
                             </Link>
@@ -337,14 +342,14 @@ function PostDate({post}){
         return(
             <div className="posts_item_link_remarks_dates_area_date">
                 <MdAccessTime className='posts_item_link_remarks_dates_area_date_icon' />
-                <span className='posts_item_link_remarks_dates_area_date_value'>{formatDistanceToNow(post.published_at,{locale: ja})}</span>
+                <span className='posts_item_link_remarks_dates_area_date_value'>{formatDistanceToNow(post.published_at,{locale: ja})}前</span>
             </div>  
         )
     }else{
         return(
             <div className="posts_item_link_remarks_dates_area_date">
                 <MdUpdate className="posts_item_link_remarks_dates_area_date_icon"/>
-                <span className='posts_item_link_remarks_dates_area_date_value'>{formatDistanceToNow(post.updated_at,{locale: ja})}</span>
+                <span className='posts_item_link_remarks_dates_area_date_value'>{formatDistanceToNow(post.updated_at,{locale: ja})}前</span>
             </div>
         )
     }

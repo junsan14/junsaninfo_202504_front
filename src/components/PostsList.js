@@ -51,14 +51,10 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
     const searchParams = useSearchParams();
     const pathname = usePathname()
     const { replace } = useRouter()
-   
     const [currentPage, setCurrentPage] = useState(1)
-   
     const [selectedCategory, setSelectedCategory] = useState(() => searchParams.get('category') || "")
     const [inputKeywords, setInputKeywords] = useState(searchParams.get('keywords')?searchParams.get('keywords').toString():"")
-   
     const isAdmin = pathname.startsWith('/admin')
-    console.log(pathname === '/')
     const { data, error, isLoading } = useSWR(
         () => currentPage? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}` : null,
         fetcher
@@ -88,17 +84,6 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
     }   
 
    
-
-    /*
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-          const pageFromQuery = Number(new URLSearchParams(window.location.search).get("page"))
-          if (pageFromQuery && pageFromQuery > 0) {
-            setCurrentPage(pageFromQuery)
-          }
-        }
-      }, []) // 初回マウント時にのみ実行
-*/
     if (error) return 'An error has occurred.'
     
     if (isLoading ||! data.posts.data){
@@ -150,9 +135,11 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
             const params = new URLSearchParams(searchParams)
             if (term) {
                 params.set('keywords', term)
+                params.delete('page')
                 setInputKeywords(term)
               } else {
                 params.delete('keywords')
+                setInputKeywords("")
               }
               replace(`${pathname}?${params.toString()}`)
     
@@ -187,6 +174,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts}){
             const params = new URLSearchParams(searchParams)
             setSelectedCategory(e.target.id)
             setCurrentPage(1)
+            params.delete("page")
             params.set("category", e.target.id)
             replace(`${pathname}?${params.toString()}`, {scroll:true})
             //router.push(`${pathname}?${params.toString()}`, { scroll: true })

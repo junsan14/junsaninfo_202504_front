@@ -921,7 +921,7 @@ body{
         &.on{
             background:#fff;
             transition: .5s all;
-            border: 1px solid rgba(0,0,0,.2);
+            border: 1px solid rgba(0,0,0,.1);
         }
         @include mq(tab){
             padding: 5px 0;
@@ -940,7 +940,7 @@ body{
         &:hover{
             background:#fff;
             transition: .5s all;
-            border: 1px solid rgba(0,0,0,.2);
+            border: 1px solid rgba(0,0,0,.1);
             
         }
         

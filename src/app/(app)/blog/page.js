@@ -1,5 +1,5 @@
-'use client'
-import ArticleList from '@/components/PostsList'
+
+import PostsList from '@/components/PostsList'
 import { Suspense } from 'react'
 export default function Posts (){
 
@@ -10,7 +10,7 @@ export default function Posts (){
                 <p className="section_title_jp">Blog</p>
             </h1>
             <Suspense>
-                <ArticleList postLimit={10} pagination={true} searchBar={true} />
+                <PostsList postLimit={10} pagination={true} searchBar={true} />
             </Suspense>
         </section>
     </>

@@ -1,4 +1,4 @@
-import ArticleList from '@/components/PostsList'
+import PostsList from '@/components/PostsList'
 import Link from 'next/link'
 import { Suspense } from 'react'
 
@@ -14,7 +14,7 @@ export default function AdminTop(){
                 </Link>
             </button>
             <Suspense>
-                <ArticleList postLimit={20} pagination={true} edit={true} all={true} searchBar={true}/>
+                <PostsList postLimit={20} pagination={true} edit={true} all={true} searchBar={true}/>
             </Suspense>
         </section>
     )

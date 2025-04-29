@@ -31,7 +31,7 @@ const sendData = async (url, { arg }) => {
 
 export default function BlogEditor({postData}){
     const { user } = useAuth()
-    const {blogCategories} = useBlogCategories();
+    const {blogCategories} = useBlogCategories()
     const { trigger, data } = useSWRMutation(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/blog/post/store`,
             sendData

@@ -48,7 +48,7 @@ const deletePost = async (url, { arg: id }) => {
 
 export default function PostsList({postLimit,pagination, edit, relevantPosts, searchBar}){
 
-    const searchParams = useSearchParams();
+    const searchParams = useSearchParams()
     const pathname = usePathname()
     const { replace } = useRouter()
     const [currentPage, setCurrentPage] = useState(1)

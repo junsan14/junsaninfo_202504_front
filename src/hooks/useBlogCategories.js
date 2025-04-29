@@ -1,14 +1,13 @@
-import useSWR from 'swr';
-import axios from 'axios';
+import useSWR from 'swr'
 
-const fetcher = (url) => axios.get(url).then(res => res.data);
+const fetcher = (url) => fetch(url).then(res => res.json())
 
 export const useBlogCategories = () => {
-  const { data:blogCategories, error, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/blog-categories`, fetcher);
+  const { data:blogCategories, error, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/blog-categories`, fetcher)
 
   return {
     blogCategories,
     isLoading,
     isError: error,
-  };
-};
+  }
+}

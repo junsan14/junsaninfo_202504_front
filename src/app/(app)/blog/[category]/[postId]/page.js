@@ -1,23 +1,28 @@
 
-'use client'
 import { usePostDetail } from "@/lib/usePostDetail"
 import ConvertCKEditorImageToNextImage from "@/components/ConvertCKEditorImageToNextImage"
 import PostsList from "@/components/PostsList"
 import useSWR from 'swr'
 
+
 const fetcher = url => fetch(url).then(res => res.json())
 
 
-export default function PostDetail({ params }) {
+
+
+export default function Page({ params }) {
  const { category, postId } = params
 
- //const { post, relevantPosts, error, isLoading } = usePostDetail(category, postId)
+//const { post, relevantPosts, error, isLoading } = usePostDetail(category, postId)
+ 
+ /*
  const { data:post, error,isLoading } = useSWR(
   category? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/${category}/${postId}` : null,
   fetcher
 )
+  */
 
-
+/*
   if (error) return <div>Error loading post</div>
   if ( isLoading || !post) return (
     <section className="wrap section animate-pulse">
@@ -65,7 +70,27 @@ return (
   </section>
   )
 )
+*/
 
+return(
+  <section className='wrap section'>
+      <h1 className="section_content_title">Hello</h1>
+      <div className="post">
+        <div className="post_date">
+         
+        </div>
+        <div className="post_content ck ck-content">
+            content
+        </div>
+      </div>
+      <div className='relevant_posts'>
+        <h3 className="relevant_posts_title">関連記事</h3>
+        <div className="relevant_posts_item">
+          <PostsList postLimit={2} pagination={false}  searchBar={false}/>
+        </div>
+      </div>
+  </section>
+)
 }
   
 

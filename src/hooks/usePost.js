@@ -11,6 +11,7 @@ export function usePost(category,postId,initialPost) {
             fallbackData: shouldFetch ? initialPost : undefined,
         }
       )
+      console.log(data)
       return {
         post:data &&data.post,
         relevantPost:data && data.relevantPost,

@@ -8,7 +8,7 @@ import PostsList from "./PostsList"
 import { formatDate } from "./Script"
 
 export default function PostContent({category,postId, initialPost}){
-    const {post,error,isLoading} = usePost(category,postId,initialPost)
+    const {post,error,isLoading, relevantPost} = usePost(category,postId,initialPost)
     if (error) return <div>Error loading post</div>
     if (isLoading && !post) return (
       <section className="wrap section animate-pulse">
@@ -25,6 +25,7 @@ export default function PostContent({category,postId, initialPost}){
         </div>
       </section>
     )
+    console.log(relevantPost)
   return (
     !post ? (
       <section className='wrap section'>

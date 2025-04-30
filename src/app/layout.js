@@ -9,6 +9,7 @@ import NextTopLoader from 'nextjs-toploader'
 import { GoogleTagManager } from '@next/third-parties/google'
 
 
+
 const murecho = Murecho({
     weight: '400',
     subsets: ['latin'],
@@ -21,7 +22,8 @@ const RootLayout = ({ children }) => {
             <head />
             <body className="antialiased">
             {!!process.env.GOOGLE_ANALYTICS_ID && (
-              <GoogleTagManager gtmId={process.env.GOOGLE_ANALYTICS_ID} />
+              <GoogleTagManager gtmId={process.env.GOOGLE_TAG_MANAGER_ID} />
+
             )}
                 <NextTopLoader />
                     <GuestHeader />

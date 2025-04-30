@@ -44,7 +44,7 @@ export default function BlogEditor({postData}){
         title:isNew?"":post.title,
         content:isNew?"":post.content,
         excerpt:isNew?"":post.excerpt,
-        category:isNew?5:post.category,
+        category:isNew?3:post.category,
         tag:isNew?"":post.tag,
         keywords:isNew?keywords.keywords:post.keywords,
         slug: isNew? "":post.slug,

@@ -11,10 +11,10 @@ export function usePost(category,postId,initialPost) {
             fallbackData: shouldFetch ? initialPost : undefined,
         }
       )
-      console.log(data)
+      //console.log(data)
       return {
         post:data &&data.post,
-        relevantPost:data && data.relevantPost,
+        relevantPosts:data && data.relevantPosts,
         error,
         isLoading,
       }

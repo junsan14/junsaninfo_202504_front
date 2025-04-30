@@ -12,6 +12,8 @@ import { ja } from 'date-fns/locale'
 import { formatDate } from "./Script"
 
 import { MdAccessTime,MdUpdate } from "react-icons/md"
+import {TiPin} from 'react-icons/ti'
+import {MdOutlineFiberNew} from 'react-icons/md'
 import NProgress from 'nprogress'
 import { AiOutlineClear } from "react-icons/ai"
 import { BsSearch } from "react-icons/bs"
@@ -47,7 +49,6 @@ const deletePost = async (url, { arg: id }) => {
 }
 
 export default function PostsList({postLimit,pagination, edit, relevantPosts, searchBar}){
-
     const searchParams = useSearchParams()
     const pathname = usePathname()
     const { replace } = useRouter()
@@ -119,7 +120,11 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
                                 </div>
                             )
                         }
-                        return <>{list}</>
+                        return (
+                            <>
+                                {list}
+                            </>
+                        )
                     }())
                 }
             </div>  
@@ -143,7 +148,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
               }
               replace(`${pathname}?${params.toString()}`)
     
-        },500)
+        },700)
         return(
             <div className="search_area js-search_area">
                 <button type="button" className="search_area_reset js-search_area_reset" value="RESET" 
@@ -254,11 +259,13 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
         )}
     
             {posts.length !==0? (   
-                <div className="posts">
+                <div className="posts"> 
                 {posts.map((post)=>{
                     const blogCategory = blogCategories.find((category)=>category.id== post.category)['name']
                     return(
                         <div className={post.is_show?"posts_item fade":"posts_item fade grey"} id={"postid_" + post.id} key={"postid_"+post.id}>
+                            {Boolean(post.is_featured)  && <TiPin className="posts_item_featured"/>}    
+                            {isNew(post.published_at) && <MdOutlineFiberNew className="posts_item_new" />}
                             <Link href={`/blog/${blogCategory}/${post.id}`} className='posts_item_link'>
                                 <div className="posts_item_link_image">
                                     <ConvertCKEditorImageToNextImage imagePath={post.thumbnail} />
@@ -317,6 +324,17 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
         
     
 }
+
+const isNew = (dateStr) => {
+    const published = new Date(dateStr)
+    const today = new Date()
+  
+    // 差分（日数）を計算
+    const diffTime = today - published
+    const diffDays = diffTime / (1000 * 60 * 60 * 24)
+  
+    return diffDays <= 7
+  }
 
 function PostDate({post}){
     if(formatDate(post.published_at) == "1970/01/01"){

@@ -94,7 +94,7 @@ export default function Contact() {
                 {isMutating ? 'SENDING...' : 'SEND'}
                 </button>
                 {error && <p className="text-red-500 mt-2">Failed to send</p>}
-                {data && <p className="text-green-500 mt-2">Successfully sent!Check your email.</p>}
+                {data && <p className="text-green-500 mt-2">Successfully sent! Check your email.</p>}
                 
             </form>
         </div>

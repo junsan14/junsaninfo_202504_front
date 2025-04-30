@@ -51,6 +51,7 @@ export default function BlogEditor({postData}){
         thumbnail:isNew?"":post.thumbnail,
         is_show:isNew?1:post.is_show,
         is_top:isNew?1:post.is_top,
+        is_featured:isNew?0:post.is_featured,
         published_at:isNew?formatinputDate(new Date()):post.published_at,
         is_continue:isNew?1:post.is_continue,
         is_restore:"false"
@@ -113,6 +114,14 @@ export default function BlogEditor({postData}){
                             id="is_top"
                             onChange={(e) =>{setForm({...form,'is_top':e.target.checked}) } } className='form_control_item_checkbox'/>
                             <label htmlFor="is_top">Show on Home</label>
+                    </div>
+                    <div  className="form_control_item showTop">
+                        <input type='checkbox'
+                            name="is_featured"
+                            checked={form.is_featured}
+                            id="is_featured"
+                            onChange={(e) =>{setForm({...form,'is_featured':e.target.checked}) } } className='form_control_item_checkbox'/>
+                            <label htmlFor="is_top">Pin</label>
                     </div>
                     <div  className="form_control_item">
                         <label htmlFor="published_at">Publish Date</label>

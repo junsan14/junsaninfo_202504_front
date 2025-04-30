@@ -11,10 +11,10 @@ export default function PostContent({category,postId, initialPost}){
     const {post,error,isLoading, relevantPosts} = usePost(category,postId,initialPost)
     if (error) return <div>Error loading post</div>
     if (isLoading && !post) return (
-      <section className="wrap section animate-pulse">
-        <h1 className="section_content_title h-8 bg-gray-300 rounded w-3/4 mb-4 text-center"  />
+        <section className="wrap section animate-pulse flex flex-col items-center pt-1">
+        <h1 className="section_content_title h-8 bg-gray-300 rounded w-2/4" />
         <div className="post">
-          <div className="post_date h-4 bg-gray-200 rounded w-1/4 mb-6" />
+          
           <div className="post_content ck ck-content space-y-4">
             <div className="h-4 bg-gray-200 rounded w-full" />
             <div className="h-4 bg-gray-200 rounded w-5/6" />

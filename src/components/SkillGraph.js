@@ -113,22 +113,27 @@ const enginerSkill = [
         fullMark: 5,
       },
       {
-        subject: 'jQuery',
-        A: 4.5,
-        fullMark: 5,
-      },
-      {
         subject: 'Google App Script',
         A: 4.5,
         fullMark: 5,
       },
       {
-        subject: 'React',
+        subject: 'React.js',
         A: 4,
         fullMark: 5,
       },
       {
-        subject: 'Git',
+        subject: 'Next.js',
+        A: 3.5,
+        fullMark: 5,
+      },
+      {
+        subject: 'API連携',
+        A: 3,
+        fullMark: 5,
+      },
+      {
+        subject: 'CI/CD',
         A: 3.5,
         fullMark: 5,
       },
@@ -163,7 +168,7 @@ const enginerSkill = [
       fullMark: 5,
     },
     {
-      subject: 'API接続',
+      subject: 'API連携',
       A: 3,
       fullMark: 5,
     },
@@ -259,53 +264,66 @@ const enginerSkill = [
       case "SNS API":
         return(
           <>
-            Twitter/ Instagram<br />           
+            Instagram / Threads<br />           
           </>
         )
       case "HTML/CSS/SASS":
         return(
           <>
-            疑似要素/ ポジション/ ransition/ animation/ filter<br />
-            リファレンスなしで基本的に実装可能
+            HTML5のセマンティック要素を活用し、SEOやパフォーマンスを考慮した構造を意識。<br/>
+            CSSはSassを使って効率的にスタイルを管理し、変数やミックスイン、ネストなどを活用して可読性の高いコード<br/>
+            また、FlexboxやGridを使ったレイアウト、アニメーションやトランジションの実装も経験済
             
           </>
         )
       case "JavaScript":
         return(
           <>
-            タブ/ アコーディオン/ スライダー/ プルダウン/ イベント/ 非同期 <br />
-            繰り返し/条件分岐/配列など基本は習得済
-          </>
-        )
-      case "jQuery":
-        return(
-          <>
-            jsと同じ理解度<br />
-                      
+            JavaScriptを使ったWebフロントエンド開発を普段からやっていて、DOM操作やイベント処理、<br/>
+            非同期処理（async-await)など経験あり。配列、オブジェクト、ES6以降のモダンな書き方<br/>
+            （Map、Set、デストラクチャリング、スプレッド構文など）にも対応
           </>
         )
       case "Google App Script":
         return(
           <>
-            onOpen/ onEdit/ SpreadSheeptApp / Webアプリ <br />
-            jsで一番得意｡SpreadSheetsと連携し､WEBアプリ作成経験あり
+            Google スプレッドシートや Google フォームと連携した業務自動化,<br/>
+            時間ベースのトリガーを活用して、定期的なレポート生成やメール通知の自動化など経験あり。<br/>
+            またdoGet / doPost を利用した Web アプリの開発にも取り組み、<br/>
+            GAS と HTML/CSS/JavaScript を組み合わせた UI 付きの業務ツールを構築
           </>
         )
-      case "React":
+      case "React.js":
         return(
           <>
-            JSX/ Babel/ useState/ useEffect/ SPA/ Render<br />
-            クラスコンポーネントの理解もあるが､16.8以降基本はフックのみ使用
-            
+            JSX / Babel / useState / useEffect / SPA / Render<br/>
+            クラスコンポーネントの理解もあるが、v16.8以降は基本的にフックを使用<br/>
+            fetch / axios / SWRでAPIと連携し、非同期処理やキャッシュ管理を実装<br/>
+            React Router v6でページ遷移・動的ルーティングを構築した経験あり
           </>
         )
-      case "RN":
-        return(
-          <>
-            一度触れたことがあるのみで経験はあまりないが､
-            ページの遷移など基本的な理解あり
-          </>
-        )
+        case "Next.js":
+          return(
+            <>
+              Next.js（App Router）を用いた開発経験があり、サーバーコンポーネントとクライアントコンポーネントの使い分け、<br/>
+              動的・静的ルーティングの実装に精通。useSWRやfetchを活用し、Laravel Breezeを用いた認証付きAPI連携も対応。<br/>
+              画像最適化にはnext/imageを用い、Headやmetadata APIによるSEO対応も実施。Vercelへのデプロイ経験あり。
+            </>
+          )
+          case "API連携":
+            return(
+              <>
+                JavaScriptのfetchやaxiosを用いて外部APIと連携し、データの取得や送信<br/>
+                また、非同期処理に関してはasync-awaitやPromiseを活用し、データ処理の効率化。
+              </>
+            )
+        case "CI/CD":
+          return(
+            <>
+              Gitを使用したバージョン管理に加え、Vercelを活用してのデプロイ,<br/>
+              Laravelのプロジェクトでは、Webサーバに手動でのデプロイした経験あり
+            </>
+          )
       case "PHP":
         return(
           <>

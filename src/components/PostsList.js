@@ -99,7 +99,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
                                 <div className="posts_item fade animate-pulse" key={i} >
                                         <div className="posts_item_link">
                                         <div className="posts_item_link_image">
-                                        <div className="w-[100px] h-[100px] md:w-[130px] md:h-[130px] bg-gray-300 rounded-sm dark:bg-gray-700 flex items-center justify-center">
+                                        <div className="w-[100px] h-[100px] md:w-[130px] md:h-[130px] bg-gray-300 rounded-sm flex items-center justify-center">
                                             <svg
                                             className="w-8 h-8 md:w-10 md:h-10 text-gray-200 dark:text-gray-600"
                                             aria-hidden="true"
@@ -112,9 +112,9 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
                                         </div>
                                         </div>
                                         <div className="posts_item_link_remarks w-full mt-4 space-y-2">
-                                            <div className="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-3/4" />
-                                            <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-full" />
-                                            <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-5/6" />
+                                            <div className="h-3 bg-gray-200 rounded-full w-3/4" />
+                                            <div className="h-2.5 bg-gray-200 rounded-full w-full" />
+                                            <div className="h-2.5 bg-gray-200 rounded-full w-5/6" />
                                         </div>
                                         </div>  
                                 </div>
@@ -281,8 +281,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
                                 </div>
                             </Link>
                             {edit && (
-                                <div className='posts_item_manage'>
-                                    <span className="posts_item_manage_id"> {post.id} </span>          
+                                <div className='posts_item_manage'>         
                                     <div className='posts_item_manage_icons'>
                                         <Link href={`/admin/blog/post/edit?postid=${post.id}`} data={{ id: post.id }}>
                                             <FaEdit className='posts_item_manage_icons_item'/>
@@ -298,6 +297,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
                                                 onClick={(e)=>handleClickDelete(e,post.id)}/>
                                         </button>
                                     </div>
+                                    <span className="posts_item_manage_id"> {post.id} </span> 
                                 </div>
                             )
                             }

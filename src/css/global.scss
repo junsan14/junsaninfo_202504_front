@@ -1089,10 +1089,11 @@ body{
         }
         &_manage{
             display: flex;
-            flex-flow: column;
             justify-content: space-evenly;
-            
-            
+            position: absolute;
+            right: 0;
+            width: 70%;
+            bottom: 0;
             &:hover{
                 box-shadow:none;
                 transform: none;
@@ -1103,11 +1104,6 @@ body{
                 img{
                     opacity: .3;			
                 }
-            }
-            &_id{
-                font-size: 1em;
-                text-align: center;
-                
             }
             .remarks{
                 font-size: 1em;
@@ -1130,7 +1126,6 @@ body{
                 }
             } 
             &_publishedDate{
-                
                 width: 100%;
                 font-size: .7em;
                 margin-top: 10px;
@@ -1141,14 +1136,13 @@ body{
             }
             &_icons{
                 width: 100%;
-             
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                flex-direction: column;
                 &_item{
                     font-size: 1.5em;
                     margin-bottom: 5px;
+                    margin-left: 20px;
                     &:hover{
                         color: rgba(#111 ,.3);
                         transition: .5s all;
@@ -1157,6 +1151,16 @@ body{
                         color: rgba(#111,3);
                         cursor: not-allowed;
                     }
+                }
+            }
+            &_id{
+                font-size: 1em;
+                text-align: center;
+                margin-right: 10px;
+                display: flex;
+                align-items: center;
+                @include mq(sp){
+                    font-size: .8rem;
                 }
             }
             
@@ -1172,6 +1176,7 @@ body{
 .post{			
     width: 70%;
     margin: 0 auto;
+    margin-top: 50px;
     @include mq(sp){
         width: 80%;
     }
@@ -1248,7 +1253,6 @@ body{
 //post content css
 .post_content, .ck-content{
     font-size: 1em;
-    margin-top: 50px;
     line-height: 2em;
     @include mq(sp){
         line-height: 1.7em;

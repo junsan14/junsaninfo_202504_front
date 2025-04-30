@@ -768,7 +768,7 @@ body{
     width: 100%;
     position:relative;
     height:100px;
-    z-index: 10;
+    z-index: 1;
     border-radius: 5px;
     @include mq(tab){
           transition:1.5s ease;

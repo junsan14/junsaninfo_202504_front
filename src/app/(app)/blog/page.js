@@ -17,3 +17,7 @@ export default function Posts (){
     )
 }
 
+export const metadata = {
+    title: 'junsan14｜BLOG',
+}
+

@@ -6,6 +6,7 @@ import '@/css/ckeditor.scss'
 import GuestHeader from '../components/Header'
 import Footer from '@/components/Footer'
 import NextTopLoader from 'nextjs-toploader'
+import { GoogleTagManager } from '@next/third-parties/google'
 
 
 const murecho = Murecho({
@@ -17,8 +18,11 @@ const murecho = Murecho({
 const RootLayout = ({ children }) => { 
     return (
         <html lang="jp" className={murecho.className}>
-             <head />
+            <head />
             <body className="antialiased">
+            {!!process.env.GOOGLE_ANALYTICS_ID && (
+              <GoogleTagManager gtmId={process.env.GOOGLE_ANALYTICS_ID} />
+            )}
                 <NextTopLoader />
                     <GuestHeader />
                     <main className='main'>

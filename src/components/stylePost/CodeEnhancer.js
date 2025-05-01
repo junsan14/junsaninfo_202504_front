@@ -39,7 +39,9 @@ const CodeEnhancer = () => {
         
         let language = code.className.replace('language-', '') || 'text'
 
-        if (language === 'GoogleAppsScript') language = 'javascript'
+        if (language === 'GoogleAppsScript') {
+          language = 'javascript'
+        }
 
         const wrapper = document.createElement('div')
         

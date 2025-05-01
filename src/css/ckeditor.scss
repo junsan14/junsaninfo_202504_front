@@ -646,11 +646,15 @@
       white-space: pre-wrap;
       font-style: normal;
       min-width: 200px;
+      @include mq(sp){
+        padding: 0.1rem;
+      }
   
       code {
         background: unset;
         padding: 0;
         border-radius: 0;
+
       }
     }
   }

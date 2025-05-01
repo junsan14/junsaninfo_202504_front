@@ -198,7 +198,7 @@ export default function BlogEditor({postData}){
                     Draft
                 </button> 
                 <button type="button" className='form_control_item_submit' id="is_show" value="1"   onClick={(e) => handleSubmit(e, 1)} >
-                    Publish
+                    {isNew ? "Publish": "Update"}
                 </button>  
         </>
     )

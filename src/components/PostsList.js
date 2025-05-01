@@ -2,7 +2,7 @@
 import Link from "next/link"
 import useSWR,{ mutate }from 'swr'
 import useSWRMutation from 'swr/mutation'
-import { useState } from "react"
+import { useState,useRef } from "react"
 import { FaTrash, FaEdit } from "react-icons/fa"
 import { AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai"
 import { useRouter, usePathname,useSearchParams } from "next/navigation"
@@ -17,7 +17,7 @@ import {MdOutlineFiberNew} from 'react-icons/md'
 import NProgress from 'nprogress'
 import { AiOutlineClear } from "react-icons/ai"
 import { BsSearch } from "react-icons/bs"
-import { useDebouncedCallback } from 'use-debounce'
+//import { useDebouncedCallback } from 'use-debounce'
 import { useBlogCategories } from "@/hooks/useBlogCategories"
 const fetcher = (url) => fetch(url).then(res => res.json())
 
@@ -52,9 +52,23 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
     const searchParams = useSearchParams()
     const pathname = usePathname()
     const { replace } = useRouter()
-    const [currentPage, setCurrentPage] = useState(1)
+    const [currentPage, setCurrentPage] = useState(searchParams.get('page')?Number(searchParams.get('page')).toString():1)
     const [selectedCategory, setSelectedCategory] = useState(() => searchParams.get('category') || "")
     const [inputKeywords, setInputKeywords] = useState(searchParams.get('keywords')?searchParams.get('keywords').toString():"")
+
+    const searchAreaRef = useRef(null)
+    const inputRef = useRef(null)
+    const handleScroll = () => {
+        if (window.scrollY > 80) {
+          searchAreaRef.current?.classList.add('scroll-fixed')
+        } else {
+          searchAreaRef.current?.classList.remove('scroll-fixed')
+        }
+      };
+    
+      if (typeof window !== 'undefined') {
+        window.onscroll = handleScroll
+      }
     const isAdmin = pathname.startsWith('/admin')
     const {blogCategories} = useBlogCategories()
     const { data, error, isLoading } = useSWR(
@@ -135,22 +149,30 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
     const totalPages = data.last_page
     const paginationRange = getPaginationRange(currentPage, totalPages)
 
-    const SearchKeyword = ()=>{
-        const handleSearchKeywords = useDebouncedCallback((term)=>{
-            const params = new URLSearchParams(searchParams)
-            if (term) {
-                params.set('keywords', term)
-                params.delete('page')
-                setInputKeywords(term)
-              } else {
-                params.delete('keywords')
-                setInputKeywords("")
-              }
-              replace(`${pathname}?${params.toString()}`)
     
-        },700)
+    
+    const SearchKeyword = ()=>{
+        const handleSearchKeywords = (e)=>{
+            const term = e.target.value;
+            if (e.key === 'Enter') {
+            e.preventDefault();
+            const params = new URLSearchParams(searchParams);
+
+            if (term) {
+                params.set('keywords', term);
+                params.delete('page');
+                setInputKeywords(term);
+            } else {
+                params.delete('keywords');
+                setInputKeywords('');
+            }
+
+            replace(`${pathname}?${params.toString()}`);
+            }
+
+        }
         return(
-            <div className="search_area js-search_area">
+            <div className="search_area js-search_area" ref={searchAreaRef}>
                 <button type="button" className="search_area_reset js-search_area_reset" value="RESET" 
                         onClick={()=>{
                             const params = new URLSearchParams(searchParams)
@@ -161,15 +183,15 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
                             replace(`${pathname}`,{ scroll: true })
                             
                         }}>
-                    <AiOutlineClear />
+                    {Boolean(selectedCategory || inputKeywords) && <AiOutlineClear />}
                 </button>
                 <BsSearch className="search_area_icon js-search_area_icon"/>
                 
                 <input list="tag-list"  className="search_area_input js-search_area_input" id="tag-choice" 
-                    name="tag-choice" placeholder=""  
+                    name="tag-choice" placeholder="Search Post"
                     defaultValue={searchParams.get('keywords')?.toString()}
-                    onChange={(e)=>handleSearchKeywords(e.target.value)}
-                   
+                    onKeyDown={(e)=>handleSearchKeywords(e)}
+                    ref={inputRef}
                 />
             </div>
         )
@@ -228,7 +250,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
                             key={item}
                             onClick={() => changePage(item)}
                             className={`px-3 py-1 rounded ${
-                                item === currentPage
+                                item == currentPage
                                 ? 'bg-gray-800 text-white'
                                 : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
                             }`}
@@ -253,11 +275,10 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
         <>
             {searchBar && (
                 <>
-                    <SearchKeyword />
                     <Category />
+                    <SearchKeyword />
                 </>
-        )}
-    
+            )}
             {posts.length !==0? (   
                 <div className="posts"> 
                 {posts.map((post)=>{
@@ -311,7 +332,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
                 </div>
         ):(
             <>
-                該当の記事はありません
+                <p>「{selectedCategory ? selectedCategory:"全ての"}」カテゴリーの中で、「{inputKeywords}」に該当する記事は見つかりませんでした。</p>
             </>
         )}
         </>

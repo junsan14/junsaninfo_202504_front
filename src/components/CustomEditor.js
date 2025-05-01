@@ -189,13 +189,11 @@ export const editorConfiguration = {
             { language: 'HTML', label: 'HTML' },
             { language: 'CSS', label: 'CSS' },
             { language: 'SCSS', label: 'SCSS' },
-            { language: 'CSS', label: 'CSS' },
             { language: 'JAVASCRIPT', label: 'JavaScript' },
-            { language: 'GoogleAppsScript', label: 'GAS' },
             { language: 'PHP', label: 'PHP' },
-            { language: 'PYTHON', label: 'python' },
+            { language: 'Python', label: 'python' },
             { language: 'SQL', label: 'SQL' },
-            { language: 'ZSH', label: 'zsh' },
+            { language: 'zsh', label: 'zsh' },
             
         ]
     }

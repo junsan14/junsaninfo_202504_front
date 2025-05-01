@@ -48,12 +48,15 @@ export default function PostContent({category,postId, initialPost}){
                 {post.content && <ConvertCKEditorImageToNextImage imagePath={post.content} />}
             </div>
             </div>
-            <div className='relevant_posts'>
-                <h3 className="relevant_posts_title">関連記事</h3>
-                <div className="relevant_posts_item">
-                    <PostsList relevantPosts={relevantPosts} postLimit={2} pagination={false}  searchBar={false}/>
-                </div>
-            </div>  
+            {relevantPosts.length !== 0 && (
+                <div className='relevant_posts'>
+                    <h3 className="relevant_posts_title">関連記事</h3>
+                    <div className="relevant_posts_item">
+                        <PostsList relevantPosts={relevantPosts} postLimit={2} pagination={false}  searchBar={false}/>
+                    </div>
+                </div>  
+            )}
+
         </section>
     )
 )

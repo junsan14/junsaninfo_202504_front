@@ -1,7 +1,8 @@
 'use client'
 import useSWRMutation from 'swr/mutation'
 import { mutate } from 'swr'
-import { useState} from 'react'
+import { useState,useEffect} from 'react'
+import { get, set, del } from 'idb-keyval'
 import CKFinderLoader from '@/components/CKFinderLoader'
 import { formatinputDate } from '@/components/Script'
 import { useRouter } from 'next/navigation'
@@ -56,7 +57,24 @@ export default function BlogEditor({postData}){
         is_continue:isNew?1:post.is_continue,
         is_restore:"false"
         })
-    
+        const draftKey = isNew ? 'draft-post-new' : `draft-post-${form.id}`
+
+        useEffect(() => {
+            get(draftKey).then((saved) => {
+              if (saved) {
+                setForm(saved)
+                console.log('Draft restored:', draftKey)
+              }
+            })
+          }, [])
+        
+          useEffect(() => {
+            const saveDraft = setTimeout(() => {
+              set(draftKey, form)
+              console.log('Draft saved:', draftKey)
+            }, 1000)
+            return () => clearTimeout(saveDraft)
+          }, [form])
     const  handleChangeData = (e)=>{  
         const key = e.target.id
         const value =e.target.value
@@ -70,6 +88,7 @@ export default function BlogEditor({postData}){
         try {
             await trigger({ ...form, is_show: showValue })
             console.log('投稿成功:', data)
+            await del(draftKey) // 投稿成功時下書きを削除
             await mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/posts`)
             //await mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/blog/post/edit?postid=${postId}`)
             router.push('/admin')
@@ -148,7 +167,7 @@ export default function BlogEditor({postData}){
                     <div  className="form_control_item">
                         <label htmlFor="tag" >Tag</label>
                         <input list="tags" name="tag" id="tag" 
-                            className='form_control_item_input' value={form.tag} onChange={(e)=>handleChangeData(e)}  />
+                            className='form_control_item_input' value={form.tag ?? ""} onChange={(e)=>handleChangeData(e)}  />
                         <datalist id="tags">
                             {tags.map((tag, key)=>(<option value={tag.tag} key={key} />))}
                         </datalist>
@@ -161,7 +180,7 @@ export default function BlogEditor({postData}){
                     <div  className="form_control_item">
                         <label htmlFor="slug" >Slug</label>
                         <textarea id="slug" name='slug' className="form_control_item_input"  
-                        rows="5" value={form.slug} onChange={(e)=>handleChangeData(e)}  />
+                        rows="5" value={form.slug ?? ""} onChange={(e)=>handleChangeData(e)}  />
                     </div>
                     <div  className="form_control_item">
                         <label htmlFor="thumbnail" style={{marginBottom:'20px'}} >Thumbnail</label>
@@ -170,7 +189,7 @@ export default function BlogEditor({postData}){
                     <div  className="form_control_item"  style={{marginTop:'20px'}}>
                         <label htmlFor="excerpt" >Excerpt</label>
                         <textarea id="excerpt" name='excerpt' className="form_control_item_input"  
-                        rows="5" value={form.excerpt} onChange={handleChangeData}  maxLength={40} />
+                        rows="5" value={form.excerpt ?? ""} onChange={handleChangeData}  maxLength={40} />
                     </div>
 
                 </div>

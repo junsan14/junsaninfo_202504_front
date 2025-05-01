@@ -1390,11 +1390,11 @@ body{
     pre{
         position: relative;
         max-width: 100%;		
-        line-height: 1.2em;
+        line-height: 1.4em;
         display: flex;
     }
     code{
-        font-size: .8em;
+        font-size: 0.9em;
         width: 100%;
         border-radius: 2px;
         @include mq(sp){
@@ -1408,7 +1408,8 @@ body{
         overflow: auto;
     }
     .sub-content{
-        margin-left:15px;
+        margin-left:5px;
+        margin-top: 5px;
         &.image{
             margin: 0.9em auto;
             text-align: center;
@@ -1422,8 +1423,9 @@ body{
             right:3%;	
             padding:5px 10px;
             font-family: 'Murecho', sans-serif;
+            color: white;
             border-radius: 2px;
-            font-size: .8em;
+            font-size: 1em;
             transition: .5s ease;
             @include mq(sp){
                 top:2%;
@@ -1452,7 +1454,7 @@ body{
             font-family: 'Murecho', sans-serif;
             border-radius: 2px;
             font-size: .8em;
-            font-style: italic;
+            color: white;
             @include mq(sp){
                 bottom: 2%;
                 font-size: .6em;

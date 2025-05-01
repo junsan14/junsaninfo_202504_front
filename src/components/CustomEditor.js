@@ -187,6 +187,7 @@ export const editorConfiguration = {
         languages: [
             { language: 'plaintext', label: 'Plain text', class: '' },
             { language: 'HTML', label: 'HTML' },
+            { language: 'CSS', label: 'CSS' },
             { language: 'SCSS', label: 'SCSS' },
             { language: 'CSS', label: 'CSS' },
             { language: 'JAVASCRIPT', label: 'JavaScript' },

@@ -32,8 +32,8 @@ export default function EditBlog(){
   }, [postId])
 
       if (error) return <div>Error loading post</div>
-      if (loading || !data) return <div>Loading...</div> // ← ココが重要
-        console.log(data)
+      if (loading || !data) return <div>Loading...</div> 
+        //console.log(data)
     return(
         <section className="section wrap blogEditor">
             <h1 className="section_title">

@@ -6,8 +6,8 @@ import CodeEnhancer from "./stylePost/CodeEnhancer"
 import PostsList from "./PostsList"
 import { formatDate } from "./Script"
 
-export default function PostContent({category,postId, initialPost,is_preview}){
-    const {post,error,isLoading, relevantPosts} = usePost(category,postId,initialPost,is_preview)
+export default function PostContent({category,postId,slug,initialPost,is_preview}){
+    const {post,error,isLoading, relevantPosts} = usePost(category,postId,slug,initialPost,is_preview)
     if (error) return <div>Error loading post</div>
     if (isLoading && !post) return (
         <section className="wrap section animate-pulse flex flex-col items-center pt-1">

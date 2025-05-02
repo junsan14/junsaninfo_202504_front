@@ -179,7 +179,7 @@ export default function BlogEditor({postData}){
                     </div>
                     <div  className="form_control_item">
                         <label htmlFor="slug" >Slug</label>
-                        <textarea id="slug" name='slug' className="form_control_item_input"  
+                        <textarea id="slug" name='slug' className="form_control_item_input" required
                         rows="5" value={form.slug ?? ""} onChange={(e)=>handleChangeData(e)}  />
                     </div>
                     <div  className="form_control_item">

@@ -1,16 +1,13 @@
 import PostContent from "@/components/PostContent"
 import { fetchPost } from "@/lib/postAPI"
 
-
-
 export default async function Page({params,searchParams}) {
-  const { category, postId } = await params
+  const { category, postId,slug } = await params
   const isPreview = searchParams?.preview === "true"
-  const {post} = await fetchPost(category,postId)
-
+  const {post} = await fetchPost(category, postId, slug)
   return(
     <>
-      <PostContent category={category} postId={postId} initialPost={post} is_preview={isPreview}/>
+      <PostContent category={category} postId={postId} slug={slug} initialPost={post} is_preview={isPreview}/>
     </>
   )
 }

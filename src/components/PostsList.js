@@ -282,12 +282,12 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
             {posts.length !==0? (   
                 <div className="posts"> 
                 {posts.map((post)=>{
-                    const blogCategory = blogCategories.find((category)=>category.id== post.category)['name']
+                    const blogCategory = blogCategories.find((category)=>category.id== post.category)['slug']
                     return(
                         <div className={post.is_show?"posts_item fade":"posts_item fade grey"} id={"postid_" + post.id} key={"postid_"+post.id}>
                             {Boolean(post.is_featured)  && <TiPin className="posts_item_featured"/>}    
                             {isNew(post.published_at) && <MdOutlineFiberNew className="posts_item_new" />}
-                            <Link href={post.is_show ? `/blog/${blogCategory}/${post.id}`:  `/blog/${blogCategory}/${post.id}?preview=true`} className='posts_item_link'>
+                            <Link href={post.is_show ? `/blog/${blogCategory}/${post.id}/${post.slug}`:  `/blog/${blogCategory}/${post.id}/${post.slug}?preview=true`} className='posts_item_link' target={edit && "_blank" } >
                                 <div className="posts_item_link_image">
                                     <ConvertCKEditorImageToNextImage imagePath={post.thumbnail} />
                                 </div>

@@ -51,7 +51,7 @@ export default function PostContent({category,postId,slug,initialPost,is_preview
                 <div className='relevant_posts'>
                     <h3 className="relevant_posts_title">関連記事</h3>
                     <div className="relevant_posts_item">
-                        <PostsList relevantPosts={relevantPosts} postLimit={2} pagination={false}  searchBar={false}/>
+                        <PostsList relevantPosts={relevantPosts} postLimit={4} pagination={false}  searchBar={false}/>
                     </div>
                 </div>  
             )}

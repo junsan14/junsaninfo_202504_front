@@ -64,7 +64,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
         } else {
           searchAreaRef.current?.classList.remove('scroll-fixed')
         }
-      };
+      }
     
       if (typeof window !== 'undefined') {
         window.onscroll = handleScroll
@@ -153,21 +153,20 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
     
     const SearchKeyword = ()=>{
         const handleSearchKeywords = (e)=>{
-            const term = e.target.value;
+            const term = e.target.value
             if (e.key === 'Enter') {
-            e.preventDefault();
-            const params = new URLSearchParams(searchParams);
+            e.preventDefault()
+            const params = new URLSearchParams(searchParams)
 
             if (term) {
-                params.set('keywords', term);
-                params.delete('page');
-                setInputKeywords(term);
+                params.set('keywords', term)
+                params.delete('page')
+                setInputKeywords(term)
             } else {
-                params.delete('keywords');
-                setInputKeywords('');
+                params.delete('keywords')
+                setInputKeywords('')
             }
-
-            replace(`${pathname}?${params.toString()}`);
+            replace(`${pathname}?${params.toString()}`)
             }
 
         }

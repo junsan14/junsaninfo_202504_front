@@ -1295,7 +1295,6 @@ body{
             transition: all .5s;
             transform: none;
             filter: none;
-            cursor: pointer;
         }
         @include mq(tab){
             width: 100%;

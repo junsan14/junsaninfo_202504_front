@@ -158,7 +158,7 @@ export default function BlogEditor({postData}){
                           
                             {blogCategories.map((category,i)=>{
                                 if(category !==""){
-                                    return category && <option value={i} key={i}>{category.name}</option>
+                                    return category && <option value={i+1} key={`category_${i+1}}`}>{category.name}</option>
                                 }
                             })}
                         

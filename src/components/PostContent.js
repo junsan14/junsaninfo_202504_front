@@ -5,6 +5,7 @@ import Toc from "./stylePost/TableOfContetsForPost"
 import CodeEnhancer from "./stylePost/CodeEnhancer"
 import PostsList from "./PostsList"
 import { formatDate } from "./Script"
+import Link from "next/link"
 
 export default function PostContent({category,postId,slug,initialPost,is_preview}){
     const {post,error,isLoading, relevantPosts} = usePost(category,postId,slug,initialPost,is_preview)
@@ -38,14 +39,26 @@ export default function PostContent({category,postId,slug,initialPost,is_preview
         <section className='wrap section'>
             <h1 className="section_content_title">{post.title}</h1>
             <div className="post" id={post.id} key={post.id}>
-            <div className="post_date">
-                <Date post={post} />
-            </div>
-            <div className="post_content ck ck-content">
-                <Toc />
-                <CodeEnhancer />
-                {post.content && <ConvertCKEditorImageToNextImage imagePath={post.content} />}
-            </div>
+                <div className="post_date">
+                    <Date post={post} />
+                </div>
+                <div className="post_content ck ck-content">
+                    <Toc />
+                    <CodeEnhancer />
+                    {post.content && <ConvertCKEditorImageToNextImage imagePath={post.content} />}
+                </div>
+                <div className="keyword-list flex flex-wrap gap-2">
+                    {post.keywords.split(/,|、/).map((keyword, index) => (
+                     <Link
+                        key={index}
+                        href={`/blog?keywords=${encodeURIComponent(keyword.trim())}`}
+                        className="text-gray-800 text-sm font-medium px-3 py-1 rounded-full"
+                        style={{ background: 'rgba(238, 238, 238, 0.5)' }} // ← rgba(#eee, .5) 相当
+                     >
+                        #{keyword.trim()}
+                    </Link>
+                    ))}
+                </div>
             </div>
             {relevantPosts.length !== 0 && (
                 <div className='relevant_posts'>

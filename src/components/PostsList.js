@@ -188,7 +188,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
                 <BsSearch className="search_area_icon js-search_area_icon"/>
                 
                 <input list="tag-list"  className="search_area_input js-search_area_input" id="tag-choice" 
-                    name="tag-choice" placeholder="Search Post"
+                    name="tag-choice" placeholder="Search..."
                     defaultValue={searchParams.get('keywords')?.toString()}
                     onKeyDown={(e)=>handleSearchKeywords(e)}
                     ref={inputRef}
@@ -287,7 +287,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
                         <div className={post.is_show?"posts_item fade":"posts_item fade grey"} id={"postid_" + post.id} key={"postid_"+post.id}>
                             {Boolean(post.is_featured)  && <TiPin className="posts_item_featured"/>}    
                             {isNew(post.published_at) && <MdOutlineFiberNew className="posts_item_new" />}
-                            <Link href={`/blog/${blogCategory}/${post.id}`} className='posts_item_link'>
+                            <Link href={post.is_show ? `/blog/${blogCategory}/${post.id}`:  `/blog/${blogCategory}/${post.id}?preview=true`} className='posts_item_link'>
                                 <div className="posts_item_link_image">
                                     <ConvertCKEditorImageToNextImage imagePath={post.thumbnail} />
                                 </div>

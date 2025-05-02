@@ -33,14 +33,12 @@ body{
     }  
 }
 
-    .spinner {
-        top: auto !important;
-        bottom: 10px !important; /* 下から10px */
-        left: auto !important;
-        right: 10px !important;  /* 右から10px */
-      }
-
-
+.spinner {
+    top: auto !important;
+    bottom: 10px !important; /* 下から10px */
+    left: auto !important;
+    right: 10px !important;  /* 右から10px */
+    }
 
 .single_btn{
     margin-right: 0;
@@ -53,6 +51,8 @@ body{
        
     }
 }
+
+  
 .main{
     .section{
         margin: 100px auto;
@@ -821,11 +821,12 @@ body{
         z-index:500;
         transition:.5s ease;
         top:10px;
-        right:calc(50% - 90px);
+        left:calc(51%);
         opacity: 0.15;
         @include mq(tab){
             top:10px;
             left:10px;
+            display: none;
         }
         &.hide{
             transition:.5s ease;
@@ -846,6 +847,11 @@ body{
         padding-left: 10px;
         transition:1s ease;
         z-index: 100;
+        &:focus {
+            outline: none;
+            --tw-ring-color: rgba(0,0,0,.3); /* red-400 相当 */
+            box-shadow: 0 0 0 1px var(--tw-ring-color);
+          }
         &.edit{
             @include mq(tab){
                 border: 1px;
@@ -1553,6 +1559,11 @@ body{
 			padding-top: 5px;
 			padding-bottom: 5px;
 			padding-left: 10px;
+            &:focus {
+                outline: none;
+                --tw-ring-color: rgba(0,0,0,.3); /* red-400 相当 */
+                box-shadow: 0 0 0 1px var(--tw-ring-color);
+              }
 
 			&_preview{
 				display: flex;

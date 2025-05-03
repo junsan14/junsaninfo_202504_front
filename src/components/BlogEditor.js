@@ -89,7 +89,6 @@ export default function BlogEditor({postData}){
         const value =e.target.value
         setForm({...form,[key]: value})
     }
-
     const handleSubmit  = async(e,showValue)=>{
         NProgress.start()
         e.preventDefault()
@@ -185,7 +184,7 @@ export default function BlogEditor({postData}){
                         <label htmlFor="tags" >Tags</label>
                         <CreatableSelect
                             isMulti
-                            value={form.tags.map(tag => ({ label: tag, value: tag }))} // ← 表示用に再整形
+                            value={ form.tags && form.tags.map(tag => ({ label: tag, value: tag }))} // ← 表示用に再整形
                             onChange={(newValue) => {
                                 const tagValues = newValue.map(tag => tag.value) // ["React", "Laravel"]
                                 setForm({ ...form, tags: tagValues })

@@ -25,7 +25,7 @@ export default function PostContent({category,postId,slug,initialPost,is_preview
         </div>
       </section>
     )
-console.log(post.tags)
+
   return (
     !post ? (
       <section className='wrap section'>

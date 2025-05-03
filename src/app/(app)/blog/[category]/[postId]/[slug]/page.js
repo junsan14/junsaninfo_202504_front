@@ -28,6 +28,11 @@ export async function generateMetadata({ params }) {
     openGraph: {
       images: [urls[0]],
     },
+    twitter: {
+      card: 'summary',
+      title: `junsan14｜${post.title}`,
+      images: [urls[0]],
+    },
   }
 }
 

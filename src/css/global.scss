@@ -993,6 +993,7 @@ body{
         display: flex;
         flex-wrap: nowrap;
         position: relative;
+        cursor: pointer;
         @include mq(sp){
             width: 100%;
         }

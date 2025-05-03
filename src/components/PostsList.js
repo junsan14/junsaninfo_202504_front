@@ -147,7 +147,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
             </div>  
         )
     }
-    console.log(blogSubCategories)
+    //console.log(blogSubCategories)
     const posts = relevantPosts?relevantPosts:data.data
     const totalPages = data.last_page
     const paginationRange = getPaginationRange(currentPage, totalPages)
@@ -155,12 +155,8 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
     
     
     const SearchKeyword = ()=>{
-        const handleSearchKeywords = (e)=>{
-            const term = e.target.value
-            if (e.key === 'Enter') {
-            e.preventDefault()
+        const handleSearch = (term) => {
             const params = new URLSearchParams(searchParams)
-
             if (term) {
                 params.set('keywords', term)
                 params.delete('page')
@@ -170,9 +166,9 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
                 setInputKeywords('')
             }
             replace(`${pathname}?${params.toString()}`)
-            }
-
         }
+    
+
         return(
             <div className="search_area js-search_area" ref={searchAreaRef}>
                 <button type="button" className="search_area_reset js-search_area_reset" value="RESET" 
@@ -189,10 +185,29 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
                 </button>
                 <BsSearch className="search_area_icon js-search_area_icon"/>
                 
-                <input list="sub_category_list" name="sub_category" id="sub_category" 
-                    placeholder="Search..." ref={inputRef}
-                    className='search_area_input' defaultValue={searchParams.get('keywords')?.toString()} 
-                    onKeyDown={(e)=>handleSearchKeywords(e)} />
+                <input
+                    list="sub_category_list"
+                    name="sub_category"
+                    id="sub_category"
+                    placeholder="Search..."
+                    ref={inputRef}
+                    className='search_area_input'
+                    defaultValue={inputKeywords}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                        e.preventDefault()
+                        handleSearch(e.target.value)
+                        }
+                    }}
+                    onInput={(e) => {
+                        // datalistから選択されたときは blur イベントで反映
+                        const selected = e.target.value
+                        if (blogSubCategories.some(sc => sc.sub_category === selected)) {
+                        handleSearch(selected)
+                        }
+                    }}
+                    />
+
                 <datalist id="sub_category_list">
                     {blogSubCategories.map((subCategory, key)=>(<option value={subCategory.sub_category} key={key} />))}
                 </datalist>

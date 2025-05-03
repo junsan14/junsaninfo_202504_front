@@ -124,7 +124,7 @@ body{
     height: 80px;
     top: 0;
     z-index: 2;
-    @include mq(sp){
+    @include mq(tab){
         height: 60px;
     }
     .toggle{
@@ -771,16 +771,14 @@ body{
 .search_area{
     width: 100%;
     position:relative;
-    height:85px;
+    height:70px;
     z-index: 1;
-    border-radius: 5px;
-    top: 160px;
+    top: 145px;
     position: sticky;
     background: white;
-    @include mq(sp){
-        top:110px;
+    @include mq(tab){
+        top:105px;
         height: 60px;
-        margin-bottom: 20px;
     }
     /*
     &.scroll-fixeds {       
@@ -863,11 +861,7 @@ body{
             outline: none;
             border: $focus-style;
             border-radius: 4px;
-            @include mq(tab){
-                outline: none;
-                border: none;
-                width: 100%;
-            }
+            
         }
     }
     &_reset{
@@ -914,11 +908,13 @@ body{
     top:80px;
     z-index: 1;
     background: white;
-    @include mq(sp){
+    padding-bottom: 15px;
+    @include mq(tab){
         width: 100%;
         margin: 0 auto 10px auto ;
         justify-content: center;
-        top:60px;
+        top:59.5px;
+        padding-bottom: 10px;
     }
     li{
         counter-increment: li;
@@ -928,7 +924,6 @@ body{
         font-size: .8em;
         text-align: center;
         width: calc(100% / 3 - 1px);
-        margin-bottom: 30px;
         background:rgba(#eee,.5);
         &.on{
             background:#fff;
@@ -938,7 +933,6 @@ body{
         @include mq(tab){
             padding: 10px 0;
             font-size: .7em;
-            margin-bottom: 20px;
         }
 
         &.skill_tab_li{

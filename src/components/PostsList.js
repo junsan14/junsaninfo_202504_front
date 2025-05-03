@@ -18,6 +18,8 @@ import NProgress from 'nprogress'
 import { AiOutlineClear } from "react-icons/ai"
 import { BsSearch } from "react-icons/bs"
 import { useBlogCategories } from "@/hooks/useBlogCategories"
+import { useBlogSubCategories } from "@/hooks/useBlogSubCategories"
+
 const fetcher = (url) => fetch(url).then(res => res.json())
 
 
@@ -55,6 +57,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
     const [selectedCategory, setSelectedCategory] = useState(() => searchParams.get('category') || "")
     const [inputKeywords, setInputKeywords] = useState(searchParams.get('keywords')?searchParams.get('keywords').toString():"")
 
+    //search menu fixed
     const searchAreaRef = useRef(null)
     const inputRef = useRef(null)
     const handleScroll = () => {
@@ -70,6 +73,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
       }
     const isAdmin = pathname.startsWith('/admin')
     const {blogCategories} = useBlogCategories()
+    const {blogSubCategories} = useBlogSubCategories()
     const { data, error, isLoading } = useSWR(
         () => currentPage? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}` : null,
         fetcher
@@ -101,7 +105,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
    
     if (error) return 'An error has occurred.'
     
-    if (isLoading ||! data.data || !blogCategories){
+    if (isLoading ||! data.data || !blogCategories || !blogSubCategories){
         return (
             <div className="posts">
                 {
@@ -143,7 +147,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
             </div>  
         )
     }
-    
+    console.log(blogSubCategories)
     const posts = relevantPosts?relevantPosts:data.data
     const totalPages = data.last_page
     const paginationRange = getPaginationRange(currentPage, totalPages)
@@ -185,12 +189,13 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
                 </button>
                 <BsSearch className="search_area_icon js-search_area_icon"/>
                 
-                <input list="tag-list"  className="search_area_input js-search_area_input" id="tag-choice" 
-                    name="tag-choice" placeholder="Search..."
-                    defaultValue={searchParams.get('keywords')?.toString()}
-                    onKeyDown={(e)=>handleSearchKeywords(e)}
-                    ref={inputRef}
-                />
+                <input list="sub_category_list" name="sub_category" id="sub_category" 
+                    placeholder="Search..." ref={inputRef}
+                    className='search_area_input' defaultValue={searchParams.get('keywords')?.toString()} 
+                    onKeyDown={(e)=>handleSearchKeywords(e)} />
+                <datalist id="sub_category_list">
+                    {blogSubCategories.map((subCategory, key)=>(<option value={subCategory.sub_category} key={key} />))}
+                </datalist>
             </div>
         )
     }

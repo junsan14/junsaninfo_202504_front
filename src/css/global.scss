@@ -823,6 +823,7 @@ body{
         top:10px;
         left:calc(51%);
         opacity: 0.15;
+        display: none;
         @include mq(tab){
             top:10px;
             left:10px;
@@ -852,14 +853,9 @@ body{
             --tw-ring-color: rgba(0,0,0,.3); /* red-400 相当 */
             box-shadow: 0 0 0 1px var(--tw-ring-color);
           }
-        &.edit{
-            @include mq(tab){
-                border: 1px;
-                
-            }
-        }
+
         @include mq(tab){
-            width: 100%;
+            width: 80vw;
             font-size: 16px;
         }
         
@@ -877,23 +873,15 @@ body{
     &_reset{
         font-size:1.5em;
         position:absolute;
-        top:13px;
-        right: 5px;
+        top:10px;
+        left:calc(51%);
         transition: .5s ease;
         z-index: 150;
         cursor: pointer;
-        &.edit{
-            @include mq(tab){
-                top: 55px;
-                right: 300px;
-        
-                font-size: 0.5em;
-                font-size: 1.5em;
-            }
-        }
+
         @include mq(tab){
             top: 15px;
-            right: 5px;
+            left: 0px;
             font-size: 0.5em;
             font-size: 1.5em;
         }

@@ -64,6 +64,7 @@ export default function BlogEditor({postData}){
         is_top:isNew?1:post.is_top,
         is_featured:isNew?0:post.is_featured,
         published_at:isNew?formatinputDate(new Date()):post.published_at,
+        is_update:1,
         is_continue:isNew?1:post.is_continue,
         is_restore:"false"
         })
@@ -158,6 +159,17 @@ export default function BlogEditor({postData}){
                             onChange={(e) =>{setForm({...form,'is_featured':e.target.checked}) } } className='form_control_item_checkbox'/>
                             <label htmlFor="is_top">Pin</label>
                     </div>
+                    {!isNew && (
+                        <div  className="form_control_item showTop">
+                            <input type='checkbox'
+                                name="is_update"
+                                checked={form.is_update}
+                                id="is_update"
+                                onChange={(e) =>{setForm({...form,'is_update':e.target.checked}) } } className='form_control_item_checkbox'/>
+                                <label htmlFor="is_top">Update date</label>
+                        </div>
+                    ) }
+                    
                     <div  className="form_control_item">
                         <label htmlFor="published_at">Publish Date</label>
                         <input type='datetime-local' className="form_control_item_select" 

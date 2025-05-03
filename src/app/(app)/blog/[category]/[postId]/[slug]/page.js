@@ -25,6 +25,8 @@ export async function generateMetadata({ params }) {
 
   return {
     title: !error && `junsan14｜${post.title}`,
+    description: post.excerpt ?? 'JICA海外協力隊としての活動記録。',
+    keywords: post.keywords ?? 'ルワンダ, 海外協力隊, JICA, JOCV,協力隊,地方生活,ルワンダ, 海外協力隊,',
     openGraph: {
       images: [urls[0]],
     },

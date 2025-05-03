@@ -12,6 +12,7 @@ import NProgress from 'nprogress'
 import { useAuth } from '@/hooks/auth'
 import { useBlogCategories } from '@/hooks/useBlogCategories'
 import { useBlogSubCategories } from '@/hooks/useBlogSubCategories'
+import { useBlogTags } from "@/hooks/useBlogTags"
 import CreatableSelect from 'react-select/creatable'
 
 
@@ -39,6 +40,7 @@ export default function BlogEditor({postData}){
     const { user } = useAuth()
     const {blogCategories} = useBlogCategories()
     const { blogSubCategories } = useBlogSubCategories()
+    const { blogTags } = useBlogTags()
  
     const { trigger, data } = useSWRMutation(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/blog/post/store`,
@@ -75,7 +77,7 @@ export default function BlogEditor({postData}){
             }
         })
     }, [])
-    
+
     useEffect(() => {
     const saveDraft = setTimeout(() => {
         set(draftKey, form)
@@ -107,8 +109,13 @@ export default function BlogEditor({postData}){
             NProgress.done()
         }
     }
-    if(!blogCategories || !blogSubCategories) return <>Loading Category...</>
+    if(!blogCategories || !blogSubCategories || !blogTags) return <>Loading Category && Sub Category && Tags...</>
     
+    const tagOptions = blogTags?.map(tag => ({
+        label: tag,
+        value: tag
+    }))
+
     return(
         <>
             {/* CKFinder Script */}
@@ -184,6 +191,7 @@ export default function BlogEditor({postData}){
                         <label htmlFor="tags" >Tags</label>
                         <CreatableSelect
                             isMulti
+                            options={tagOptions}
                             value={ form.tags && form.tags.map(tag => ({ label: tag, value: tag }))} // ← 表示用に再整形
                             onChange={(newValue) => {
                                 const tagValues = newValue.map(tag => tag.value) // ["React", "Laravel"]

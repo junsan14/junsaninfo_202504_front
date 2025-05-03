@@ -25,7 +25,7 @@ export default function PostContent({category,postId,slug,initialPost,is_preview
         </div>
       </section>
     )
-    //console.log(relevantPosts)
+console.log(post.tags)
   return (
     !post ? (
       <section className='wrap section'>
@@ -47,15 +47,15 @@ export default function PostContent({category,postId,slug,initialPost,is_preview
                     <CodeEnhancer />
                     {post.content && <ConvertCKEditorImageToNextImage imagePath={post.content} />}
                 </div>
-                <div className="keyword-list flex flex-wrap gap-2">
-                    {post.keywords.split(/,|、/).map((keyword, index) => (
+                <div className="post_keyword-list flex flex-wrap gap-2">
+                    {post.tags.length !== 0 && post.tags.map((tag, index) => (
                      <Link
                         key={index}
-                        href={`/blog?keywords=${encodeURIComponent(keyword.trim())}`}
+                        href={`/blog?keywords=${encodeURIComponent(tag.trim())}`}
                         className="text-gray-800 text-sm font-medium px-3 py-1 rounded-full"
                         style={{ background: 'rgba(238, 238, 238, 0.5)' }} // ← rgba(#eee, .5) 相当
                      >
-                        #{keyword.trim()}
+                        #{tag.trim()}
                     </Link>
                     ))}
                 </div>

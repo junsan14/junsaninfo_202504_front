@@ -11,7 +11,12 @@ import dynamic from 'next/dynamic'
 import NProgress from 'nprogress'
 import { useAuth } from '@/hooks/auth'
 import { useBlogCategories } from '@/hooks/useBlogCategories'
+import { useBlogSubCategories } from '@/hooks/useBlogSubCategories'
+import CreatableSelect from 'react-select/creatable'
+
+
 const  ClientSideCustomEditor = dynamic( () => import( '@/components/CustomEditor' ), { ssr: false } )
+
 
 
 const sendData = async (url, { arg }) => {
@@ -33,12 +38,14 @@ const sendData = async (url, { arg }) => {
 export default function BlogEditor({postData}){
     const { user } = useAuth()
     const {blogCategories} = useBlogCategories()
+    const { blogSubCategories } = useBlogSubCategories()
+ 
     const { trigger, data } = useSWRMutation(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/blog/post/store`,
             sendData
         )    
     const router = useRouter()
-    const { post,tags,isNew,keywords } = postData
+    const { post,isNew,keywords } = postData
     const [form, setForm] = useState({
         id:isNew?"":post.id,
         author_id:user.user.id,
@@ -46,7 +53,8 @@ export default function BlogEditor({postData}){
         content:isNew?"":post.content,
         excerpt:isNew?"":post.excerpt,
         category:isNew?3:post.category,
-        tag:isNew?"":post.tag,
+        sub_category:isNew?"":post.sub_category,
+        tags: isNew ? [] : post.tags,
         keywords:isNew?keywords.keywords:post.keywords,
         slug: isNew? "":post.slug,
         thumbnail:isNew?"":post.thumbnail,
@@ -57,24 +65,25 @@ export default function BlogEditor({postData}){
         is_continue:isNew?1:post.is_continue,
         is_restore:"false"
         })
-        const draftKey = isNew ? 'draft-post-new' : `draft-post-${form.id}`
 
-        useEffect(() => {
-            get(draftKey).then((saved) => {
-              if (saved) {
-                setForm(saved)
-                console.log('Draft restored:', draftKey)
-              }
-            })
-          }, [])
-        
-          useEffect(() => {
-            const saveDraft = setTimeout(() => {
-              set(draftKey, form)
-              console.log('Draft saved:', draftKey)
-            }, 1000)
-            return () => clearTimeout(saveDraft)
-          }, [form])
+    const draftKey = isNew ? 'draft-post-new' : `draft-post-${form.id}`
+    useEffect(() => {
+        get(draftKey).then((saved) => {
+            if (saved) {
+            setForm(saved)
+            console.log('Draft restored:', draftKey)
+            }
+        })
+    }, [])
+    
+    useEffect(() => {
+    const saveDraft = setTimeout(() => {
+        set(draftKey, form)
+        console.log('Draft saved:', draftKey)
+    }, 1000)
+    return () => clearTimeout(saveDraft)
+    }, [form])
+
     const  handleChangeData = (e)=>{  
         const key = e.target.id
         const value =e.target.value
@@ -99,7 +108,8 @@ export default function BlogEditor({postData}){
             NProgress.done()
         }
     }
-    if(!blogCategories) return <>Loading</>
+    if(!blogCategories || !blogSubCategories) return <>Loading Category...</>
+    
     return(
         <>
             {/* CKFinder Script */}
@@ -155,7 +165,6 @@ export default function BlogEditor({postData}){
                                 (e)=>{
                                     handleChangeData(e)
                                 }}>
-                          
                             {blogCategories.map((category,i)=>{
                                 if(category !==""){
                                     return category && <option value={i+1} key={`category_${i+1}}`}>{category.name}</option>
@@ -165,12 +174,26 @@ export default function BlogEditor({postData}){
                         </select>
                     </div>
                     <div  className="form_control_item">
-                        <label htmlFor="tag" >Tag</label>
-                        <input list="tags" name="tag" id="tag" 
-                            className='form_control_item_input' value={form.tag ?? ""} onChange={(e)=>handleChangeData(e)}  />
-                        <datalist id="tags">
-                            {tags.map((tag, key)=>(<option value={tag.tag} key={key} />))}
+                        <label htmlFor="sub_category" >Sub Category</label>
+                        <input list="sub_category_list" name="sub_category" id="sub_category" 
+                            className='form_control_item_input' value={form.sub_category ?? ""} onChange={(e)=>handleChangeData(e)}  />
+                        <datalist id="sub_category_list">
+                            {blogSubCategories.map((subCategory, key)=>(<option value={subCategory.sub_category} key={key} />))}
                         </datalist>
+                    </div>
+                    <div  className="form_control_item">
+                        <label htmlFor="tags" >Tags</label>
+                        <CreatableSelect
+                            isMulti
+                            value={form.tags.map(tag => ({ label: tag, value: tag }))} // ← 表示用に再整形
+                            onChange={(newValue) => {
+                                const tagValues = newValue.map(tag => tag.value) // ["React", "Laravel"]
+                                setForm({ ...form, tags: tagValues })
+                            }}
+                            placeholder="タグを入力してEnter..."
+                            noOptionsMessage={() => '入力してEnterで追加'}
+                            className='form_control_item_input'
+                            />
                     </div>
                     <div  className="form_control_item">
                         <label htmlFor="keywords" >Keywords</label>

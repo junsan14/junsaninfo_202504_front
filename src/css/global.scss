@@ -133,6 +133,10 @@ body{
         height: 80px;
         float: right;
         z-index: 3;
+        @include mq(tab){
+            height: 60px;
+            width: 60px;
+        }
         &:hover{
             cursor: pointer;
         }
@@ -777,8 +781,9 @@ body{
     position: sticky;
     background: white;
     @include mq(tab){
-        top:105px;
-        height: 60px;
+        top:109.5px;
+        height: 65px;
+        padding-top: 5px;
     }
     /*
     &.scroll-fixeds {       

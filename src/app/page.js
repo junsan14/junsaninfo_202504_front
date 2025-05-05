@@ -16,7 +16,7 @@ export default function Home (){
                     <div className="section_title_jp">BLOG</div>
                 </h2>
                 <Suspense>
-                    <PostsList postLimit={6}/>
+                    <PostsList postLimit={6} isTop={true}/>
                 </Suspense>
                 <div className="section_btn">
                     <Link href='/blog'>

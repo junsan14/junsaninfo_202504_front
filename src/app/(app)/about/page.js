@@ -16,9 +16,9 @@ export default function About() {
                   <div className="profile_icon">
                     <Image src='/profile.png' className="profile_icon_img" alt="" width={150} height={150} priority/>
                     <div className="profile_icon_desc">
-                      <p >junsan14</p>
-                      <p>ホテル業界4年､WEB業界2年</p>
-                      <p>JICA海外協力隊<br />2024年第1次隊ルワンダ</p>
+                      <p>junsan14</p>
+                      <p>元ホテルマン/ WEBエンジニア</p>
+                      <p>JICA海外協力隊<br />2024年度1次隊ルワンダ</p>
                       
                     </div>
                     <div className="profile_icon_desc">
@@ -39,16 +39,16 @@ export default function About() {
                       <dt>2016</dt>
                       <dd>ロンドンに留学し、日本の言語/文化交流のコミュニティ JLCE設立し2年弱滞在</dd>
                       <dt>2018</dt>
-                      <dd>帰国後、星野リゾートに入社、4年間河口湖のほとりで過ごす</dd>
+                      <dd>某リゾート会社へ@河口湖</dd>
                       <dt>2022</dt>
-                      <dd>転職後､WEBディレクター兼エンジニアとして東京で活動</dd>
+                      <dd>WEBエンジニアへ@東京</dd>
                       <dt>2024 <br className="sp-display"/>Jan-Mar</dt>
-                      <dd>JICAグローカルプログラム第3期愛媛県伊予市活動</dd>
+                      <dd>JICAグローカルプログラム@愛媛県伊予市</dd>
                       <dt>2024 <br className="sp-display"/>April-July</dt>
-                      <dd>JICA海外協力隊二本松訓練所にて語学訓練</dd>
+                      <dd>JICA海外協力隊訓練@二本松</dd>
                       <dt>2024 <br className="sp-display"/>Sep-Now</dt>
                       <dd>JICA海外協力隊24年第1期コンピュータ技術 <br className="sp-display"/>
-                        ルワンダ東部ガツィボ郡ムフラセクター<br className="sp-display"/>
+                        @ルワンダ東部ガツィボ郡ムフラセクター<br className="sp-display"/>
                         セント・アレクサンドレ・サウリ技術高等学校 活動中</dd>
                     </dl>
                   </div>

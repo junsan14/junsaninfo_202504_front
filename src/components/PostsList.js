@@ -49,7 +49,7 @@ const deletePost = async (url, { arg: id }) => {
     
 }
 
-export default function PostsList({postLimit,pagination, edit, relevantPosts, searchBar}){
+export default function PostsList({postLimit,pagination, edit, relevantPosts, searchBar,isTop}){
     const searchParams = useSearchParams()
     const pathname = usePathname()
     const { replace } = useRouter()
@@ -75,9 +75,10 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
     const {blogCategories} = useBlogCategories()
     const {blogSubCategories} = useBlogSubCategories()
     const { data, error, isLoading } = useSWR(
-        () => currentPage? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}` : null,
+        () => currentPage? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}&isTop=${isTop}` : null,
         fetcher
       )
+      console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}&isTop=${isTop}`)
     const { trigger:triggerVisibility,isMutating } = useSWRMutation(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/blog/post/visible`,
         toggleVisibility

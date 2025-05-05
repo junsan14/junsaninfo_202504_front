@@ -194,7 +194,7 @@ export default function BlogEditor({postData}){
                     <div  className="form_control_item">
                         <label htmlFor="sub_category" >Sub Category</label>
                         <input list="sub_category_list" name="sub_category" id="sub_category" 
-                            className='form_control_item_input' value={form.sub_category } onChange={(e)=>handleChangeData(e)}  />
+                            className='form_control_item_input' value={form.sub_category  ?? ""} onChange={(e)=>handleChangeData(e)}  />
                         <datalist id="sub_category_list">
                             {blogSubCategories.map((subCategory, key)=>(<option value={subCategory.sub_category} key={key} />))}
                         </datalist>
@@ -222,7 +222,7 @@ export default function BlogEditor({postData}){
                     <div  className="form_control_item">
                         <label htmlFor="slug" >Slug</label>
                         <textarea id="slug" name='slug' className="form_control_item_input" required
-                        rows="5" value={form.slug ?? ""} onChange={(e)=>handleChangeData(e)}  />
+                        rows="1" value={form.slug ?? ""} onChange={(e)=>handleChangeData(e)}  />
                     </div>
                     <div  className="form_control_item">
                         <label htmlFor="thumbnail" style={{marginBottom:'20px'}} >Thumbnail</label>

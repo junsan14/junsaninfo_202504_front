@@ -8,7 +8,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     const router = useRouter()
     const params = useParams()
 
-    const { data: user, error, mutate } = useSWR(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user`,() =>
+    const { data: user, error, mutate,isLoading } = useSWR(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user`,() =>
     
         axios
             .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user`,{
@@ -128,7 +128,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
         window.location.pathname = '/login'
     }
-
+/*
     useEffect(() => {
         if (middleware === 'guest' && redirectIfAuthenticated && user)
             router.push(redirectIfAuthenticated)
@@ -143,6 +143,29 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             router.push(redirectIfAuthenticated)
         if (middleware === 'auth' && error) logout()
     }, [user, error])
+*/
+    useEffect(() => {
+        if (isLoading) return // データ取得中は何もしない
+
+        if (middleware === 'guest' && redirectIfAuthenticated && user) {
+            router.push(redirectIfAuthenticated)
+        }
+
+        if (middleware === 'auth' && user && !user.email_verified_at) {
+            router.push('/verify-email')
+        }
+
+        if (middleware === 'auth' && error) {
+            logout()
+        }
+
+        if (
+            window.location.pathname === '/verify-email' &&
+            user?.email_verified_at
+        ) {
+            router.push(redirectIfAuthenticated)
+        }
+    }, [user, error, isLoading])
 
     return {
         user,

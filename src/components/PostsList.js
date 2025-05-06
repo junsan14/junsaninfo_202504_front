@@ -78,7 +78,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
         () => currentPage? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}&isTop=${isTop}` : null,
         fetcher
       )
-      console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}&isTop=${isTop}`)
+     // console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}&isTop=${isTop}`)
     const { trigger:triggerVisibility,isMutating } = useSWRMutation(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/blog/post/visible`,
         toggleVisibility
@@ -92,7 +92,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
         const id = Number(e.currentTarget.id)
         try {
             await triggerVisibility({id:id, is_show:is_show})
-            mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}`)
+            mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}&isTop=${isTop}`)
         } catch (err) {
             console.error(err)
         }   
@@ -100,7 +100,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
     const handleClickDelete = async(e,id)=>{
         const res = confirm('本当に削除してよろしいですか?')
         if(res) await triggerDelete(id)
-        mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}`)
+        mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog?page=${currentPage}&limit=${postLimit}&category=${selectedCategory}&keywords=${inputKeywords}&all=${isAdmin}&isTop=${isTop}`)
     }   
 
    

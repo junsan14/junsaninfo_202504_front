@@ -102,7 +102,7 @@ export default function BlogEditor({postData}){
             await del(draftKey) // 投稿成功時下書きを削除
             await mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/posts`)
             //await mutate(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/blog/post/edit?postid=${postId}`)
-            router.push('/admin')
+            router.back()
             
         } catch (err) {
             console.error(err)
@@ -217,7 +217,7 @@ export default function BlogEditor({postData}){
                     <div  className="form_control_item">
                         <label htmlFor="keywords" >Keywords</label>
                         <textarea id="keywords" name='keywords' className="form_control_item_input"  
-                        rows="5" value={form.keywords} onChange={(e)=>handleChangeData(e)}  />
+                        rows="5" value={form.keywords ?? ""} onChange={(e)=>handleChangeData(e)}  />
                     </div>
                     <div  className="form_control_item">
                         <label htmlFor="slug" >Slug</label>

@@ -1,0 +1,70 @@
+[
+    {
+        "1. Apply  PHP fundamentals":[
+            {
+                "name": "1.1 Definition of key terms",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EZJJe9hTpfNFuxwvmM9IHYUBcXUVbU-AadF3prF-ZTG19Q?e=349Cfa"
+            },
+            {
+                "name": "1.2 Installation of XAMPP",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/ES0zdCI1iHdJkCDmvqkquZQB6xtEJ6z6Ln8zOw11YmxaRA?e=1ulgDf"
+            },
+            {
+                "name": "1.3 Application of PHP concepts",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EZ_fUJMBIEpEvt4O1-6ey5QB3D3_TPpu-LH6148c75qxdg?e=5TUjDm"
+            },
+            {
+                "name": "1.4 Application of PHP concepts 2",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/ERfGowzpFDhAgQFM4f1Rs2sBCaECsy0JO-JS1Fl33msVCg?e=O3Tua8"
+            },
+            {
+                "name": "1.5 Use of Function",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EVBRzIQ8VudImPNhbyeJti8BWyJnU7zU-SupoeA_UjOUIQ?e=MVAoBh"
+            },
+            {
+                "name": "1.6 File handling",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EcqY-pmYc1VIhwCmvqcWe_cBk0yodTvNQIiYY95xe56_-Q?e=a2HZaJ"
+            },
+            {
+                "name": "1.7 Form Submission",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EfseogWa1ZRBkCYHvlge-p4BQceKbt3z_ZPTmNQ_2sHP9g?e=S5sadC"
+            },
+            {
+                "name": "1.8 Cookies and Sessions",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EWGcReZQqj9DmLJrJG0ZC7UBndJxQ9Jo7vaGWgPCxMVi0Q?e=auwxsv"
+            },
+            {
+                "name": "1.9 OOP",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EftMycqgTGRMiqlNgmzig5EBWCLpjuEErQU6w8WKU08JIw?e=gAYhcF"
+            }
+        ]
+    },
+    {
+        "2. Connect PHP to the database":[
+            {
+                "name": "2.1 Use of MySQL",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/Ea0cxybY11FIrZUfbI239SgBJ7k7ZW3DwrCzvj63rq71jA?e=omLcqn"
+            },
+            {
+                "name": "2.2 Application of Database Connection drives",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EZMgSgeb9RJHnnaoaCck3eMBX3YvN5Sw_hvhlZStfPedHg?e=X0efLN"
+            },
+            {
+                "name": "2.3 Import and Export Data",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EZaDq5uMvixPq8WPLbaCP_MBTMSoy7IoIi8iEgM2qpRbug?e=h1xPIc"
+            },
+            {
+                "name": "2.4 Application of PHP Basic Security Concepts",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EQaxFCQw1DxNrp1kOQ8wgBYBpJ_YTgpI5wHrrVhcRJ5kxQ?e=aovb8W"
+            },
+            {
+                "name": "2.5 Errors and Exceptions in PHP",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EZb9Fju-jMpBgFWCefKEbNIBb5fToyU3Fvdf9hmZ7VkFsg?e=N74Ijn"
+            },
+            {
+                "name": "2.6 Implementation of User Authentication",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EYg1emu7gtxAnZEVykIk02MBCwWzKIAgih_aiVCsPW2TyA?e=KPbrXH"
+            }
+        ]
+    }
+]

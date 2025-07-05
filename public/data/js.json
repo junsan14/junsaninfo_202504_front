@@ -1,0 +1,232 @@
+[
+    {
+    "1. Apply JavaScript Basic Concepts":[
+        {
+            "name": "1.1 Introduction to JavaScript ",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/ETTKD5DuMHxGmRFpEpfk2xcB0gOYKWP3BFu5_wS7eiaHrQ?e=DZ4lrE"
+        },
+        {
+            "name": "1.2 JAVASCRIPT key concepts ",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/ETohONzCmIFAthgTXH59ILQBqj1b7XVu4RqcsDFKT8xslw?e=FT8612"
+        },
+        {
+            "name": "1.3 JavaScript libraries & frameworks ",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EVUsWeFOrMlIsLumMpVcb2cBqB8nUOZSj0756uo6Ac_Wcw?e=VP27jU"
+        },
+        {
+            "name": "1.4 Integration of JavaScript into HTML ",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EcgnPSXdKVRKuAudZa_2rlYB-hL2wSTimc6PV2Pg5d1Jyg?e=wuvoYk"
+        },
+        {
+            "name": "1.5 Use of Variables in JavaScript ",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EVr4OdYN1cVGhxmbu0EnX7MBit1MhQL2BuLnAhlTpOwSIg?e=4HwKXi"
+        },
+        {
+            "name": "1.6 Use of Data Types in JavaScript ",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/ESe-ZWBkIlBGhqqGgeqpJ44BQYwa8B2ZHrmz90bq0XHFfA?e=bmnzil"
+        },
+        {
+            "name": "1.7 Use of operators in Javascript ",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EakhX2wJ3W9Pjwq-WS_uPNYBdaVmYi7FLKwGn4SGUpGkVw?e=dv3NsQ"
+        },
+        {
+            "name": "1.8 Using string in Javascript ",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/Ee0lPQkSTqlLk1ex4hkAY58BwoIsqBYst8s_Amize70CjQ?e=6p6g3k"
+        },
+        {
+            "name": "1.9 Using conditional statement ",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/ESPMdVs2c3xGvf0GX0dgzQQBGgSvxN40rvX6DQuTk4HiUg?e=1wkJSu"
+        },
+        {
+            "name": "1.10 Using Loop functions in Javascript ",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/ERDBCqPZ_3lKrOiKMnrCZj8BSsQpbvaXb7A0Cm3PSPJcZQ?e=JVX0mX"
+        },
+        {
+            "name": "1.11 Using Loop functions in Javascript2 ",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EVpWUBADZOtDpVCAmSyXXEgBTqSw-wX1feZOD4ZkacdzVw?e=NeXLmK"
+        },
+        {
+            "name": "1.12 Using Functions in Javascript [Practical] ",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EVHt2NFAbBhCtUWr3sUO5vMBvtgH_L4SUg6ykkEqNwGyBg?e=vjC9Zm"
+        },
+        {
+            "name": "1.13 Using Arrays in JavaScript ",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EbE0z7LqdtlOmVyaxFtKJJsBhXq2GTH8mAYUNbnnpVLenQ?e=fCFb0t"
+        },
+        {
+            "name": "1.14 Using objects in Javascript ",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/Ecb0dpqZO1pGgIgKrZVuutYB-t47U9fn_a8-ulb_jRBzqA?e=OnAgZX"
+        }
+    ]
+    
+    },
+    {
+        "2. Manipulate data with JavaScript":[
+            {
+                "name": "2.1 Using string in Javascript",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EZ1WXHByYkZAn4luslMqVxcBFcZ9dNGctodmNZB8gFyEfw?e=Cl5BVm"
+            },
+            {
+                "name": "2.2 Using Arrays in JavaScript",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EeTBoYButR9NubHPhQNwsY0BveCs2nIUzz35MLg9xOXm_A?e=3z39Fw"
+            },
+            {
+                "name": "2.3 Using objects in Javascript",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/Ea_IIvnrhidEoJyUpw9Hri4BNuLHD2hnXQ1mEVbyDuwSpA?e=DbT98j"
+            },
+            {
+                "name": "2.4 Using conditional statement",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EUTJhIN45EVPnUJWRUZlHAQBI2SZPZkrOBRlX4gEks3Fgw?e=jit7O0"
+            },
+            {
+                "name": "2.5 Using Loop functions in Javascript",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/ETDvRHbAaDlGqWQEPgsN07EBPYMpJkHK-MvC0tjoW_FJoQ?e=TQDXy3"
+            },
+            {
+                "name": "2.6 Using Loop functions in Javascript2",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EWIjgTHDf8tKrDqqlbHdiTABwrP_33TPDpgQGZFo71RAow?e=BWyjVY"
+            },
+            {
+                "name": "2.7 Using Functions in Javascript [Practical]",
+                "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/ETCDzxL0T45LgXsnSu7IyhEBf3mT_-V9CGcpCfmLirADyQ?e=yxptcc"
+            },
+            {
+                "2.8 Using JavaScript in HTML":[
+                    {
+                        "name": "2.8.1 Javascript HTML DOM",
+                        "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EY5yxMesdfxIjBQRUoWvNkYB8An8K6t5oitCXn0i5kp9UA?e=CDriUZ"
+                    },
+                    {
+                        "name": "2.8.2 HTML Events",
+                        "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EU_tjHY_po5ClCm74LzX4WYBFjWf-dc-plH0OmXDK26svw?e=lY12c1"
+                    },
+                    {
+                        "name": "2.8.3 Core JavaScript DOM Methods & Properties",
+                        "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EcG9Lvs5va5Iu1QvrhefmT4Bsbe4nwsPiKkhb44WnPs19A?e=zQlXcG"
+                    },
+                    {
+                        "name": "2.8.4 JavaScript window object",
+                        "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EW8DWQvYRrpJuf9GzH4GrcEBZqfQVHccgv5Hu7wALnAjvQ?e=zDhKED"
+                    },
+                    {
+                        "name": "2.8.5 JavaScript Form Validation",
+                        "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/Ed_Lvb-gQcdIsHwxY2zYVIsB1AY3GRXeEunZTLUzKtOPag?e=ZpncYq"
+                    },
+                    {
+                        "name": "2.8.6 Error Handling in JavaScript",
+                        "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EXAgfJjhbxlNp3E3_1Lv3P8BJVcpgZScDzbZX6kc5A6f9A?e=2qNFTF"
+                    },
+                    {
+                        "name": "2.8.7 Regular Expressions (RegEx) Basics",
+                        "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EaCMS0WH541Pr5LALehIPy4B4L_DF-X1RaZrMW0Rfu49_g?e=XywhCH"
+                    },
+                    {
+                        "name": "2.8.8 How to make slides",
+                        "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EXTvp-CwjlJAmHocYhN66xEBblz4wjaweb2H4SrhFGOkjw?e=fvJlVq"
+                    },
+                    {
+                        "name": "2.8.9 JavaScript Animation",
+                        "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EXv_VDebe5BGgA4pidZJWmEBxT0TPP8P6WKIAkiIlCJtqQ?e=CLhwLx"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "3. Apply JavaScript in Project":[
+        {
+            "3.1 To-Do List App Overview":[
+                {
+                    "name": "Requirement",
+                    "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/Ee2wovzD8pBAvsxNEBSPuUIBys3e7VU44-HZQb25cf399Q?e=ZVGMCt"
+                },
+                {
+                    "name": "index.html",
+                    "url": "https://1drv.ms/u/c/c8eb9938b1272e9e/EalLLXX09QxNqkzw9O3dx14B35DdldKYqueGqL8K1zpNiQ?e=XYmjdn",
+                    "format":"html"
+                },
+                {
+                    "name": "style.css",
+                    "url": "https://1drv.ms/u/c/c8eb9938b1272e9e/Ee0t9qicswZKrtb-yBHZdSsBD986Chx0kDcuZ-Oe08XibA?e=2JVGQo",
+                    "format":"css"
+                },
+                {
+                    "name": "script.js",
+                    "url": "https://1drv.ms/u/c/c8eb9938b1272e9e/EWugersbyihNs_BSUBa2cYYBT3JEEpd7zMduZ7HtvA0mmw?e=lz8mJU",
+                    "format":"js"
+                }
+            ]
+        },
+        {
+            "3.2 Tip Calculator":[
+                {
+                    "name": "Requirement",
+                    "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EUQupJ_PFRxFrk65DAY4H9sB0pRXIqPV47Ogqqxmv73kLQ?e=j4qAg6"
+                },
+                {
+                    "name": "index.html",
+                    "url": "https://1drv.ms/u/c/c8eb9938b1272e9e/EQcuWEXgcWlIrwbG1JYRVdQBbhRagdMFaB6UW9UvVf721Q?e=GfvsSI",
+                     "format":"html"
+                },
+                {
+                    "name": "style.css",
+                    "url": "https://1drv.ms/u/c/c8eb9938b1272e9e/EfkaLQLHfc1NoRJQK1dXtUsBGD-FxPYNzYXylT--0cXtvQ?e=h5siSd",
+                     "format":"css"
+                },
+                {
+                    "name": "script.js",
+                    "url": "https://1drv.ms/u/c/c8eb9938b1272e9e/EXMVr7TSbX5CnEFueYUSXMIBcKwnhty38isItlL2WzGy6g?e=9ju6H7",
+                     "format":"js"
+                }
+            ]
+        },
+        {
+            "3.3. Temperature Converter":[
+                {
+                    "name": "Requirement",
+                    "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EVQYf8Q_awtJhbqLoaEr-EcBvYCNiuibyTnxVhiEpbcOjA?e=ypCCgx"
+                },
+                {
+                    "name": "index.html",
+                    "url": "https://1drv.ms/u/c/c8eb9938b1272e9e/Edg3aqU-S_5Hu__nntPXJSUBdC9xrUT_iKufcLrpW_WQ6g?e=VNa9al",
+                     "format":"html"
+                },
+                {
+                    "name": "style.css",
+                    "url": "https://1drv.ms/u/c/c8eb9938b1272e9e/EXPRMu56zMpKq7I_Kf73sjMB6d00o-1ngGn0CrUyg7sRcA?e=gvTDwH",
+                     "format":"css"
+                },
+                {
+                    "name": "script.js",
+                    "url": "https://1drv.ms/u/c/c8eb9938b1272e9e/EVRVli4TlI1Lk8WKkmPJn2QB3ve5EQexvQNMJtiqB0TFDQ?e=qZUxqS",
+                    "format":"js"
+                }
+            ]
+        },
+        {
+            "3.4 Simple Calculator":[
+                {
+                    "name": "Requirement",
+                    "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/ERLayW6UMq1PvSy99X5pAQsBIkJMl-HYESGi_r1jaS8sNw?e=I0hmgc"
+                },
+                {
+                    "name": "index.html",
+                    "url": "https://1drv.ms/u/c/c8eb9938b1272e9e/EYtgfiQi7itCgfoH7tUgk1YBqxQPoP3v87d3QRwvSEr04g?e=RzFX5z",
+                    "format":"html"
+                },
+                {
+                    "name": "style.css",
+                    "url": "https://1drv.ms/u/c/c8eb9938b1272e9e/ETjegS7f_jhCvMEirm817tYB9YKKb9anSWN72zcNuI0erw?e=YyQsBE",
+                    "format":"css"
+                },
+                {
+                    "name": "script.js",
+                    "url": "https://1drv.ms/u/c/c8eb9938b1272e9e/ERjQdQH91klAgNs46mbOWlcBbuAuF1rYnwT3JDdBH5-zvw?e=LyAtST",
+                    "format":"js"
+                }
+            ]
+        }
+    ]
+    }
+
+]

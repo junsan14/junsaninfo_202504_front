@@ -1,11 +1,18 @@
 import Image from 'next/image'
 import { SkillGrapah } from '@/components/SkillGraph'
+import {useTranslations} from 'next-intl'
+import React from 'react'
 export default function About() {
+  const t = useTranslations('About')
+  const biogprahy = ['1992', '2011', '2014', '2016', '2018', '2022', '2024 Jan-Mar', '2024 April-July', '2024 Sep-Now']
+
   return (
       <>
             <section className="section about wrap">
               <h1 className="section_title">
-                <div className="section_title_jp">ABOUT</div>
+                <div className="section_title_jp">
+                  {t('title')}
+                </div>
               </h1>
                      
               <div className="section_content about_content">
@@ -17,20 +24,33 @@ export default function About() {
                     <Image src='/profile.png' className="profile_icon_img" alt="" width={150} height={150} priority/>
                     <div className="profile_icon_desc">
                       <p>junsan14</p>
-                      <p>元ホテルマン/ WEBエンジニア</p>
-                      <p>JICA海外協力隊<br />2024年度1次隊ルワンダ</p>
+                      <p>{t('job')}</p>
+                      <p>{t('jica')}</p>
                       
                     </div>
                     <div className="profile_icon_desc">
-                      <p>好きなもの</p>
-                      <p>バスケ,Mac,ドラクエ<br/>自然､海,お酒,温泉</p>
-
-                      
+                      <p>{t('likes_title')}</p>
+                      <p>
+                        {t('likes')}
+                      </p>      
                     </div>
                   </div>
                   <div className="profile_biography">
+
                     <dl>
-                      <dt>1992</dt>
+                      {biogprahy.map((key) => (
+                          <React.Fragment key={key}>
+                            <dt >{t(`biography.${key}.title`)}</dt>
+                            <dd>{t(`biography.${key}.value`)}</dd>
+                          </React.Fragment> 
+                        ))}
+                      {/*
+                         {biogprahy.map((key) => (
+                          <>
+                          <dt key={key}>{t(`${key}.year`)}</dt>
+                            <dd>{t(`${key}.value`)}</dd>
+                          </> 
+                        ))}
                       <dd>大阪で生まれ､高校まで過ごす</dd>
                       <dt>2011</dt>
                       <dd>大学入学を機に上京､工学部情報システム専攻</dd>
@@ -50,6 +70,7 @@ export default function About() {
                       <dd>JICA海外協力隊24年第1期コンピュータ技術 <br className="sp-display"/>
                         @ルワンダ東部ガツィボ郡ムフラセクター<br className="sp-display"/>
                         セント・アレクサンドレ・サウリ技術高等学校 活動中</dd>
+                      */}
                     </dl>
                   </div>
                 </div>

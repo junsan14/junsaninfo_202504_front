@@ -2,9 +2,11 @@
 import React from 'react'
 import { Radar,RadarChart, PolarGrid,Tooltip, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts'
 import { useState } from 'react'
+import {useTranslations} from 'next-intl'
 
 export function SkillGrapah() {
   const [isVisible, setIsVisible] = useState("front")
+  const t = useTranslations('About')
   const toggle = (e) => {
    setIsVisible(e.target.id)
   }
@@ -12,10 +14,10 @@ export function SkillGrapah() {
   return (
       <>
         <div className="skill">
-            <ul className="skill_tab tab">
-            <li className={`skill_tab_li ${isVisible === "front" ? "on" : ""}`} tabIndex="-1" id="front" onClick={toggle}>FrontEnd</li>
-            <li className={`skill_tab_li ${isVisible === "back" ? "on" : ""}`} tabIndex="-1" id="back" onClick={toggle}>BackEnd</li>
-            <li className={`skill_tab_li ${isVisible === "other" ? "on" : ""}`} tabIndex="-1" id="other" onClick={toggle}>Adobe/Tools</li>
+            <ul className="category-tab">
+            <li className={`${isVisible === "front" ? "on" : ""}`} tabIndex="-1" id="front" onClick={toggle}>FrontEnd</li>
+            <li className={`${isVisible === "back" ? "on" : ""}`} tabIndex="-1" id="back" onClick={toggle}>BackEnd</li>
+            <li className={`${isVisible === "other" ? "on" : ""}`} tabIndex="-1" id="other" onClick={toggle}>Adobe/Tools</li>
             </ul>
             <div className="skill_content">
                 <div className={`skill_content_item ${isVisible === "front" ? "show" : ""}`}>
@@ -23,11 +25,11 @@ export function SkillGrapah() {
                     <FrontSKillGraph />
                 </div>
                 <div className="skill_content_item_desc skill_desc">
-                    <p>5: どんな処理も基本的に対応可能</p>
-                    <p>4: 実務経験が豊富にあり､人に指南可能</p>
-                    <p>3: 1人でリファレンスみながら実装可能</p>
-                    <p>2: 基本的な処理の理解あるが､1人では対応困難</p>
-                    <p>1: 少し触れたレベルで､スキル向上の余地多くあり</p>
+                    <p> {t('skills.front.5')} </p>
+                    <p> {t('skills.front.4')} </p>
+                    <p> {t('skills.front.3')} </p>
+                    <p> {t('skills.front.2')} </p>
+                    <p> {t('skills.front.1')} </p>
                 </div>
                 </div>
                 <div className={`skill_content_item ${isVisible === "back" ? "show" : ""}`}>
@@ -35,11 +37,11 @@ export function SkillGrapah() {
                     <BackSKillGraph />
                 </div>
                 <div className="skill_content_item_desc skill_desc">
-                    <p>5: どんな処理も基本的に対応可能</p>
-                    <p>4: 実務経験が豊富にあり､人に指南可能</p>
-                    <p>3: 1人でリファレンスみながら実装可能</p>
-                    <p>2: 基本的な処理の理解あるが､1人では対応困難</p>
-                    <p>1: 少し触れたレベルで､スキル向上の余地多くあり</p>
+                    <p> {t('skills.front.5')} </p>
+                    <p> {t('skills.front.4')} </p>
+                    <p> {t('skills.front.3')} </p>
+                    <p> {t('skills.front.2')} </p>
+                    <p> {t('skills.front.1')} </p>
                 </div>
                 </div>
                 <div className={`skill_content_item ${isVisible === "other" ? "show" : ""}`}>
@@ -47,11 +49,11 @@ export function SkillGrapah() {
                     <OtherSkillGraph />
                 </div>
                 <div className="skill_content_item_desc skill_desc">
-                    <p>5: Toolマスター</p>
-                    <p>4: 実務使用経験があり、複雑な機能も使用可能</p>
-                    <p>3: 機能の多くを理解、ある程度1人で操作可能</p>
-                    <p>2: 基本的な機能は使用しているが、それまで</p>
-                    <p>1: 少し触れたレベルで､機能理解の余地多くあり</p>
+                    <p> {t('skills.other.5')} </p>
+                    <p> {t('skills.other.4')} </p>
+                    <p> {t('skills.other.3')} </p>
+                    <p> {t('skills.other.2')} </p>
+                    <p> {t('skills.other.1')} </p>
                 </div>
                 </div>
             </div>
@@ -128,7 +130,7 @@ const enginerSkill = [
         fullMark: 5,
       },
       {
-        subject: 'API連携',
+        subject: 'API',
         A: 3,
         fullMark: 5,
       },
@@ -168,7 +170,7 @@ const enginerSkill = [
       fullMark: 5,
     },
     {
-      subject: 'API連携',
+      subject: 'API with BackEnd',
       A: 3,
       fullMark: 5,
     },
@@ -222,6 +224,7 @@ const enginerSkill = [
     return null
   }
   const getIntroOfPage = (label) => {
+    const t = useTranslations('About')
     switch(label){
       case "CODING":
         return(
@@ -270,133 +273,115 @@ const enginerSkill = [
       case "HTML/CSS/SASS":
         return(
           <>
-            HTML5のセマンティック要素を活用し、SEOやパフォーマンスを考慮した構造を意識。<br/>
-            CSSはSassを使って効率的にスタイルを管理し、変数やミックスイン、ネストなどを活用して可読性の高いコード<br/>
-            また、FlexboxやGridを使ったレイアウト、アニメーションやトランジションの実装も経験済
-            
+            { t('skills.comment.html') }   
           </>
         )
       case "JavaScript":
         return(
           <>
-            JavaScriptを使ったWebフロントエンド開発を普段からやっていて、DOM操作やイベント処理、<br/>
-            非同期処理（async-await)など経験あり。配列、オブジェクト、ES6以降のモダンな書き方<br/>
-            （Map、Set、デストラクチャリング、スプレッド構文など）にも対応
+            { t('skills.comment.JavaScript') }
           </>
         )
       case "Google App Script":
         return(
           <>
-            Google スプレッドシートや Google フォームと連携した業務自動化,<br/>
-            時間ベースのトリガーを活用して、定期的なレポート生成やメール通知の自動化など経験あり。<br/>
-            またdoGet / doPost を利用した Web アプリの開発にも取り組み、<br/>
-            GAS と HTML/CSS/JavaScript を組み合わせた UI 付きの業務ツールを構築
+            { t('skills.comment.GAS') }
           </>
         )
       case "React.js":
         return(
           <>
-            JSX / Babel / useState / useEffect / SPA / Render<br/>
-            クラスコンポーネントの理解もあるが、v16.8以降は基本的にフックを使用<br/>
-            fetch / axios / SWRでAPIと連携し、非同期処理やキャッシュ管理を実装<br/>
-            React Router v6でページ遷移・動的ルーティングを構築した経験あり
+            { t('skills.comment.reactjs') }
           </>
         )
         case "Next.js":
           return(
             <>
-              Next.js（App Router）を用いた開発経験があり、サーバーコンポーネントとクライアントコンポーネントの使い分け、<br/>
-              動的・静的ルーティングの実装に精通。useSWRやfetchを活用し、Laravel Breezeを用いた認証付きAPI連携も対応。<br/>
-              画像最適化にはnext/imageを用い、Headやmetadata APIによるSEO対応も実施。Vercelへのデプロイ経験あり。
+              { t('skills.comment.nextjs') }
             </>
           )
-          case "API連携":
+          case "API":
             return(
               <>
-                JavaScriptのfetchやaxiosを用いて外部APIと連携し、データの取得や送信<br/>
-                また、非同期処理に関してはasync-awaitやPromiseを活用し、データ処理の効率化。
+                { t('skills.comment.API') }
               </>
             )
         case "CI/CD":
           return(
             <>
-              Gitを使用したバージョン管理に加え、Vercelを活用してのデプロイ,<br/>
-              Laravelのプロジェクトでは、Webサーバに手動でのデプロイした経験あり
+              { t('skills.comment.CI/CO') }
             </>
           )
       case "PHP":
         return(
           <>
-            一度フルスクラッチで､ユーザのCRUD処理を
-            一から実装経験あり(一応セキュリティ実装も)          
+            { t('skills.comment.PHP') }       
           </>
         )
       case "Laravel":
         return(
           <>
-            <a href='https://hotelier-front.com/'>Hotelier</a>の
-            WEBアプリ構築経験あり     
+            { t('skills.comment.Laravel') }    
           </>
         )
       case "Wordpress":
         return(
           <>
-            自作テーマ作成の経験あり<br />
-            基本的なWP特有のPHPの書き方の理解
+            { t('skills.comment.Wordpress') }
           </>
         )
       case "mySQL":
         return(
           <>
-            SQL構文/ Laravel Eloquentの操作経験あり   
+            { t('skills.comment.mySQL') } 
           </>
         )
       case "firebase":
         return(
           <>
-            React NativeのDBとして連携経験あり   
+            { t('skills.comment.firebase') }
           </>
         )
-      case "API":
+      case "API with BackEnd":
         return(
           <>
-            Twitter/ Instagramのapi組み込み経験あり
+            { t('skills.comment.API2') }
           </>
         )
       case "PSD":
         return(
           <>
-            レイヤーの理解､スライスなど基本的な操作理解あり
+            { t('skills.comment.psd') }
           </>
         )
       case "XD":
         return(
           <>
-            アニメーション/レイヤー/コンポーネントなどある程度複雑な操作理解あり   
+            { t('skills.comment.xd') }
           </>
         )
       case "AI":
         return(
           <>
-            PSDより操作経験なし
+            { t('skills.comment.ai') }
           </>
         )
       case "gulp":
         return(
           <>
-            Frameworkなしの際､関数を作成しホットリロードやSass/jsコンパイルなどの理解あり 
+            { t('skills.comment.gulp') }
           </>
         )
       case "webpack":
         return(
           <>
-            gulpより理解は低いが､リファレンス見ながら操作経験あり   
+            { t('skills.comment.webpack') }  
           </>
         )
       case "git":
         return(
           <>
-            sourcetree/コマンドどちらも操作経験あり。   
+            { t('skills.comment.git') }
           </>
         )
 

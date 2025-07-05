@@ -1,0 +1,76 @@
+[
+    {
+    "1. Introduction to CSS":[
+        {
+            "name": "Introduction to CSS",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EWvSkAHIwGxDt6qGANIjKG0B-iJsHsA5owgiJ_5itgjwUg?e=PjqKkE"
+        }
+    ]
+    },
+    {
+    "2. Creating CSS files":[
+        {
+            "name": "2.1 CSS syntax & Use of CSS style types",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/ETSNuazvi-RFuf92XLz2AhYBhNeQWtYRX6EIUyJV2zCc0A?e=KqiGiL"
+        },
+        {
+            "name": "2.2 Use CSS Visual rules",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EWezzGdsY4RIiaNqpWUTLZQBlDrWYu2swpjIFYP4q_T88A?e=Dnqn04"
+        },
+        {
+            "name": "2.3 Use CSS Display and positioning",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EWEKiYJQ7_lDr-GIGkXdHMsBMc8Et5Z0pGnoDMFSG0dp6g?e=CRyYvl"
+        },
+        {
+            "name": "2.4 Use CSS Box model",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EQ_9KD0ssn5Csei1qw2UERkB-iK5_zrHkSlLfBxRzje_Ig?e=wig6Z9"
+        }
+    ]
+    },
+    {
+    "3. Applying Typography on webpage":[
+        {
+            "name": "Applying Typography on webpage",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EXWC0Jv67gJAlcJP_AneHfoBnv7GebK66Uuie2MgrK1dGA?e=mPbVbX"
+        }
+    ]
+    },
+     {
+    "4. Setting media query rules":[
+        {
+            "name": "Setting media query rules",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EZpQMmFmlQhGsVqK4YAA0owBKEneN3EE2SEroc15puGQcg?e=dgBNNU"
+        }
+    ]
+    },
+     {
+    "5. flex&grid":[
+        {
+            "name": "flex&grid",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EWYmx3P32wlIslU9vP6Z2W8BaYaP5Yhg0QlD8vkDVvhWjw?e=eclJKq"
+        }
+    ]
+    },
+     {
+    "6. animation":[
+        {
+            "name": "CSS Child Selectors",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EasHu7_Xvi5ImY4Wg-l55-ABIBRQiGOQWc-XFGPX9WkeWQ?e=5Ufcb8"
+        },
+        {
+            "name": "CSS Hover Animation",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EZ5EWmLhDZlHg4xFNTqaF6IB4cMHIU41ixhfjfJihuuBBQ?e=ExkoMa"
+        }
+    ]
+    },
+    {
+    "7. Optimizing Webpage in HTML":[
+        {
+            "name": "Optimizing Webpage in HTML",
+            "url": "https://1drv.ms/p/c/c8eb9938b1272e9e/EVm3TDL_5TBOoGYY6gV5CgcB7oX1pUFa-6E9EE8XnSdxLw?e=p61kJI"
+        }
+    ]
+    }
+    
+    
+]

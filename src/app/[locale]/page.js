@@ -1,13 +1,15 @@
 
-import PostsList from '../components/PostsList'
-import { Instagram, Threads } from '../components/Sns'
+import PostsList from '@/components/PostsList'
+import { Instagram, Threads } from '@/components/Sns'
 import Contact from '@/components/Contact'
 import {MdOutlineReadMore} from 'react-icons/md'
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { KVSlide } from '@/components/KVSlide'
 
+
 export default function Home (){
+
     return(
         <>
             <KVSlide />

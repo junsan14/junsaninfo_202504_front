@@ -1,0 +1,93 @@
+{
+  "Common":{
+    "error":"Data is not available."
+  },
+  "HomePage": {
+    "title": "Hello world!",
+    "about": "Go to the about page"
+  },
+  "About": {
+    "title": "ABOUT",
+    "name": "junsan14",
+    "job": "Ex-hotelier / Web Engineer",
+    "jica": "JICA Volunteer - Rwanda, Batch 1 (2024)",
+    "likes_title": "Things I Like",
+    "likes": "Basketball, Mac, Dragon Quest, Nature, Ocean, Alcohol, Hot Springs",
+    "biography": {
+      "1992": {
+        "title": "1992",
+        "value": "Born in Osaka, lived there until high school"
+      },
+      "2011": {
+        "title": "2011",
+        "value": "Moved to Tokyo to study info systems in university"
+      },
+      "2014": {
+        "title": "2014",
+        "value": "Transferred to International Liberal Arts for study abroad dream"
+      },
+      "2016": {
+        "title": "2016",
+        "value": "Studied in London, founded JLCE (cultural exchange group), stayed ~2 years"
+      },
+      "2018": {
+        "title": "2018",
+        "value": "Joined a resort company in Kawaguchiko"
+      },
+      "2022": {
+        "title": "2022",
+        "value": "Became a web engineer in Tokyo"
+      },
+      "2024 Jan-Mar": {
+        "title": "2024 Jan-Mar",
+        "value": "JICA Glocal Program in Iyo City, Ehime"
+      },
+      "2024 April-July": {
+        "title": "2024 April-July",
+        "value": "JICA Volunteer Training in Nihonmatsu"
+      },
+      "2024 Sep-Now": {
+        "title": "2024 Sep-Now",
+        "value": "Serving as Computer Tech Volunteer in Rwanda (Gatsibo, Muhura), at St. Alexandre Sauli TVET School"
+      }
+    },
+    "skills":{
+      "front":{
+        "5": "5: Able to handle basically any task",
+        "4": "4: Extensive practical experience and able to teach others",
+        "3": "3: Can implement alone while referring to documentation",
+        "2": "2: Understands basic tasks but struggles to handle alone",
+        "1": "1: Limited experience, with much room for skill improvement"
+      },
+      "other":{
+        "5": "5: Tool master",
+        "4": "4: Practical experience, able to use complex features",
+        "3": "3: Understands most features, can operate mostly alone",
+        "2": "2: Uses basic functions, but limited beyond that",
+        "1": "1: Limited exposure, with much room to understand features"
+      },
+      "comment": {
+        "html": "Utilize HTML5 semantic elements with attention to SEO and performance. Manage CSS efficiently using Sass with variables, mixins, and nesting for readable code. Experienced in layouts using Flexbox and Grid, as well as animations and transitions.",
+        "JavaScript": "Regularly develop web frontends using JavaScript, experienced with DOM manipulation, event handling, and asynchronous processing (async-await). Familiar with arrays, objects, and modern ES6+ syntax such as Map, Set, destructuring, and spread operators.",
+        "GAS": "Automated workflows integrating with Google Sheets and Forms. Experienced with time-based triggers for periodic report generation and email notifications. Developed web apps using doGet/doPost, building UI-enabled business tools combining GAS with HTML/CSS/JavaScript.",
+        "reactjs": "Experienced with JSX, Babel, useState, useEffect, SPA architecture, and rendering. Understand class components but mainly use hooks since v16.8. Implement asynchronous API calls and cache management with fetch, axios, and SWR. Built page navigation and dynamic routing using React Router v6.",
+        "nextjs": "Developed with Next.js (App Router), proficient in using server and client components, and implementing dynamic/static routing. Utilized useSWR and fetch, integrated authenticated APIs via Laravel Breeze. Used next/image for image optimization and Head/metadata API for SEO. Experience deploying on Vercel.",
+        "API": "Integrated external APIs using JavaScript fetch and axios for data fetching and sending. Utilized async-await and Promises for efficient asynchronous data handling.",
+        "CI/CO": "Version control using Git and deployment with Vercel. Experience manually deploying Laravel projects to web servers.",
+        "PHP": "Implemented full user CRUD functionality from scratch, including basic security implementations.",
+        "Laravel": "Built the web app <a href='https://hotelier-front.com/'>Hotelier</a>.",
+        "Wordpress": "Experience creating custom themes and understanding of WordPress-specific PHP coding.",
+        "mySQL": "Experience with SQL syntax and Laravel Eloquent ORM operations.",
+        "firebase": "Integrated React Native with Firebase database.",
+        "API2": "Experience embedding Twitter and Instagram APIs.",
+        "psd": "Understands layers and basic operations like slicing.",
+        "xd": "Understands animations, layers, and components at an intermediate level.",
+        "ai": "No experience beyond PSD.",
+        "gulp": "Created functions for hot reload and compiling Sass/JS without frameworks.",
+        "webpack": "Less experienced than gulp but has used it following documentation.",
+        "git": "Experienced with both SourceTree GUI and command line."
+      }
+
+    }
+  }
+}

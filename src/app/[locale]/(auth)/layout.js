@@ -1,5 +1,6 @@
-import AuthCard from '@/app/(auth)/AuthCard'
+import AuthCard from '@/app/[locale]/(auth)/AuthCard'
 import NextTopLoader from 'nextjs-toploader'
+
 
 export const metadata = {
     title: 'Admin',

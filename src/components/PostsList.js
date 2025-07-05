@@ -226,10 +226,10 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
             //router.push(`${pathname}?${params.toString()}`, { scroll: true })
         }
         return(
-            <ul className="category_tab tab">  
+            <ul className="category-tab">  
                 {blogCategories.map((item,i)=>{
                         return(
-                            <li className={selectedCategory === item['name']?"category_tab_li on":"category_tab_li"} 
+                            <li className={selectedCategory === item['name'] ? "on" : undefined} 
                                 tabIndex="-1" value={item['name']}  onClick={handleClickCategory} key={i} id={item['name']} >
                                     {item['name']}
                             </li>
@@ -358,11 +358,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
         
         
 
-    )
-
-
-        
-    
+    )   
 }
 
 const isNew = (dateStr) => {

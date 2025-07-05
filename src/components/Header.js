@@ -4,11 +4,12 @@ import {FaInstagram,FaThreads} from 'react-icons/fa6'
 import {useState,useEffect } from 'react'
 import { useAuth } from '../hooks/auth'
 
+
 export default function GuestHeader(){
   //const { user } = useAuth({ middleware: 'guest' })
   const { user } = useAuth()
   const { logout } = useAuth()
-  
+
   const [isShowMenu, setIsShowMenu] = useState(false)
   const toggle = ()=>{
     setIsShowMenu((prev)=>!prev)
@@ -32,7 +33,10 @@ export default function GuestHeader(){
                 <ul className="nav_ul" onClick={toggle}>
                   <li className="nav_ul_li"><Link href="/">HOME</Link></li>
                   <li className="nav_ul_li"><Link href="/about">ABOUT</Link></li>
-                  <li className="nav_ul_li"><Link href="/blog">BLOG</Link></li>     
+                  <li className="nav_ul_li"><Link href="/blog">BLOG</Link></li> 
+                  <li className="nav_ul_li"><Link href="/docs">DOCS</Link></li>     
+                  <Link href="/ja">JP/</Link>
+                  <Link href="/en">EN</Link>
                   {user && (
                       <>
                       <li className="nav_ul_li"><Link href="/admin">ADMIN</Link></li> 

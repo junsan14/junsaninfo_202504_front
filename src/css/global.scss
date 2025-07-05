@@ -669,63 +669,6 @@ body{
 					
 				}
 			}
-            .tab{
-                display: flex;
-                width: 100%;
-                justify-content: space-between;
-                font-size: 1.4em;
-                margin: 0 auto 40px auto ;
-                flex-wrap: wrap;
-                margin-right: 5px;
-                position: relative;
-                @include mq(sp){
-                    width: 100%;
-                    margin: 0 auto 10px auto ;
-                    justify-content: center;
-                }
-        
-                li{
-                    counter-increment: li;
-                    cursor: pointer;
-                    padding: 10px 0;
-                    transition: .5s all;
-                    font-size: .8em;
-                    text-align: center;
-                    
-                    width: calc(100% / 3 - 1px);
-                    margin-bottom: 30px;
-                    background:rgba(#eee,.5);
-                    &.on{
-                        background:#fff;
-                        transition: .5s all;
-                        transform: translateY(-1px);
-                    }
-                    @include mq(tab){
-        
-                        padding: 5px 0;
-                        font-size: .7em;
-                        margin-bottom: 20px;
-                        
-                    }
-        
-                    &.skill_tab_li{
-                        width: calc(100% / 3 - 1px);
-                        @include mq(tab){
-                            width: calc(100% / 3 - 1px);
-                        }
-                    }
-                    
-                    
-                    &:hover{
-                        background:#fff;
-                        transition: .5s all;
-                        
-                    }
-                    
-                }
-        
-            }
-
 			}
 		
 			
@@ -901,7 +844,7 @@ body{
     
     
 }
-.tab{
+.category-tab{
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -930,6 +873,9 @@ body{
         text-align: center;
         width: calc(100% / 3 - 1px);
         background:rgba(#eee,.5);
+        &.docs{
+             width: calc(100% / 5 - 1px);
+        }
         &.on{
             background:#fff;
             transition: .5s all;
@@ -1490,6 +1436,45 @@ body{
       
 
       
+}
+
+
+//docs
+.docs{
+    &_files{
+       &_section{
+        margin-bottom: 30px;
+        &_title{
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            @include mq(sp){
+                font-size: 1.1em;
+            }
+        }
+        &_list{
+            &_item{
+                margin-left: 15px;
+                margin-bottom: 5px;
+                margin-top: 10px;
+                @include mq(sp){
+                 font-size: .9em;
+                
+                }   
+                &_link{
+                    display: flex;
+                    align-items: center;
+                    svg{
+                        font-size: 1.4em;
+                        margin-right: 5px;
+                        @include mq(sp){
+                            font-size: 1.2em;
+                        }
+                    }
+                }
+            }
+        }
+       }
+    }
 }
 
 //contact 

@@ -71,7 +71,7 @@ export default function PostsList({postLimit,pagination, edit, relevantPosts, se
       if (typeof window !== 'undefined') {
         window.onscroll = handleScroll
       }
-    const isAdmin = pathname.startsWith('/admin')
+    const isAdmin = pathname.includes('/admin')
     const {blogCategories} = useBlogCategories()
     const {blogSubCategories} = useBlogSubCategories()
     const { data, error, isLoading } = useSWR(

@@ -1,18 +1,33 @@
 'use client'
-import Link from 'next/link'
 import {FaInstagram,FaThreads} from 'react-icons/fa6'
 import {useState,useEffect } from 'react'
 import { useAuth } from '../hooks/auth'
+import {Link,useRouter, usePathname} from '@/i18n/navigation'
+import { useLocale } from "next-intl"
+import { routing } from "@/i18n/routing"
+
+
+
 
 
 export default function GuestHeader(){
   //const { user } = useAuth({ middleware: 'guest' })
   const { user } = useAuth()
   const { logout } = useAuth()
+  const locale = useLocale()
+  const router = useRouter()
+  const pathname = usePathname()
+
 
   const [isShowMenu, setIsShowMenu] = useState(false)
   const toggle = ()=>{
     setIsShowMenu((prev)=>!prev)
+  }
+
+  const handleLocaleChange = (e) => {
+    const newLocale = e.currentTarget.dataset.locale
+    console.log(pathname)
+   router.push(pathname, { locale: newLocale })
   }
   useEffect(() => {
     if (isShowMenu) {
@@ -34,9 +49,7 @@ export default function GuestHeader(){
                   <li className="nav_ul_li"><Link href="/">HOME</Link></li>
                   <li className="nav_ul_li"><Link href="/about">ABOUT</Link></li>
                   <li className="nav_ul_li"><Link href="/blog">BLOG</Link></li> 
-                  <li className="nav_ul_li"><Link href="/docs">DOCS</Link></li>     
-                  <Link href="/ja">JP/</Link>
-                  <Link href="/en">EN</Link>
+                  <li className="nav_ul_li"><Link href="/docs">DOCS</Link></li>
                   {user && (
                       <>
                       <li className="nav_ul_li"><Link href="/admin">ADMIN</Link></li> 
@@ -44,6 +57,21 @@ export default function GuestHeader(){
                       </>
                   )}
                 </ul>
+
+                <ul className='nav_lang'>
+                    {routing.locales.map(loc => (
+                      <li
+                        className={`nav_lang_list ${loc === locale ? 'active':''}`}
+                        disabled={loc === locale}
+                        key={loc}
+                        data-locale={loc}
+                        onClick={handleLocaleChange}
+                      >
+                          {loc === "ja" ? "JP":"EN"}
+                      
+                      </li>
+                    ))} 
+                </ul>  
                 <div className="nav_sns">
                 <a href="https://www.threads.net/@junsan_junsan14/" target="_blank" rel="noopener noreferrer">
                     <FaThreads className='nav_sns_icon'/>
@@ -52,6 +80,7 @@ export default function GuestHeader(){
                     <FaInstagram className='nav_sns_icon'/>
                 </a>
                 </div>
+
             </nav>        
         </header>
     )

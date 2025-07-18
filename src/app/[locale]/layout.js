@@ -33,18 +33,18 @@ export default async function LocaleLayout({
        <html lang={locale} className={murecho.className}>
             <head />
             <body className="antialiased">
-            {!!process.env.GOOGLE_ANALYTICS_ID && (
-              <GoogleTagManager gtmId={process.env.GOOGLE_TAG_MANAGER_ID} />
+              {!!process.env.GOOGLE_ANALYTICS_ID && (
+                <GoogleTagManager gtmId={process.env.GOOGLE_TAG_MANAGER_ID} />
 
-            )}
-                <NextTopLoader />
+              )}
+              <NextIntlClientProvider>
+                    <NextTopLoader />
                     <GuestHeader />
                     <main className='main'>
-                    <NextIntlClientProvider>
                       {children}
-                    </NextIntlClientProvider>
                     </main>
                     <Footer />
+              </NextIntlClientProvider>
             </body>
       </html>
   )

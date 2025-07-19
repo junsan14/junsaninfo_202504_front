@@ -1356,9 +1356,11 @@ body{
         font-size: 0.9em;
         width: 100%;
         border-radius: 2px;
-     
+        
     
         &.hljs {
+            overflow-x: auto; /* 横方向にスクロールを許可 */
+            white-space: pre; /* 改行を無視して、折り返さない */
             @include mq(sp){
                 padding: 0.4rem ;
             }

@@ -13,7 +13,7 @@ import sql from 'highlight.js/lib/languages/sql'
 //import 'highlight.js/styles/atom-one-dark.css'
 //import hljsLineNumbers from 'highlightjs-line-numbers.js'
 
-import 'highlight.js/styles/monokai.css'
+import 'highlight.js/styles/monokai-sublime.css'
 
 hljs.registerLanguage('javascript', javascript)
 hljs.registerLanguage('html', html)     // カスタム名でもOK

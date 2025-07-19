@@ -6,8 +6,10 @@ import CodeEnhancer from "./stylePost/CodeEnhancer"
 import PostsList from "./PostsList"
 import { formatDate } from "./Script"
 import Link from "next/link"
+//import {useTranslations} from 'next-intl'
 
 export default function PostContent({category,postId,slug,initialPost,is_preview}){
+    //const t = useTranslations('About')
     const {post,error,isLoading, relevantPosts} = usePost(category,postId,slug,initialPost,is_preview)
     if (error) return <div>Error loading post</div>
     if (isLoading && !post) return (

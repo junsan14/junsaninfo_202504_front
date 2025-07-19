@@ -7,9 +7,6 @@ import { useLocale } from "next-intl"
 import { routing } from "@/i18n/routing"
 
 
-
-
-
 export default function GuestHeader(){
   //const { user } = useAuth({ middleware: 'guest' })
   const { user } = useAuth()
@@ -58,7 +55,7 @@ export default function GuestHeader(){
                   )}
                 </ul>
 
-                <ul className='nav_lang'>
+                <ul className='nav_lang' onClick={toggle}>
                     {routing.locales.map(loc => (
                       <li
                         className={`nav_lang_list ${loc === locale ? 'active':''}`}
